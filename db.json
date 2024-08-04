@@ -1,0 +1,389 @@
+{
+    "version": "1.2.11",
+    "db_type": "http",
+    "start_time": "2024-08-04T10:03:47.173Z",
+    "db_info": {
+        "instance_start_time": "1722765352",
+        "db_name": "app_dev_6f9f6046e82a47d0867e47742dd9ee65",
+        "purge_seq": "0-g1AAAABXeJzLYWBgYMpgTmEQTM4vTc5ISXIwNDLXMwBCwxyQVB4LkGRoAFL_gSArkQGP2kSGpHqIoiwAtOgYRA",
+        "update_seq": "45-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXIwNDLXMwBCwxyQVB4LkGRoAFL_gSArgzmRMxcowJ6aamhkYpKCTR8e0xIZkuqhxqiAjTFJTk40T0vDpiELAAJbKQo",
+        "sizes": {
+            "file": 311714,
+            "external": 6071,
+            "active": 9639
+        },
+        "props": {},
+        "doc_del_count": 0,
+        "doc_count": 9,
+        "disk_format_version": 8,
+        "compact_running": false,
+        "cluster": {
+            "q": 2,
+            "n": 1,
+            "w": 1,
+            "r": 1
+        },
+        "host": "http://127.0.0.1:5984/app_dev_6f9f6046e82a47d0867e47742dd9ee65/",
+        "auto_compaction": false,
+        "adapter": "http"
+    }
+}
+{
+    "docs": [
+        {
+            "_id": "_design/database",
+            "_rev": "4-ac4a715396a21643f53aef11b78cef49",
+            "views": {
+                "by_link": {
+                    "map": "function(doc2) {\n      if (doc2.type === \"link\") {\n        let doc1 = doc2.doc1;\n        let doc22 = doc2.doc2;\n        emit([doc1.tableId, doc1.rowId], {\n          id: doc22.rowId,\n          thisId: doc1.rowId,\n          fieldName: doc1.fieldName\n        });\n        if (doc1.tableId !== doc22.tableId) {\n          emit([doc22.tableId, doc22.rowId], {\n            id: doc1.rowId,\n            thisId: doc22.rowId,\n            fieldName: doc22.fieldName\n          });\n        }\n      }\n    }"
+                },
+                "screen_routes": {
+                    "map": "function(doc) {\n      if (doc._id.startsWith(\"screen_\")) {\n        emit(doc._id, {\n          id: doc._id,\n          routing: doc.routing,\n        })\n      }\n    }"
+                }
+            },
+            "createdAt": "2024-08-04T09:55:52.476Z",
+            "updatedAt": "2024-08-04T09:55:52.839Z",
+            "indexes": {
+                "rows": {
+                    "index": "function(doc2) {\n      function idx(input, prev) {\n        for (let key of Object.keys(input)) {\n          let idxKey = prev != null ? `${prev}.${key}` : key;\n          idxKey = idxKey.replace(/ /g, \"_\");\n          if (Array.isArray(input[key])) {\n            for (let val of input[key]) {\n              if (typeof val !== \"object\") {\n                index(idxKey, val, { store: true });\n              }\n            }\n          } else if (key === \"_id\" || key === \"_rev\" || input[key] == null) {\n            continue;\n          }\n          if (typeof input[key] === \"string\") {\n            index(idxKey, input[key].toLowerCase(), { store: true });\n          } else if (typeof input[key] !== \"object\") {\n            index(idxKey, input[key], { store: true });\n          } else {\n            idx(input[key], idxKey);\n          }\n        }\n      }\n      if (doc2._id.startsWith(\"ro_\")) {\n        index(\"default\", doc2._id);\n        idx(doc2);\n      }\n    }",
+                    "analyzer": "keyword"
+                }
+            },
+            "_revisions": {
+                "start": 4,
+                "ids": [
+                    "ac4a715396a21643f53aef11b78cef49",
+                    "0f2a5548d2d653c3cd7fb820036bc0d1",
+                    "db6731e23b62a2a706ac435f7bf276dd",
+                    "5399f9b99c5aded593b6c924bc1eb889"
+                ]
+            }
+        },
+        {
+            "_id": "app_metadata",
+            "_rev": "12-0f23851d7f132a5fa2b096ed540e4de9",
+            "appId": "app_dev_6f9f6046e82a47d0867e47742dd9ee65",
+            "type": "app",
+            "version": "2.29.25",
+            "componentLibraries": [
+                "@budibase/standard-components"
+            ],
+            "name": "try",
+            "url": "/try",
+            "instance": {
+                "_id": "app_dev_6f9f6046e82a47d0867e47742dd9ee65"
+            },
+            "tenantId": "default",
+            "updatedAt": "2024-08-04T10:03:39.225Z",
+            "createdAt": "2024-08-04T09:55:52.901Z",
+            "status": "development",
+            "navigation": {
+                "navigation": "Top",
+                "links": [
+                    {
+                        "text": "Start",
+                        "url": "/start",
+                        "type": "link",
+                        "roleId": "BASIC"
+                    }
+                ],
+                "title": "try",
+                "sticky": null,
+                "hideLogo": null,
+                "logoUrl": null,
+                "hideTitle": null,
+                "textAlign": "Left",
+                "navBackground": "var(--spectrum-global-color-gray-100)",
+                "navWidth": "Large",
+                "navTextColor": null
+            },
+            "theme": "spectrum--light",
+            "customTheme": {
+                "buttonBorderRadius": "16px"
+            },
+            "features": {
+                "componentValidation": true,
+                "disableUserMetadata": true,
+                "skeletonLoader": true
+            },
+            "updatedBy": "us_41742f1195ea4fdd861a014a1b774c17",
+            "_revisions": {
+                "start": 12,
+                "ids": [
+                    "0f23851d7f132a5fa2b096ed540e4de9",
+                    "1eb948916fdf996d65de92fa55d4eec8",
+                    "938330d724105c9220b4006f94f69ad4",
+                    "e908fc7e1d5afdee9cc4d4137811e846",
+                    "d73b3b589875c5f60b371f890fd56ff0",
+                    "8c6cd8e9c49053f6e76151520a9453d1",
+                    "f7e1e5a405ec4ece9263edae4468c42a",
+                    "097dd86fd4acfe21cad568e570df890c",
+                    "3c620c8e36e70a840cd42ee5241d5a58",
+                    "256c86eb4eeae799fd63174da4129afb",
+                    "3333a0f96ce27d49c802bc50229a31b7",
+                    "b01c767e6aef5f80a2e005dad6aef8fd"
+                ]
+            }
+        },
+        {
+            "_id": "migrations",
+            "_rev": "3-03078200d523176c6e6308dac37d916d",
+            "app_urls": 1722765353486,
+            "createdAt": "2024-08-04T09:55:53.487Z",
+            "updatedAt": "2024-08-04T09:55:53.524Z",
+            "event_app_backfill": 1722765353500,
+            "table_settings_links_to_actions": 1722765353524,
+            "_revisions": {
+                "start": 3,
+                "ids": [
+                    "03078200d523176c6e6308dac37d916d",
+                    "87b14d975e7a7cd09e12c79c622b6aea",
+                    "05b76d7d9e5f55a560e5e933e1c79b6a"
+                ]
+            }
+        },
+        {
+            "_id": "ro_ta_2a58ec29e4254be5bd1173d129562ee1_7a9469fe210a4d5b9dd1712e1de8ef00",
+            "_rev": "1-a42189a1ebbc2bf2f4380d30e5b60bd8",
+            "name": "bbb",
+            "phone": "9876543210",
+            "tableId": "ta_2a58ec29e4254be5bd1173d129562ee1",
+            "type": "row",
+            "createdAt": "2024-08-04T09:57:32.577Z",
+            "updatedAt": "2024-08-04T09:57:32.577Z"
+        },
+        {
+            "_id": "ro_ta_2a58ec29e4254be5bd1173d129562ee1_9264560d150b47ca8d4710f894e1de58",
+            "_rev": "1-8c8e555fb9c289aba5cd515032dcdf6f",
+            "name": "aaa",
+            "phone": "0123456789",
+            "tableId": "ta_2a58ec29e4254be5bd1173d129562ee1",
+            "type": "row",
+            "createdAt": "2024-08-04T09:56:50.184Z",
+            "updatedAt": "2024-08-04T09:56:50.184Z"
+        },
+        {
+            "_id": "screen_8d8d5a8685a3450695a7ded8c21d12c9",
+            "_rev": "19-74e14f6907654c7fdc78854470525da9",
+            "showNavigation": true,
+            "width": "Large",
+            "props": {
+                "_id": "c40b1a746c39342bcaa04a506fcce95d1",
+                "_component": "@budibase/standard-components/container",
+                "_styles": {
+                    "normal": {},
+                    "hover": {},
+                    "active": {},
+                    "selected": {}
+                },
+                "_children": [
+                    {
+                        "_id": "c8b0992ed94964e338d460473d9d2a60e",
+                        "_component": "@budibase/standard-components/container",
+                        "_styles": {
+                            "normal": {},
+                            "hover": {},
+                            "active": {}
+                        },
+                        "_instanceName": "New Container",
+                        "direction": "column",
+                        "hAlign": "stretch",
+                        "vAlign": "top",
+                        "size": "shrink",
+                        "gap": "M",
+                        "_children": [
+                            {
+                                "_id": "c4ea316091a0048e28db58cd10e6e42b3",
+                                "_component": "@budibase/standard-components/heading",
+                                "_styles": {
+                                    "normal": {},
+                                    "hover": {},
+                                    "active": {}
+                                },
+                                "_instanceName": "New Headline",
+                                "size": "M",
+                                "align": "center",
+                                "text": "כותרת"
+                            }
+                        ]
+                    },
+                    {
+                        "_id": "c9d7a25278d2349bba71350b5992619d4",
+                        "_component": "@budibase/standard-components/button",
+                        "_styles": {
+                            "normal": {
+                                "margin-left": "auto",
+                                "margin-right": "auto"
+                            },
+                            "hover": {},
+                            "active": {},
+                            "custom": "direction: rtl;\n"
+                        },
+                        "_instanceName": "New Button",
+                        "text": "המשך",
+                        "type": "cta",
+                        "size": "M",
+                        "gap": "M",
+                        "icon": "ri-arrow-up-fill"
+                    }
+                ],
+                "_instanceName": "New Screen",
+                "direction": "column",
+                "hAlign": "stretch",
+                "vAlign": "top",
+                "size": "grow",
+                "gap": "M"
+            },
+            "routing": {
+                "route": "/start",
+                "roleId": "BASIC",
+                "homeScreen": false
+            },
+            "name": "c40b1a746c39342bcaa04a506fcce95d1",
+            "template": "createFromScratch",
+            "createdAt": "2024-08-04T09:57:46.043Z",
+            "updatedAt": "2024-08-04T10:03:10.628Z",
+            "pluginAdded": false,
+            "_revisions": {
+                "start": 19,
+                "ids": [
+                    "74e14f6907654c7fdc78854470525da9",
+                    "202f6ac2ecc0adb7bca0a66875d6925c",
+                    "e94ae67fd77b3adcb2a48dbd34f04aba",
+                    "1355f90322f262505025cbd54046ee74",
+                    "9696464d6a24e8040fec6b8c1c1c5524",
+                    "e9aa7005e3b1a879dc95f6e724c8d724",
+                    "d2dcae08ecd28e380d05484ead532ff4",
+                    "cdf3d56f98aac0185eb74f30fe7e3470",
+                    "52f28be19ee39df1b32336d89e9a7b8b",
+                    "f87d1a6ed2fbb376021d6b4ee7a4cb4a",
+                    "f6fea0a5cd1f6053ad157183e0c33014",
+                    "8ff77e1e07865ab8c2277bf98e51b11d",
+                    "1f9e58c9dafc7e530f00d17687d8dc19",
+                    "669354bb5b462c2c3514f763d1c155df",
+                    "31b33fa8520244e04a9c794c447b26bf",
+                    "6c5d688f8054652cf94c92c3ea7ff5f8",
+                    "afd58503693e2c574f178e63b32a8b6f",
+                    "2d789bc79e59cc5835e84f31ab29e3a0",
+                    "662aca81c0f639855709e5a775eb0234"
+                ]
+            }
+        },
+        {
+            "_id": "ta_2a58ec29e4254be5bd1173d129562ee1",
+            "_rev": "3-8a22cfa107ad900d56e8d0bb91e75334",
+            "name": "try",
+            "schema": {
+                "name": {
+                    "type": "string",
+                    "constraints": {
+                        "type": "string",
+                        "length": {
+                            "maximum": null
+                        },
+                        "presence": false
+                    },
+                    "name": "name"
+                },
+                "phone": {
+                    "type": "string",
+                    "constraints": {
+                        "type": "string",
+                        "length": {
+                            "maximum": null
+                        },
+                        "presence": false
+                    },
+                    "name": "phone"
+                }
+            },
+            "type": "table",
+            "sourceId": "bb_internal",
+            "sourceType": "internal",
+            "views": {},
+            "createdAt": "2024-08-04T09:56:06.154Z",
+            "updatedAt": "2024-08-04T09:56:38.269Z",
+            "indexes": [],
+            "primaryDisplay": "name",
+            "_revisions": {
+                "start": 3,
+                "ids": [
+                    "8a22cfa107ad900d56e8d0bb91e75334",
+                    "842bb92ef3bfaca92c158658d2926065",
+                    "795667f5e7d49b3a1e9fbbc746560425"
+                ]
+            }
+        },
+        {
+            "_id": "ta_users",
+            "_rev": "1-31a08b830da5502c06112ce677245c87",
+            "type": "table",
+            "sourceId": "bb_internal",
+            "sourceType": "internal",
+            "views": {},
+            "name": "Users",
+            "schema": {
+                "email": {
+                    "type": "string",
+                    "constraints": {
+                        "type": "string",
+                        "email": true,
+                        "length": {
+                            "maximum": ""
+                        },
+                        "presence": true
+                    },
+                    "name": "email"
+                },
+                "firstName": {
+                    "name": "firstName",
+                    "type": "string",
+                    "constraints": {
+                        "type": "string",
+                        "presence": false
+                    }
+                },
+                "lastName": {
+                    "name": "lastName",
+                    "type": "string",
+                    "constraints": {
+                        "type": "string",
+                        "presence": false
+                    }
+                },
+                "roleId": {
+                    "name": "roleId",
+                    "type": "options",
+                    "constraints": {
+                        "type": "string",
+                        "presence": false,
+                        "inclusion": [
+                            "ADMIN",
+                            "POWER",
+                            "BASIC",
+                            "PUBLIC"
+                        ]
+                    }
+                },
+                "status": {
+                    "name": "status",
+                    "type": "options",
+                    "constraints": {
+                        "type": "string",
+                        "presence": false,
+                        "inclusion": [
+                            "active",
+                            "inactive"
+                        ]
+                    }
+                }
+            },
+            "primaryDisplay": "email",
+            "createdAt": "2024-08-04T09:55:52.866Z",
+            "updatedAt": "2024-08-04T09:55:52.866Z"
+        }
+    ]
+}
+{
+    "seq": "45-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXIwNDLXMwBCwxyQVCJDUv3___-zMpgTVXKBAuwmycmJ5mlp2DTgMSaPBUgyNACp_1DTOMGmpaYaGpmYpGDTlwUAYCwpCg"
+}
