@@ -1,16 +1,16 @@
 {
     "version": "1.2.11",
     "db_type": "http",
-    "start_time": "2024-08-04T10:03:47.173Z",
+    "start_time": "2024-08-04T12:05:13.837Z",
     "db_info": {
         "instance_start_time": "1722765352",
         "db_name": "app_dev_6f9f6046e82a47d0867e47742dd9ee65",
         "purge_seq": "0-g1AAAABXeJzLYWBgYMpgTmEQTM4vTc5ISXIwNDLXMwBCwxyQVB4LkGRoAFL_gSArkQGP2kSGpHqIoiwAtOgYRA",
-        "update_seq": "45-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXIwNDLXMwBCwxyQVB4LkGRoAFL_gSArgzmRMxcowJ6aamhkYpKCTR8e0xIZkuqhxqiAjTFJTk40T0vDpiELAAJbKQo",
+        "update_seq": "66-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXIwNDLXMwBCwxyQVB4LkGRoAFL_gSArgzmRKxcowJ6aamhkYpKCTR8e0xIZkuqhxliAjTFJTk40T0vDpiELAAVsKR8",
         "sizes": {
-            "file": 311714,
+            "file": 483746,
             "external": 6071,
-            "active": 9639
+            "active": 12608
         },
         "props": {},
         "doc_del_count": 0,
@@ -61,10 +61,10 @@
         },
         {
             "_id": "app_metadata",
-            "_rev": "12-0f23851d7f132a5fa2b096ed540e4de9",
+            "_rev": "23-96d769a240f735f208ad97c379eccb8b",
             "appId": "app_dev_6f9f6046e82a47d0867e47742dd9ee65",
             "type": "app",
-            "version": "2.29.25",
+            "version": "2.29.26",
             "componentLibraries": [
                 "@budibase/standard-components"
             ],
@@ -74,7 +74,7 @@
                 "_id": "app_dev_6f9f6046e82a47d0867e47742dd9ee65"
             },
             "tenantId": "default",
-            "updatedAt": "2024-08-04T10:03:39.225Z",
+            "updatedAt": "2024-08-04T12:05:13.621Z",
             "createdAt": "2024-08-04T09:55:52.901Z",
             "status": "development",
             "navigation": {
@@ -108,8 +108,19 @@
             },
             "updatedBy": "us_41742f1195ea4fdd861a014a1b774c17",
             "_revisions": {
-                "start": 12,
+                "start": 23,
                 "ids": [
+                    "96d769a240f735f208ad97c379eccb8b",
+                    "66ee4e1e782e2ce9b635fbbfa65cb450",
+                    "e07e41819d013bbcbee41c153c7a1380",
+                    "0ceddbc38b68e44843f0e9e57044bdef",
+                    "fb20eed4fda98a2054731e018353e31e",
+                    "d1a3475f6bff3772fb2b405596e7a7eb",
+                    "068c64428ec951bc9b98771d66e02eaf",
+                    "90f657f86d6968221663c3092b7baa5d",
+                    "debe6a98299c68e539f40f1a44c64adb",
+                    "63ffa2cf431fec58a5b701c399e4d78f",
+                    "43de2525df0827e11d6e7e730648148b",
                     "0f23851d7f132a5fa2b096ed540e4de9",
                     "1eb948916fdf996d65de92fa55d4eec8",
                     "938330d724105c9220b4006f94f69ad4",
@@ -164,7 +175,7 @@
         },
         {
             "_id": "screen_8d8d5a8685a3450695a7ded8c21d12c9",
-            "_rev": "19-74e14f6907654c7fdc78854470525da9",
+            "_rev": "27-7ad7eb04e7855874573a8a28acb2bb24",
             "showNavigation": true,
             "width": "Large",
             "props": {
@@ -242,11 +253,19 @@
             "name": "c40b1a746c39342bcaa04a506fcce95d1",
             "template": "createFromScratch",
             "createdAt": "2024-08-04T09:57:46.043Z",
-            "updatedAt": "2024-08-04T10:03:10.628Z",
+            "updatedAt": "2024-08-04T12:05:02.768Z",
             "pluginAdded": false,
             "_revisions": {
-                "start": 19,
+                "start": 27,
                 "ids": [
+                    "7ad7eb04e7855874573a8a28acb2bb24",
+                    "5d5b98caf78a9c49d139fb669650a702",
+                    "69eb6e41eeb69e5cb7513b6f8865e594",
+                    "edb7032c903d84106fff331c24baa34c",
+                    "05c496023d95640f1d4a547059d2a7b8",
+                    "181efc4764940c6f967ee86a8274d9ca",
+                    "2bab152ed0b2e4548e88b9b7e2972b60",
+                    "7aac1f681f4b8665f3629514e13fb344",
                     "74e14f6907654c7fdc78854470525da9",
                     "202f6ac2ecc0adb7bca0a66875d6925c",
                     "e94ae67fd77b3adcb2a48dbd34f04aba",
@@ -271,7 +290,7 @@
         },
         {
             "_id": "ta_2a58ec29e4254be5bd1173d129562ee1",
-            "_rev": "3-8a22cfa107ad900d56e8d0bb91e75334",
+            "_rev": "4-42b4204a7e8874e4ef32333eefe77a87",
             "name": "try",
             "schema": {
                 "name": {
@@ -306,8 +325,9 @@
             "indexes": [],
             "primaryDisplay": "name",
             "_revisions": {
-                "start": 3,
+                "start": 4,
                 "ids": [
+                    "42b4204a7e8874e4ef32333eefe77a87",
                     "8a22cfa107ad900d56e8d0bb91e75334",
                     "842bb92ef3bfaca92c158658d2926065",
                     "795667f5e7d49b3a1e9fbbc746560425"
@@ -316,7 +336,7 @@
         },
         {
             "_id": "ta_users",
-            "_rev": "1-31a08b830da5502c06112ce677245c87",
+            "_rev": "2-5b5c2288876bae521e82182ba626a857",
             "type": "table",
             "sourceId": "bb_internal",
             "sourceType": "internal",
@@ -380,10 +400,17 @@
             },
             "primaryDisplay": "email",
             "createdAt": "2024-08-04T09:55:52.866Z",
-            "updatedAt": "2024-08-04T09:55:52.866Z"
+            "updatedAt": "2024-08-04T09:55:52.866Z",
+            "_revisions": {
+                "start": 2,
+                "ids": [
+                    "5b5c2288876bae521e82182ba626a857",
+                    "31a08b830da5502c06112ce677245c87"
+                ]
+            }
         }
     ]
 }
 {
-    "seq": "45-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXIwNDLXMwBCwxyQVCJDUv3___-zMpgTVXKBAuwmycmJ5mlp2DTgMSaPBUgyNACp_1DTOMGmpaYaGpmYpGDTlwUAYCwpCg"
+    "seq": "66-g1AAAACbeJzLYWBgYMpgTmEQTM4vTc5ISXIwNDLXMwBCwxyQVCJDUv3___-zMpgTLXKBAuwmycmJ5mlp2DTgMSaPBUgyNACp_1DTuMCmpaYaGpmYpGDTlwUAaQ4pHw"
 }
