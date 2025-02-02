@@ -36,8 +36,8 @@ jobs:
     - name: 🔧 Configure Docker to use the gcloud
       run: gcloud auth configure-docker ${{ env.PROJECT }}
 
-    - name: ✅ enable artifact registry
-      run: gcloud services enable artifactregistry.googleapis.com
+    # - name: ✅ enable artifact registry
+    #   run: gcloud services enable artifactregistry.googleapis.com
       
     - name: 📃 Docker metadata
       id: meta
