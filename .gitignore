@@ -1,0 +1,27 @@
+### Project Ignores ###
+
+
+# dotenv environment variable files
+.env
+.env.*
+!.env.sample
+!.env.*.sample
+
+# data folders
+/server/data/documents
+/server/data/extract_images
+
+
+### Python ###
+**/__pycache__/
+
+
+### Node ###
+# Dependencies
+/client/node_modules/
+
+# Testing
+/client/coverage
+
+# Production
+/client/build
