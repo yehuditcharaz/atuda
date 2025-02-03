@@ -16,7 +16,9 @@ echo "🔐 after service account authorization"
 echo "📁 Listing files and directories in the root:"
 ls -la /
 
-cd app
+cd /app
+echo "Current directory: $(pwd)"
+
 echo "🗂️ In app directory:"
 ls -la /
 
