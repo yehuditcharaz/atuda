@@ -14,11 +14,11 @@ gcloud auth activate-service-account --key-file=/project-for-version.json
 echo "🔐 after service account authorization"
 
 echo "📁 Listing files and directories in the root:"
-ls -la /
+ls -la /app
 
 echo "🚚 run the code"
 
-python -m src.services.main
+python -m app.src.services.main
 
 
 # _setup() {
