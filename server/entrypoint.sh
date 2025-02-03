@@ -8,24 +8,19 @@ fi
 
 echo "🤖 $GOOGLE_CREDENTIALS"
 echo "$GOOGLE_CREDENTIALS" | sed "s/^'//;s/'$//" > /project-for-version.json
+
 echo "✏️ service account writed successfully"
 gcloud auth activate-service-account --key-file=/project-for-version.json
 
 echo "🔐 after service account authorization"
 
-echo "📁 Listing files and directories in the root:"
-ls -la /
-
-cd /app
-echo "Current directory: $(pwd)"
-
-echo "🗂️ In app directory:"
-ls -la /
 
 echo "🚚 run the code"
 
+cd /app
 python -m src.services.main
 
+echo "🔚 after run the code"
 
 # _setup() {
 #     echo "🗝️ Connect to GCP..."
