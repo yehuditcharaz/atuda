@@ -7,7 +7,8 @@ if [ -z "$GOOGLE_CREDENTIALS" ]; then
 fi
 
 echo "🤖 $GOOGLE_CREDENTIALS"
-echo "$GOOGLE_CREDENTIALS" | sed "s/^'//;s/'$//" | jq . > /project-for-version.json
+echo "$GOOGLE_CREDENTIALS" | sed "s/^'//;s/'$//" > /project-for-version.json
+echo "$GOOGLE_CREDENTIALS" | sed "s/^'//;s/'$//" | grep -q '{.*}' && echo "Valid JSON" || echo "Invalid JSON"
 echo "✏️ service account writed successfully"
 gcloud auth activate-service-account --key-file=/project-for-version.json
 
