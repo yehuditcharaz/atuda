@@ -6,14 +6,6 @@ WORKDIR /app
 COPY . /app/
 USER root
 
-# --- NETFREE CERT INTSALL ---
-ADD https://netfree.link/dl/unix-ca.sh /home/netfree-unix-ca.sh
-RUN cat  /home/netfree-unix-ca.sh | sh
-ENV NODE_EXTRA_CA_CERTS=/etc/ca-bundle.crt
-ENV REQUESTS_CA_BUNDLE=/etc/ca-bundle.crt
-ENV SSL_CERT_FILE=/etc/ca-bundle.crt
-# --- END NETFREE CERT INTSALL ---
-
 RUN pip install -r requirements.txt 
 RUN python3 -c "import nltk; nltk.download('all')"
 RUN apt-get update && apt-get install -y libgl1
