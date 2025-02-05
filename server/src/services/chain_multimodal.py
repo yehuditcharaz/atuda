@@ -8,8 +8,8 @@ from langchain_core.runnables import RunnableLambda, RunnablePassthrough
 from langchain_google_vertexai import (
     ChatVertexAI,
 )
-from ..config import ModelConfig, PromptConfig
-from .retriever import retriever_multi_vector_img
+from config import ModelConfig, PromptConfig
+from services.retriever import retriever_multi_vector_img
 
 
 def initialize_chain():
@@ -80,7 +80,6 @@ def is_image_data(b64data):
 
 
 def format_model_input(data_dict):
-    ("I'm starting to format messages")
     formatted_texts = "\n".join(data_dict["context"]["texts"])
     messages = [
         {

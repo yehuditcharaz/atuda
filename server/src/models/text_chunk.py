@@ -1,4 +1,4 @@
-from .base_chunk import BaseChunk
+from models.base_chunk import BaseChunk
 
 
 class TextChunk(BaseChunk):

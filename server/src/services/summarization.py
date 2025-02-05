@@ -6,8 +6,8 @@ from langchain_google_vertexai import (
     ChatVertexAI,
     VertexAI,
 )
-from ..config import ModelConfig, PromptConfig, UtilsConfig
-from ..utils.data_preparing import is_image_chunk
+from config import ModelConfig, PromptConfig, UtilsConfig
+from utils.data_preparing import is_image_chunk
 
 
 def set_summaries(chunks):

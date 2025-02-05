@@ -5,15 +5,13 @@ from langchain_google_vertexai import (
     VertexAIEmbeddings,
 )
 from langchain_google_vertexai.vectorstores.document_storage import GCSDocumentStorage
-from ..config import GCPConfig, ModelConfig, UtilsConfig
+from config import GCPConfig, ModelConfig, UtilsConfig
 from google.cloud import aiplatform
 from google.oauth2 import service_account
 import json
 
 
 credentials_dict = json.loads(GCPConfig.GOOGLE_CREDENTIALS)
-print("GCPConfig.GOOGLE_CREDENTIALS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-print(GCPConfig.GOOGLE_CREDENTIALS)
 credentials = service_account.Credentials.from_service_account_info(
     credentials_dict)
 aiplatform.init(project=GCPConfig.PROJECT_ID, location=GCPConfig.LOCATION,
@@ -49,4 +47,3 @@ def get_docstore():
 
 
 retriever_multi_vector_img = initialize_retriever()
-print("after initialization!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")

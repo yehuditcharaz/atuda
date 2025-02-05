@@ -6,11 +6,11 @@ WORKDIR /app
 COPY . /app/
 USER root
 
-RUN pip install -r requirements.txt 
+RUN pip install .
 RUN python3 -c "import nltk; nltk.download('all')"
-RUN apt-get update && apt-get install -y libgl1
-RUN apt-get install -y poppler-utils
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tesseract-ocr
+RUN apt-get update && apt-get install -y libgl1 \
+    && apt-get install -y poppler-utils \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y tesseract-ocr
 
 ENV PATH="/usr/local/gcloud/google-cloud-sdk/bin:$PATH"
 
@@ -20,7 +20,8 @@ RUN mkdir -p /usr/local/gcloud \
   && /usr/local/gcloud/google-cloud-sdk/install.sh 
 
 RUN gcloud config set project $PROJECT_ID 
-RUN apt-get update
+
+RUN pip install --upgrade flask-socketio
 
 EXPOSE 8000
 
