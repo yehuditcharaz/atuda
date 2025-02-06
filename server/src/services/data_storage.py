@@ -1,5 +1,5 @@
 from langchain_core.documents import Document
-from config import UtilsConfig
+from utils.config import UtilsConfig
 from utils.data_preparing import is_image_chunk
 from services.retriever import retriever_multi_vector_img
 

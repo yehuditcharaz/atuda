@@ -8,7 +8,8 @@ from langchain_core.runnables import RunnableLambda, RunnablePassthrough
 from langchain_google_vertexai import (
     ChatVertexAI,
 )
-from config import ModelConfig, PromptConfig
+from utils.config import ModelConfig
+from utils.const import PromptConst
 from services.retriever import retriever_multi_vector_img
 
 
@@ -31,7 +32,7 @@ def initialize_chain():
 def query_processing(query):
     model = ChatVertexAI(model_name=ModelConfig.MODEL_NAME,
                          max_output_tokens=ModelConfig.TOKEN_LIMIT)
-    msg = model.invoke(PromptConfig.PROCESS_USER_QUERY + "\n\n" + query)
+    msg = model.invoke(PromptConst.PROCESS_USER_QUERY + "\n\n" + query)
     return msg.content
 
 
@@ -85,7 +86,7 @@ def format_model_input(data_dict):
         {
             "type": "text",
             "text": (
-                f"{PromptConfig.GENERATION}"
+                f"{PromptConst.GENERATION}"
                 f"User-provided question: {data_dict['question']}\n\n"
                 "Text and / or tables:\n"
                 f"{formatted_texts}"

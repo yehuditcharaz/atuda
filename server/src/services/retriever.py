@@ -5,7 +5,7 @@ from langchain_google_vertexai import (
     VertexAIEmbeddings,
 )
 from langchain_google_vertexai.vectorstores.document_storage import GCSDocumentStorage
-from config import GCPConfig, ModelConfig, UtilsConfig
+from utils.config import GCPConfig, ModelConfig, UtilsConfig
 from google.cloud import aiplatform
 from google.oauth2 import service_account
 import json

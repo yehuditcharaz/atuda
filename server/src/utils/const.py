@@ -1,32 +1,4 @@
-import os
-from dotenv import load_dotenv
-
-
-load_dotenv()
-
-
-class GCPConfig:
-    PROJECT_ID = os.getenv("PROJECT_ID")
-    LOCATION = os.getenv("LOCATION")
-    GCS_BUCKET = os.getenv("GCS_BUCKET")
-    GCS_BUCKET_URI = f"gs://" + (os.getenv("GCS_BUCKET"))
-    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-    INDEX_ID = os.getenv("INDEX_ID")
-    INDEX_ENDPOINT_ID = os.getenv("INDEX_ENDPOINT_ID")
-    CHUNKS_FOLDER = "chunks",
-    GOOGLE_CREDENTIALS = os.getenv("GOOGLE_CREDENTIALS")
-
-
-class ModelConfig:
-    MODEL_NAME = "gemini-2.0-flash-exp"
-    GEMINI_OUTPUT_TOKEN_LIMIT = 8192
-    EMBEDDING_MODEL_NAME = "text-embedding-004"
-    EMBEDDING_TOKEN_LIMIT = 4096
-    TOKEN_LIMIT = min(GEMINI_OUTPUT_TOKEN_LIMIT, EMBEDDING_TOKEN_LIMIT)
-    SEARCH_KWARGS = {"k": 10}
-
-
-class PromptConfig:
+class PromptConst:
     TEXT_SUMMARIZATION = """You are an assistant tasked with summarizing tables \
     and text for retrieval. These summaries will be embedded and used to \
     retrieve the raw text or table elements. Give a concise summary of the table\
@@ -171,11 +143,3 @@ Output: What techniques or adjustments can improve the stability of the helicopt
     remarks about the source of the materials, their format, or how they were \
     compiled. Simply deliver the most relevant and comprehensive answer to the \
     question, ensuring it aligns with the provided information."""
-
-
-class UtilsConfig:
-    DOCUMENTS_FOLDER_PATH = os.getenv("DOCUMENTS_FOLDER_PATH")
-    IMAGES_FOLDER_PATH = os.getenv("IMAGES_FOLDER_PATH")
-    BATCH_SIZE = 1000
-    ID_KEY = "doc_id"
-    MAX_TRIES = 6

@@ -6,7 +6,8 @@ from langchain_google_vertexai import (
     ChatVertexAI,
     VertexAI,
 )
-from config import ModelConfig, PromptConfig, UtilsConfig
+from utils.config import ModelConfig, UtilsConfig
+from utils.const import PromptConst
 from utils.data_preparing import is_image_chunk
 
 
@@ -26,7 +27,7 @@ def set_summaries(chunks):
 
 
 def generate_document_summary(chunk_content: str) -> str:
-    prompt = PromptTemplate.from_template(PromptConfig.TEXT_SUMMARIZATION)
+    prompt = PromptTemplate.from_template(PromptConst.TEXT_SUMMARIZATION)
     empty_response = RunnableLambda(
         lambda x: AIMessage(content="Error processing document")
     )
@@ -46,7 +47,7 @@ def generate_image_summary(base64_image: str) -> str:
         [
             HumanMessage(
                 content=[
-                    {"type": "text", "text": PromptConfig.IMAGE_SUMMARIZATION},
+                    {"type": "text", "text": PromptConst.IMAGE_SUMMARIZATION},
                     {
                         "type": "image_url",
                         "image_url": {"url": f"data:image/png;base64,{base64_image}"},

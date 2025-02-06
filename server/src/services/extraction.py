@@ -3,7 +3,7 @@ import os
 import uuid
 
 from unstructured.partition.pdf import partition_pdf
-from config import UtilsConfig
+from utils.config import UtilsConfig
 from models.image_chunk import ImageChunk
 from models.text_chunk import TextChunk
 
