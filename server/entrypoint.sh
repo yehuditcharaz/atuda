@@ -18,5 +18,3 @@ python src/services/data_preparation.py
 echo "🔚 after run the code"
 
 python src/routes/chat.py
-
-# run the server

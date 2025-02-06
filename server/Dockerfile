@@ -23,7 +23,7 @@ RUN gcloud config set project $PROJECT_ID
 
 RUN pip install --upgrade flask-socketio
 
-EXPOSE 8000
+EXPOSE 8080
 
 COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
