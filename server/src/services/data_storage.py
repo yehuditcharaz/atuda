@@ -1,7 +1,7 @@
 from langchain_core.documents import Document
 from utils.config import UtilsConfig
 from utils.data_preparing import is_image_chunk
-from services.retriever import retriever_multi_vector_img
+from services.retriever import initialize_retriever
 
 
 def create_document(chunk, is_summary=False):
@@ -12,6 +12,8 @@ def create_document(chunk, is_summary=False):
 
 
 def store_data(chunks):
+    retriever_multi_vector_img = initialize_retriever()
+
     chunks_documents = [create_document(chunk) for chunk in chunks]
     doc_ids = [doc.metadata[UtilsConfig.ID_KEY] for doc in chunks_documents]
 

@@ -15,6 +15,7 @@ class GCPConfig:
     INDEX_ENDPOINT_ID = os.getenv("INDEX_ENDPOINT_ID")
     CHUNKS_FOLDER = "chunks",
     GOOGLE_CREDENTIALS = os.getenv("GOOGLE_CREDENTIALS")
+    CORPUS_FOLDER = "corpus"
 
 
 class ModelConfig:

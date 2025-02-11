@@ -1,7 +1,9 @@
 from google.cloud import storage
+from langchain.retrievers import EnsembleRetriever, MultiQueryRetriever
 from langchain.retrievers.multi_vector import MultiVectorRetriever
 from langchain_google_vertexai import (
     VectorSearchVectorStore,
+    VertexAI,
     VertexAIEmbeddings,
 )
 from langchain_google_vertexai.vectorstores.document_storage import GCSDocumentStorage
@@ -16,6 +18,27 @@ credentials = service_account.Credentials.from_service_account_info(
     credentials_dict)
 aiplatform.init(project=GCPConfig.PROJECT_ID, location=GCPConfig.LOCATION,
                 staging_bucket=GCPConfig.GCS_BUCKET_URI, credentials=credentials)
+
+
+def initialize_ensemble_retriever():
+    retriever = initialize_retriever()
+
+    multi_query_retriever = MultiQueryRetriever.from_llm(
+        retriever=retriever,
+        llm=VertexAI(
+            temperature=0,
+            model_name=ModelConfig.MODEL_NAME,
+            max_output_tokens=ModelConfig.TOKEN_LIMIT
+        )
+    )
+
+    ensemble_retriever = EnsembleRetriever(
+        retrievers=[retriever,
+                    multi_query_retriever],
+        weights=[0.6, 0.4]
+    )
+
+    return ensemble_retriever
 
 
 def initialize_retriever():
@@ -46,4 +69,4 @@ def get_docstore():
     return GCSDocumentStorage(bucket, GCPConfig.CHUNKS_FOLDER)
 
 
-retriever_multi_vector_img = initialize_retriever()
+ensemble_retriever = initialize_ensemble_retriever()
