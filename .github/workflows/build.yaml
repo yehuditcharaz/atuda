@@ -7,7 +7,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE: project-for-version/ofer/client-openwebui
+  IMAGE: project-for-version/ofer/client-pipeline
   PROJECT: us-central1-docker.pkg.dev
 
 jobs:
@@ -52,11 +52,11 @@ jobs:
       uses: docker/build-push-action@v5
       id: docker_build
       with:
-        context: ./client/open-webui
+        context: ./client/pipeline
         push: true
         provenance: false
         labels: ${{ steps.meta.outputs.labels }}
         tags: ${{ steps.meta.outputs.tags }}
-        file: ./client/open-webui/Dockerfile
+        file: ./client/pipeline/Dockerfile
         build-args: |
           GOOGLE_CREDENTIALS=${{ secrets.ACCOUNT_KEY }}
