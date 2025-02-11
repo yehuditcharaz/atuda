@@ -1,21 +1,13 @@
-console.log('2.6')
-
-window.navigation.addEventListener("navigate", (event) => {
+window.navigation.addEventListener("navigate", () => {
+    setTimeout(UpdateElements, 1000);
     setTimeout(userLogin, 3500);
-    setTimeout(AddInstructions, 3500);
     setTimeout(selectModel, 3500);
 })
 
 let flag = true;
 
-function userLogin() {
-    let userType = document.getElementsByClassName('size-6 object-cover rounded-full');
-    userType[0].src === "http://localhost:3000/user.png" ? flag = false : null;
-}
-
-
-function AddInstructions() {
-    if (!document.getElementById("InstructionsDiv")) {
+function UpdateElements(){
+    if (!document.getElementById("InstructionsDiv")){
         const infoPlace = document.querySelector('[aria-label="New Chat"]');
         const infoDiv = document.createElement('div');
         infoDiv.className = "flex"
@@ -24,7 +16,7 @@ function AddInstructions() {
         buttonI.id = "Instructions"
         buttonI.className = 'flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition';
         infoDiv.appendChild(buttonI)
-        buttonI.addEventListener('click', function () { ClickInfo() })
+        buttonI.addEventListener('click', function(){ClickInfo()})
         const iconDiv = document.createElement('div');
         iconDiv.className = "m-auto self-center"
         buttonI.appendChild(iconDiv)
@@ -39,11 +31,10 @@ function AddInstructions() {
         const pathInfo = document.createElementNS(svgInfoNamespace, "path");
         pathInfo.setAttribute("stroke-linecap", "round");
         pathInfo.setAttribute("stroke-linejoin", "round");
-        pathInfo.setAttribute("d", "M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z");
+        pathInfo.setAttribute("d","M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z");
         svgInfo.appendChild(pathInfo);
         iconDiv.appendChild(svgInfo);
         infoPlace.insertAdjacentElement('beforebegin', infoDiv)
-
 
         const filePlace = document.getElementById("InstructionsDiv")
         const fileDiv = document.createElement('div');
@@ -52,12 +43,12 @@ function AddInstructions() {
         buttonF.id = "files"
         buttonF.className = 'flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition';
         fileDiv.appendChild(buttonF)
-        buttonF.addEventListener('click', function () {
+        buttonF.addEventListener('click', function(){
             window.open('https://www.example.com', '_blank');
         })
         const iconFileDiv = document.createElement('div');
         iconFileDiv.className = "m-auto self-center"
-        buttonF.appendChild(iconFileDiv)
+        buttonF.appendChild(iconFileDiv);
         const svgFileNamespace = "http://www.w3.org/2000/svg";
         const svgFile = document.createElementNS(svgFileNamespace, "svg");
         svgFile.setAttribute("xmlns", svgFileNamespace);
@@ -69,11 +60,16 @@ function AddInstructions() {
         const pathFile = document.createElementNS(svgFileNamespace, "path");
         pathFile.setAttribute("stroke-linecap", "round");
         pathFile.setAttribute("stroke-linejoin", "round");
-        pathFile.setAttribute("d", "M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z");
+        pathFile.setAttribute("d","M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z");
         svgFile.appendChild(pathFile);
         iconFileDiv.appendChild(svgFile);
-        filePlace.insertAdjacentElement('beforebegin', fileDiv)
+        filePlace.insertAdjacentElement('beforebegin', fileDiv);
     }
+
+    const helps = document.getElementsByClassName('text-gray-600 dark:text-gray-300 bg-gray-300/20 size-5 flex items-center justify-center text-[0.7rem] rounded-full');
+    [...helps].forEach((help) => {
+        help.style.display = 'none';
+    });
 }
 
 function ClickInfo() {
@@ -89,7 +85,6 @@ function ClickInfo() {
                     </svg>
                 </button>
             </div>
-
             <div class="px-5 py-4 text-gray-800 dark:text-gray-100">
                 <p class="mb-4 text-lg font-semibold">🚁 ברוך הבא לצ'אטבוט התמיכה למערכות המסוק! 🚁</p>
                 <p>הצ'אטבוט כאן כדי לעזור לך להבין את מערכות המסוק והפעלתן, עם מידע מדויק מהתיעוד הרשמי.</p>
@@ -129,35 +124,20 @@ function ClickInfo() {
     `;
     document.body.appendChild(dialog);
     dialog.showModal();
-    dialog.querySelector('#closeDialog').onclick = function () {
+    dialog.querySelector('#closeDialog').onclick = function() {
         dialog.close();
-        document.body.removeChild(dialog); 
+        document.body.removeChild(dialog);
     };
 }
 
-function selectPipelineDisabled(className) {
-    const selectedPipeline = document.getElementsByClassName(className);
-    [...selectedPipeline].forEach((pipeline) => {
-        pipeline.style.display = 'none';
-    });
-}
-
-function currentModel(pipelines) {
-    const model = document.createElement('div');
-    model.id = 'Ofer-knowledge-chat'
-    model.textContent = "Ofer knowledge chat";
-    [...pipelines].forEach((pipeline) => {
-        pipeline.appendChild(model);
-    });
+function userLogin() {
+    const userType = document.getElementsByClassName('size-6 object-cover rounded-full');
+    userType[0].src === "https://client-openwebui-199581308623.us-central1.run.app/user.png" ? flag = false : null;
 }
 
 function selectModel() {
     const setAsDefaults = document.getElementsByClassName('absolute text-left mt-[1px] ml-1 text-[0.7rem] text-gray-500 font-primary');
     const pipelines = document.getElementsByClassName('flex-1 overflow-hidden max-w-full py-0.5 ');
-    const helps = document.getElementsByClassName('text-gray-600 dark:text-gray-300 bg-gray-300/20 size-5 flex items-center justify-center text-[0.7rem] rounded-full');
-    [...helps].forEach((help) => {
-        help.style.display = 'none';
-    });
     if (flag) {
         [...setAsDefaults].forEach((setAsDefault) => {
             setAsDefault.addEventListener('click', function () {
@@ -177,4 +157,20 @@ function selectModel() {
             currentModel(pipelines);
         }
     }
+}
+
+function selectPipelineDisabled(className) {
+    const selectedPipeline = document.getElementsByClassName(className);
+    [...selectedPipeline].forEach((pipeline) => {
+        pipeline.style.display = 'none';
+    });
+}
+
+function currentModel(pipelines) {
+    const model = document.createElement('div');
+    model.id = 'Ofer-knowledge-chat'
+    model.textContent = "Ofer chat";
+    [...pipelines].forEach((pipeline) => {
+        pipeline.appendChild(model);
+    });
 }
