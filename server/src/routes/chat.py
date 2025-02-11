@@ -28,4 +28,5 @@ def chat(query: str):
 
 
 if __name__ == '__main__':
-    socketio.run(app, host=UtilsConfig.HOST, port=8000)
+    socketio.run(app, host=UtilsConfig.HOST, port=8080, allow_unsafe_werkzeug=True)
+    # socketio.run(app, host=UtilsConfig.HOST, port=8000)
