@@ -141,21 +141,23 @@ function selectModel() {
     const pipelines = document.getElementsByClassName('flex-1 overflow-hidden max-w-full py-0.5 ');
     if (flag) {
         console.log("in true");
-        [...setAsDefaults].forEach((setAsDefault) => {
-            setAsDefault.addEventListener('click', function () {
-                this.style.display = 'none';
-                flag = false;
-                selectPipelineDisabled('flex w-full max-w-fit');
-                currentModel(pipelines);
-            })
-        });
+        if (!document.getElementById('Ofer-chat')) {
+            [...setAsDefaults].forEach((setAsDefault) => {
+                setAsDefault.addEventListener('click', function () {
+                    this.style.display = 'none';
+                    flag = false;
+                    selectPipelineDisabled('flex w-full max-w-fit');
+                    currentModel(pipelines);
+                })
+            });
+        }
     }
     else {
         console.log("in false");
         [...setAsDefaults].forEach((setAsDefault) => {
             setAsDefault.style.display = 'none';
         });
-        if (!document.getElementById('Ofer-knowledge-chat')) {
+        if (!document.getElementById('Ofer-chat')) {
             selectPipelineDisabled('flex flex-col w-full items-start');
             currentModel(pipelines);
         }
@@ -171,8 +173,8 @@ function selectPipelineDisabled(className) {
 
 function currentModel(pipelines) {
     const model = document.createElement('div');
-    model.id = 'Ofer-knowledge-chat'
-    model.textContent = "Ofer knowledge chat";
+    model.id = 'Ofer-chat'
+    model.textContent = "Ofer chat";
     [...pipelines].forEach((pipeline) => {
         pipeline.appendChild(model);
     });
