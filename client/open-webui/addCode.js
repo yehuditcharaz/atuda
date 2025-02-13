@@ -138,7 +138,6 @@ function userLogin() {
 
 function selectModel() {
     const setAsDefaults = document.getElementsByClassName('absolute text-left mt-[1px] ml-1 text-[0.7rem] text-gray-500 font-primary');
-    const pipelines = document.getElementsByClassName('flex-1 overflow-hidden max-w-full py-0.5 ');
     if (flag) {
         [...setAsDefaults].forEach((setAsDefault) => {
             setAsDefault.addEventListener('click', function () {
@@ -146,7 +145,7 @@ function selectModel() {
                     this.style.display = 'none';
                     flag = false;
                     selectPipelineDisabled('flex w-full max-w-fit');
-                    currentModel(pipelines);
+                    currentModel();
                 }
             })
         });
@@ -157,7 +156,7 @@ function selectModel() {
         });
         if (!document.getElementById('Ofer-chat')) {
             selectPipelineDisabled('flex flex-col w-full items-start');
-            currentModel(pipelines);
+            currentModel();
         }
     }
 }
@@ -169,7 +168,8 @@ function selectPipelineDisabled(className) {
     });
 }
 
-function currentModel(pipelines) {
+function currentModel() {
+    const pipelines = document.getElementsByClassName('flex-1 overflow-hidden max-w-full py-0.5 ');
     const model = document.createElement('div');
     model.id = 'Ofer-chat'
     model.textContent = "Ofer chat";
