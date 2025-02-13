@@ -1,19 +1,17 @@
-import ast
 import base64
 import os
+from pathlib import Path
 import re
 
-from langchain_core.documents import Document
 from langchain_core.messages import HumanMessage
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnableLambda, RunnablePassthrough
-from langchain_google_vertexai import (
-    ChatVertexAI,
-)
+from langchain_core.runnables import RunnableLambda
+from langchain_google_vertexai import ChatVertexAI
 from urllib.parse import quote
+
+from models.answer_schema import AnswerSchema
+from services.retriever import ensemble_retriever
 from utils.config import GCPConfig, ModelConfig
 from utils.const import PromptConst
-from services.retriever import ensemble_retriever
 
 
 def initialize_chain():
@@ -25,9 +23,8 @@ def initialize_chain():
             temperature=0,
             model_name=ModelConfig.MODEL_NAME,
             max_output_tokens=ModelConfig.TOKEN_LIMIT,
-        )
-        | StrOutputParser()
-        | RunnableLambda(format_answer)
+        ).with_structured_output(AnswerSchema)
+        | RunnableLambda(set_links)
     )
     return chain_multimodal_rag
 
@@ -89,19 +86,14 @@ def is_image_data(b64data):
 
 
 def format_model_input(data_dict):
-    formatted_texts = "\n".join(data_dict["context"]["texts"])
+    formatted_chunks = str(data_dict["context"]["texts"])
+    full_prompt = f"{PromptConst.ANSWER_GENERATION_INSTRUCTIONS}\nUser-provided question: {data_dict['question']}\n\nText and / or tables:\n{formatted_chunks}"
     messages = [
         {
             "type": "text",
-            "text": (
-                f"{PromptConst.ANSWER_GENERATION}"
-                f"User-provided question: {data_dict['question']}\n\n"
-                "Text and / or tables:\n"
-                f"{formatted_texts}"
-            ),
+            "text": (full_prompt),
         }
     ]
-
     if data_dict["context"]["images"]:
         for image in data_dict["context"]["images"]:
             messages.append(
@@ -113,38 +105,33 @@ def format_model_input(data_dict):
     return [HumanMessage(content=messages)]
 
 
-def format_answer(str_result):
-    result = ast.literal_eval(str_result)
-    return {'answer': result['answer'],
-            'links': get_links(result['links']),
-            'imgs': get_images(result['imgs'])}
+def set_links(result):
+    result.referenced_chunks_filename_and_page_number = get_links(
+        result.referenced_chunks_filename_and_page_number)
+    return result
 
 
 def get_links(chunks_metadata):
-    return [(f"[{get_link_preview(chunk_metadata)}]({get_document_link(chunk_metadata)})")
+    return [f"[{get_link_preview(chunk_metadata)}]({get_document_link(chunk_metadata)})"
             for chunk_metadata in chunks_metadata]
 
 
 def get_document_link(chunk_metadata):
-    filename = quote(chunk_metadata['filename'])
+    filename = quote(chunk_metadata[0])
     return os.path.join('https://storage.cloud.google.com/',
                         GCPConfig.GCS_BUCKET,
                         GCPConfig.CORPUS_FOLDER,
                         get_filename_without_prefix(filename),
-                        f"{filename}#page={chunk_metadata['page_number']}"
+                        f"{filename}#page={chunk_metadata[1]}"
                         )
 
 
 def get_filename_without_prefix(filename):
-    return filename.split('.')[0]
+    return Path(filename).stem
 
 
 def get_link_preview(chunk_metadata):
-    return f"{chunk_metadata['filename']} P. {chunk_metadata['page_number']}"
-
-
-def get_images(imgs_metadata):
-    return []
+    return f"{chunk_metadata[0]} P. {chunk_metadata[1]}"
 
 
 chain_multimodal_rag = initialize_chain()

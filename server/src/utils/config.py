@@ -13,7 +13,7 @@ class GCPConfig:
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
     INDEX_ID = os.getenv("INDEX_ID")
     INDEX_ENDPOINT_ID = os.getenv("INDEX_ENDPOINT_ID")
-    CHUNKS_FOLDER = "chunks",
+    CHUNKS_FOLDER = "chunks"
     GOOGLE_CREDENTIALS = os.getenv("GOOGLE_CREDENTIALS")
     CORPUS_FOLDER = "corpus"
 
@@ -34,5 +34,3 @@ class UtilsConfig:
     ID_KEY = "doc_id"
     MAX_TRIES = 6
     HOST = os.getenv('HOST')
-    PORT = os.getenv("PORT")
-
