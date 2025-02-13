@@ -34,3 +34,4 @@ class UtilsConfig:
     ID_KEY = "doc_id"
     MAX_TRIES = 6
     HOST = os.getenv('HOST')
+    PORT = os.getenv('PORT')
