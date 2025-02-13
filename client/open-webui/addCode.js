@@ -1,5 +1,5 @@
 window.navigation.addEventListener("navigate", () => {
-    setTimeout(UpdateElements, 1000);
+    setTimeout(UpdateElements, 3500);
     setTimeout(userLogin, 3500);
     setTimeout(selectModel, 3500);
 })
