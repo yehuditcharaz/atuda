@@ -140,20 +140,18 @@ function selectModel() {
     const setAsDefaults = document.getElementsByClassName('absolute text-left mt-[1px] ml-1 text-[0.7rem] text-gray-500 font-primary');
     const pipelines = document.getElementsByClassName('flex-1 overflow-hidden max-w-full py-0.5 ');
     if (flag) {
-        console.log("in true");
-        if (!document.getElementById('Ofer-chat')) {
-            [...setAsDefaults].forEach((setAsDefault) => {
-                setAsDefault.addEventListener('click', function () {
+        [...setAsDefaults].forEach((setAsDefault) => {
+            setAsDefault.addEventListener('click', function () {
+                if (!document.getElementById('Ofer-chat')) {
                     this.style.display = 'none';
                     flag = false;
                     selectPipelineDisabled('flex w-full max-w-fit');
                     currentModel(pipelines);
-                })
-            });
-        }
+                }
+            })
+        });
     }
     else {
-        console.log("in false");
         [...setAsDefaults].forEach((setAsDefault) => {
             setAsDefault.style.display = 'none';
         });
