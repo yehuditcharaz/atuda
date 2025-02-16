@@ -13,7 +13,7 @@ class GCPConfig:
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
     INDEX_ID = os.getenv("INDEX_ID")
     INDEX_ENDPOINT_ID = os.getenv("INDEX_ENDPOINT_ID")
-    CHUNKS_FOLDER = "chunks"
+    CHUNKS_FOLDER = "RFM_chunks_v2"
     GOOGLE_CREDENTIALS = os.getenv("GOOGLE_CREDENTIALS")
     CORPUS_FOLDER = "corpus"
 
