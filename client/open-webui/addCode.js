@@ -1,6 +1,6 @@
 window.navigation.addEventListener("navigate", () => {
+    setTimeout(userLogin, 1000);
     setTimeout(UpdateElements, 3500);
-    setTimeout(userLogin, 3500);
     setTimeout(selectModel, 3500);
 })
 
@@ -131,9 +131,22 @@ function ClickInfo() {
 }
 
 function userLogin() {
-    const userType = document.getElementsByClassName('size-6 object-cover rounded-full');
-    console.log(userType[0].src);
-    userType[0].src === "https://client-openwebui-199581308623.us-central1.run.app/user.png" ? flag = false : null;
+    const login = document.getElementsByClassName('bg-gray-700/5 hover:bg-gray-700/10 dark:bg-gray-100/5 dark:hover:bg-gray-100/10 dark:text-gray-300 dark:hover:text-white transition w-full rounded-full font-medium text-sm py-2.5');
+    let userEmail, userPassword;
+    [...login].forEach((entry) => {
+        entry.addEventListener('click', function () {
+            const emails = document.getElementsByName('email');
+            [...emails].forEach((email) => {
+                userEmail = email.value;
+            })
+            const passwords = document.getElementsByName('current-password');
+            [...passwords].forEach((password) => {
+                userPassword = password.value;
+            })
+            !(userEmail === "admin@gmail.com" && userPassword === "admin") ? flag = false : null;
+
+        })
+    })
 }
 
 function selectModel() {
@@ -144,8 +157,7 @@ function selectModel() {
                 if (!document.getElementById('Ofer-chat')) {
                     this.style.display = 'none';
                     flag = false;
-                    selectPipelineDisabled('flex w-full max-w-fit');
-                    currentModel();
+                    currentModel('flex w-full max-w-fit');
                 }
             })
         });
@@ -155,20 +167,16 @@ function selectModel() {
             setAsDefault.style.display = 'none';
         });
         if (!document.getElementById('Ofer-chat')) {
-            selectPipelineDisabled('flex flex-col w-full items-start');
-            currentModel();
+            currentModel('flex flex-col w-full items-start');
         }
     }
 }
 
-function selectPipelineDisabled(className) {
+function currentModel(className) {
     const selectedPipeline = document.getElementsByClassName(className);
     [...selectedPipeline].forEach((pipeline) => {
         pipeline.style.display = 'none';
     });
-}
-
-function currentModel() {
     const pipelines = document.getElementsByClassName('flex-1 overflow-hidden max-w-full py-0.5 ');
     const model = document.createElement('div');
     model.id = 'Ofer-chat'
