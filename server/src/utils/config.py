@@ -23,7 +23,16 @@ class ModelConfig:
     GEMINI_OUTPUT_TOKEN_LIMIT = 8192
     EMBEDDING_MODEL_NAME = "text-embedding-004"
     EMBEDDING_TOKEN_LIMIT = 4096
+    TEMPERATURE = 0
     TOKEN_LIMIT = min(GEMINI_OUTPUT_TOKEN_LIMIT, EMBEDDING_TOKEN_LIMIT)
+    RESPONSE_SCHEMA = response_schema = {
+        "type": "object",
+        "properties": {
+            "markdown_answer": {"type": "string"},
+            "referenced_chunks_filename_and_page_number": {"type": "array", "items": {"type": "array", "items": {"type": "string"}}},
+        },
+        "required": ["markdown_answer"],
+    }
     SEARCH_KWARGS = {"k": 10}
 
 

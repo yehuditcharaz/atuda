@@ -13,8 +13,8 @@ def chat():
         print(query)
         response = {
             'status_code': 200,
-            'answer': result.answer,
-            'links': result.referenced_chunks_filename_and_page_number,
+            'answer': result['answer'],
+            'links': result['links'],
         }
     except Exception as e:
         response = {

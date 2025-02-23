@@ -3,12 +3,12 @@ import os
 from pathlib import Path
 import re
 
+from langchain_core.output_parsers.json import JsonOutputParser
 from langchain_core.messages import HumanMessage
 from langchain_core.runnables import RunnableLambda
 from langchain_google_vertexai import ChatVertexAI
 from urllib.parse import quote
 
-from models.answer_schema import AnswerSchema
 from services.retriever import ensemble_retriever
 from utils.config import GCPConfig, ModelConfig
 from utils.const import PromptConst
@@ -20,10 +20,14 @@ def initialize_chain():
         | RunnableLambda(sources_retrieval)
         | RunnableLambda(format_model_input)
         | ChatVertexAI(
-            temperature=0,
+            temperature=ModelConfig.TEMPERATURE,
             model_name=ModelConfig.MODEL_NAME,
             max_output_tokens=ModelConfig.TOKEN_LIMIT,
-        ).with_structured_output(AnswerSchema)
+            response_mime_type="application/json",
+            response_schema=ModelConfig.RESPONSE_SCHEMA,
+            system_instruction=PromptConst.SYSTEM_INSTRUCTIONS,
+        )
+        | JsonOutputParser()
         | RunnableLambda(set_links)
     )
     return chain_multimodal_rag
@@ -87,7 +91,7 @@ def is_image_data(b64data):
 
 def format_model_input(data_dict):
     formatted_chunks = str(data_dict["context"]["texts"])
-    full_prompt = f"{PromptConst.ANSWER_GENERATION_INSTRUCTIONS}\nUser-provided question: {data_dict['question']}\n\nText and / or tables:\n{formatted_chunks}"
+    full_prompt = f"User-provided question: {data_dict['question']}\n\nText and / or tables:\n{formatted_chunks}"
     messages = [
         {
             "type": "text",
@@ -106,9 +110,8 @@ def format_model_input(data_dict):
 
 
 def set_links(result):
-    result.referenced_chunks_filename_and_page_number = get_links(
-        result.referenced_chunks_filename_and_page_number)
-    return result
+    return {'answer': result['markdown_answer'],
+            'links': get_links(result['referenced_chunks_filename_and_page_number'])}
 
 
 def get_links(chunks_metadata):
