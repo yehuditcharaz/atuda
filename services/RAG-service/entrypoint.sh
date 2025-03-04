@@ -15,6 +15,6 @@ echo "🔐 after service account authorization"
 echo "🚚 run the code"
 cd /app
 # python src/services/data_preparation.py
-echo "🔚 after run the code"
+# echo "🔚 after run the code"
 
 python src/routes/chat.py

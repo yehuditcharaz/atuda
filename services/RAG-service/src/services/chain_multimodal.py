@@ -12,6 +12,8 @@ from urllib.parse import quote
 from services.retriever import ensemble_retriever
 from utils.config import GCPConfig, ModelConfig
 from utils.const import PromptConst
+from utils.data_preparing import is_hebrew
+from utils.dictionary import dictionary
 
 
 def initialize_chain():
@@ -34,10 +36,13 @@ def initialize_chain():
 
 
 def query_processing(query):
+    if not is_hebrew(query):
+        return query
+    prompt = f"{PromptConst.TRANSLATION} \n Question: {query} \n Dictionary: {dictionary}"
     model = ChatVertexAI(model_name=ModelConfig.MODEL_NAME,
                          max_output_tokens=ModelConfig.TOKEN_LIMIT)
-    msg = model.invoke(PromptConst.PROCESS_USER_QUERY + "\n\n" + query)
-    return msg.content
+    result = model.invoke(prompt)
+    return result.content
 
 
 def sources_retrieval(query):
@@ -110,22 +115,31 @@ def format_model_input(data_dict):
 
 
 def set_links(result):
-    return {'answer': result['markdown_answer'],
-            'links': get_links(result['referenced_chunks_filename_and_page_number'])}
+    return {'answer': result['markdown_answer_with_reasoning'],
+            'links': get_links(result['doc_ids'])}
 
 
-def get_links(chunks_metadata):
+def get_links(docs_ids):
+    chunks_metadata = get_chunks_metadata(docs_ids)
     return [f"[{get_link_preview(chunk_metadata)}]({get_document_link(chunk_metadata)})"
             for chunk_metadata in chunks_metadata]
 
 
+def get_chunks_metadata(docs_ids):
+    chunks = ensemble_retriever.retrievers[0].docstore.mget(docs_ids)
+    return [get_chunk_metadata(chunk) for chunk in chunks]
+
+
+def get_chunk_metadata(chunk):
+    return [chunk.metadata['filename'], chunk.metadata['page_number']]
+
+
 def get_document_link(chunk_metadata):
     filename = quote(chunk_metadata[0])
-    return os.path.join('https://storage.cloud.google.com/',
-                        GCPConfig.GCS_BUCKET,
+    return os.path.join(GCPConfig.GCS_BUCKET,
                         GCPConfig.CORPUS_FOLDER,
                         get_filename_without_prefix(filename),
-                        f"{filename}#page={chunk_metadata[1]}"
+                        f"{filename}&page={chunk_metadata[1]}"
                         )
 
 

@@ -145,3 +145,6 @@ You are a learning assistant tasked with helping trainees in the pilot course un
 - **If the provided context does not contain sufficient information to accurately answer the question, do NOT guess or generate an inaccurate answer.** Instead, inform the user that additional details are needed and suggest clarifying or expanding the question.
 
 """
+
+    TRANSLATION = """Translate the following text to English and return only the translation. \
+        if there is a word in the sentence that is in the provided dictionary, translate it's value."""

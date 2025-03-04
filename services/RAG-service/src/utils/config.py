@@ -25,13 +25,20 @@ class ModelConfig:
     EMBEDDING_TOKEN_LIMIT = 4096
     TEMPERATURE = 0
     TOKEN_LIMIT = min(GEMINI_OUTPUT_TOKEN_LIMIT, EMBEDDING_TOKEN_LIMIT)
-    RESPONSE_SCHEMA = response_schema = {
+    RESPONSE_SCHEMA = {
         "type": "object",
         "properties": {
-            "markdown_answer": {"type": "string"},
-            "referenced_chunks_filename_and_page_number": {"type": "array", "items": {"type": "array", "items": {"type": "string"}}},
+            "markdown_answer_with_reasoning": {
+                "type": "string",
+            },
+            "doc_ids": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            }
         },
-        "required": ["markdown_answer"],
+        "required": ["markdown_answer_with_reasoning"],
     }
     SEARCH_KWARGS = {"k": 10}
 

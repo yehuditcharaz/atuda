@@ -1,16 +1,18 @@
-from flask import Flask, request, jsonify
+from flask import Flask
+from flask_socketio import SocketIO, emit
+
 from services.chain_multimodal import chain_multimodal_rag
 from utils.config import UtilsConfig
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 
 
 @app.route('/chat')
-def chat():
-    query = request.args.get('query')
+@socketio.on('chat')
+def chat(query: str):
     try:
         result = chain_multimodal_rag.invoke(query)
-        print(query)
         response = {
             'status_code': 200,
             'answer': result['answer'],
@@ -21,8 +23,8 @@ def chat():
             'status_code': 500,
             'error': str(e)
         }
-    return jsonify(response)
+    emit('chat_answer', response)
 
 
 if __name__ == '__main__':
-    app.run(host=UtilsConfig.HOST, port=UtilsConfig.PORT)
+    socketio.run(app, host=UtilsConfig.HOST, port=8000)
