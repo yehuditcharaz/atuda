@@ -1,65 +1,68 @@
-# name: Build and Push Docker Image
+name: Build and Push Docker Image
 
-# on: [push]
+on: [push]
 
-# permissions:
-#   contents: read
-#   packages: write
+permissions:
+  contents: read
+  packages: write
 
-# env:
-#   # IMAGE: project-for-version/ofer/server
-#   IMAGE: project-for-version/ofer/client-openwebui
-#   PROJECT: us-central1-docker.pkg.dev
+env:
+  # IMAGE: project-for-version/ofer/server
+  IMAGE: project-for-version/ofer/services/signed-url-service
+  # IMAGE: project-for-version/ofer/client-openwebui
+  PROJECT: us-central1-docker.pkg.dev
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-#     permissions:
-#       contents: 'read'
-#       id-token: 'write'
+    permissions:
+      contents: 'read'
+      id-token: 'write'
 
-#     steps:
-#     - name: 📁 Checkout repository
-#       uses: actions/checkout@v4
+    steps:
+    - name: 📁 Checkout repository
+      uses: actions/checkout@v4
 
-#     - name: 🛠️ Set up Docker Buildx
-#       uses: docker/setup-buildx-action@v3
+    - name: 🛠️ Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
 
-#     - name: 🗝️ Login to Container Registry
-#       uses: 'google-github-actions/auth@v2'
-#       with:
-#         credentials_json: '${{ secrets.ACCOUNT_KEY }}'
+    - name: 🗝️ Login to Container Registry
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.ACCOUNT_KEY }}'
 
-#     - name: ⛅ Set up Cloud SDK
-#       uses: 'google-github-actions/setup-gcloud@v2'
+    - name: ⛅ Set up Cloud SDK
+      uses: 'google-github-actions/setup-gcloud@v2'
 
-#     - name: 🔧 Configure Docker to use the gcloud
-#       run: gcloud auth configure-docker ${{ env.PROJECT }}
+    - name: 🔧 Configure Docker to use the gcloud
+      run: gcloud auth configure-docker ${{ env.PROJECT }}
       
-#     - name: 📃 Docker metadata
-#       id: meta
-#       uses: docker/metadata-action@v5
-#       with:
-#         images: ${{ env.PROJECT }}/${{ env.IMAGE }}
-#         flavor: |
-#           latest=false
-#         tags: |
-#           type=raw,value=latest
-#           type=semver,pattern=v{{version}}
-#           type=semver,pattern=v{{major}}.{{minor}}
+    - name: 📃 Docker metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.PROJECT }}/${{ env.IMAGE }}
+        flavor: |
+          latest=false
+        tags: |
+          type=raw,value=latest
+          type=semver,pattern=v{{version}}
+          type=semver,pattern=v{{major}}.{{minor}}
 
-#     - name: 🐳 Docker Build & Push
-#       uses: docker/build-push-action@v5
-#       id: docker_build
-#       with:
-#         # context: ./server
-#         context: ./client/open-webui
-#         push: true
-#         provenance: false
-#         labels: ${{ steps.meta.outputs.labels }}
-#         tags: ${{ steps.meta.outputs.tags }}
-#         # file: ./server/Dockerfile
-#         file: ./client/open-webui/Dockerfile
-#         build-args: |
-#           GOOGLE_CREDENTIALS=${{ secrets.ACCOUNT_KEY }}
+    - name: 🐳 Docker Build & Push
+      uses: docker/build-push-action@v5
+      id: docker_build
+      with:
+        # context: ./server
+        context: ./services/signed-url-service
+        # context: ./client/open-webui
+        push: true
+        provenance: false
+        labels: ${{ steps.meta.outputs.labels }}
+        tags: ${{ steps.meta.outputs.tags }}
+        # file: ./server/Dockerfile
+        file: ./services/signed-url-service/Dockerfile
+        # file: ./client/open-webui/Dockerfile
+        build-args: |
+          GOOGLE_CREDENTIALS=${{ secrets.ACCOUNT_KEY }}

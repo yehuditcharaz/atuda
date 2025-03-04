@@ -1,13 +1,13 @@
 window.navigation.addEventListener("navigate", () => {
-    setTimeout(userLogin, 1000);
     setTimeout(UpdateElements, 3500);
+    setTimeout(userLogin, 3500);
     setTimeout(selectModel, 3500);
 })
 
 let flag = true;
 
-function UpdateElements() {
-    if (!document.getElementById("InstructionsDiv")) {
+function UpdateElements(){
+    if (!document.getElementById("InstructionsDiv")){
         const infoPlace = document.querySelector('[aria-label="New Chat"]');
         const infoDiv = document.createElement('div');
         infoDiv.className = "flex"
@@ -16,7 +16,7 @@ function UpdateElements() {
         buttonI.id = "Instructions"
         buttonI.className = 'flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition';
         infoDiv.appendChild(buttonI)
-        buttonI.addEventListener('click', function () { ClickInfo() })
+        buttonI.addEventListener('click', function(){ClickInfo()})
         const iconDiv = document.createElement('div');
         iconDiv.className = "m-auto self-center"
         buttonI.appendChild(iconDiv)
@@ -31,7 +31,7 @@ function UpdateElements() {
         const pathInfo = document.createElementNS(svgInfoNamespace, "path");
         pathInfo.setAttribute("stroke-linecap", "round");
         pathInfo.setAttribute("stroke-linejoin", "round");
-        pathInfo.setAttribute("d", "M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z");
+        pathInfo.setAttribute("d","M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z");
         svgInfo.appendChild(pathInfo);
         iconDiv.appendChild(svgInfo);
         infoPlace.insertAdjacentElement('beforebegin', infoDiv)
@@ -43,7 +43,7 @@ function UpdateElements() {
         buttonF.id = "files"
         buttonF.className = 'flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition';
         fileDiv.appendChild(buttonF)
-        buttonF.addEventListener('click', function () {
+        buttonF.addEventListener('click', function(){
             window.open('https://www.example.com', '_blank');
         })
         const iconFileDiv = document.createElement('div');
@@ -60,7 +60,7 @@ function UpdateElements() {
         const pathFile = document.createElementNS(svgFileNamespace, "path");
         pathFile.setAttribute("stroke-linecap", "round");
         pathFile.setAttribute("stroke-linejoin", "round");
-        pathFile.setAttribute("d", "M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z");
+        pathFile.setAttribute("d","M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z");
         svgFile.appendChild(pathFile);
         iconFileDiv.appendChild(svgFile);
         filePlace.insertAdjacentElement('beforebegin', fileDiv);
@@ -85,26 +85,22 @@ function ClickInfo() {
                     </svg>
                 </button>
             </div>
+
             <div class="px-5 py-4 text-gray-800 dark:text-gray-100">
                 <p class="mb-4 text-lg font-semibold">🚁 ברוך הבא לצ'אטבוט התמיכה למערכות המסוק! 🚁</p>
                 <p>הצ'אטבוט כאן כדי לעזור לך להבין את מערכות המסוק והפעלתן, עם מידע מדויק מהתיעוד הרשמי.</p>
 
                 <h2 class="mt-4 font-semibold text-xl">איך לשאול שאלות?</h2>
-                <p>💬 **הצ'אטבוט תומך בשאלות הן באנגלית והן בעברית.**  
-                עם זאת, **בגרסה הנוכחית עדיף לשאול באנגלית** כדי לקבל תשובות מדויקות יותר.  
-                אם אתה מעדיף לשאול בעברית, מומלץ לציין מושגים טכניים באנגלית, במיוחד כשמדובר במונחים מורכבים.</p>
+                <p>💬 **המערכת תומכת בשאלות בעברית ובאנגלית, אבל התשובות תמיד יתקבלו באנגלית.**  
+                כששואלים בעברית, **מומלץ לציין מושגים טכניים באנגלית** כדי לשפר את הדיוק של התשובה.</p>
 
-                <h2 class="mt-4 font-semibold text-lg">🎯 דוגמאות לשאלות טובות באנגלית:</h2>
-                <ul class="list-disc pr-5">
-                    <li><strong>How do I activate the Hydraulic System?</strong></li>
-                    <li><strong>What should I do in case of low oil pressure?</strong></li>
-                </ul>
-
-                <h2 class="mt-4 font-semibold text-lg">🔹 דוגמאות לשאלות בעברית עם מושגים באנגלית:</h2>
+                <h2 class="mt-4 font-semibold text-lg">🔹 דוגמה לשאלה בעברית עם מושגים באנגלית:</h2>
                 <div class="bg-gray-200 dark:bg-gray-700 p-3 rounded-lg my-2">
                     ❌ איך מפעילים את מערכת ההידראוליקה? <br>
                     ✅ איך מפעילים את ה-<strong>Hydraulic System</strong>?
                 </div>
+
+                <p class="mt-4">💡 **אם לא מתקבלת תשובה מדויקת או ברורה מספיק, כדאי לנסות לשאול מחדש ישירות באנגלית – זה עשוי לשפר את הדיוק והפירוט של התשובה.**</p>
 
                 <h2 class="mt-4 font-semibold text-xl">מה תקבל בתשובה?</h2>
                 <ul class="list-disc pr-5">
@@ -124,7 +120,7 @@ function ClickInfo() {
     `;
     document.body.appendChild(dialog);
     dialog.showModal();
-    dialog.querySelector('#closeDialog').onclick = function () {
+    dialog.querySelector('#closeDialog').onclick = function() {
         dialog.close();
         document.body.removeChild(dialog);
     };
@@ -143,8 +139,7 @@ function userLogin() {
             [...passwords].forEach((password) => {
                 userPassword = password.value;
             })
-            !(userEmail === "admin@gmail.com" && userPassword === "admin") ? flag = false : null;
-
+            !(userEmail === "chaya@gmail.com" && userPassword === "chaya123!") ? flag = false : null;
         })
     })
 }
