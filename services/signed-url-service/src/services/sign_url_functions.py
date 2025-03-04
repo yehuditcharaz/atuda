@@ -1,4 +1,5 @@
 import datetime
+import json
 import re
 import urllib.parse
 
@@ -6,9 +7,16 @@ from google.cloud import storage
 from google.oauth2 import service_account
 from utils.config import UtilsConfig
 
-def generate_signed_url(bucket_name, blob_name):
-    credentials = service_account.Credentials.from_service_account_info(UtilsConfig.GOOGLE_CREDENTIALS)
+
+def create_storage_client():
+    credentials_info = json.load(UtilsConfig.GOOGLE_APPLICATION_CREDENTIALS)
+    credentials = service_account.Credentials.from_service_account_info(credentials_info)
     storage_client = storage.Client(credentials=credentials)
+    return storage_client
+
+
+def generate_signed_url(bucket_name, blob_name):
+    storage_client = create_storage_client()
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob(blob_name)
     url = blob.generate_signed_url(
@@ -31,7 +39,7 @@ def extract_bucket_and_blob(parts):
 
 
 def get_bucket_and_blob_name(url):
-    parser_url = urllib.parse(url)
+    parser_url = urllib.parse.unquote(url)
     parts = parser_url.split('/')
     index = next((i for i, s in enumerate(parts) if re.search(r'[\u0590-\u05FF]', s)), None)
 
