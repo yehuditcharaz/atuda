@@ -1,67 +1,38 @@
+import json
 from typing import List, Union, Generator, Iterator
-# from schemas import OpenAIChatMessage
-# from pydantic import BaseModel
-
+from pydantic import BaseModel,Field
+import re
+import requests
+import os
+import hashlib
+# import config 
 
 class Pipeline:
-    # class Valves(BaseModel):
-    #     pass
+    class Valves(BaseModel):
+    #   SERVER_URL: str = config.SERVER_URL
+        SERVER_URL:str="https://server-199581308623.us-central1.run.app"
 
     def __init__(self):
-
-        # The name of the pipeline.
-        self.name = "Ofer knowledge chat"
-        pass
-
-    async def on_startup(self):
-        # This function is called when the server is started.
-        print(f"on_startup:{__name__}")
-        pass
-
-    async def on_shutdown(self):
-        # This function is called when the server is stopped.
-        print(f"on_shutdown:{__name__}")
-        pass
-
-    async def on_valves_updated(self):
-        # This function is called when the valves are updated.
-        pass
-
-    async def inlet(self, body: dict, user: dict) -> dict:
-        # This function is called before the OpenAI API request is made. You can modify the form data before it is sent to the OpenAI API.
-        print(f"inlet:{__name__}")
-
-        print(body)
-        print(user)
-
-        return body
-
-    async def outlet(self, body: dict, user: dict) -> dict:
-        # This function is called after the OpenAI API response is completed. You can modify the messages after they are received from the OpenAI API.
-        print(f"outlet:{__name__}")
-
-        print(body)
-        print(user)
-
-        return body
-    
+        self.name = "Ofer Chat💬"
+        self.valves = self.Valves()
 
 
     def pipe(
         self, user_message: str, model_id: str, messages: List[dict], body: dict
     ) -> Union[str, Generator, Iterator]:
-        # This is where you can add your custom pipelines like RAG.
-        print(f"pipe:{__name__}")
+        history=[]
+        history.append(messages)
+        response = requests.get(self.valves.SERVER_URL, params={"query": history})
+        return convert_to_md(response.json())
 
-        # If you'd like to check for title generation, you can add the following check
-        if body.get("title", False):
-            print("Title Generation Request")
-        else:
-            print(messages)
-            print(user_message)
-            print(body)
-
-            # Define the link you want to return
-
-            # Return the sentence with the link
-            return f"{__name__} {user_message}. "
+def convert_to_md(response):
+    md_output = []
+    md_output.append(response.get('answer', 'No answer provided.') + "\n")
+    links = response.get("links", [])
+    images = response.get("images", [])
+    if links:
+        md_output.append("**Source:**")
+        md_output.extend(links)  
+    if images:
+        md_output.extend(images) 
+    return "\n\n".join(md_output)
