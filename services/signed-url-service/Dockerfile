@@ -22,3 +22,5 @@ RUN mkdir -p /usr/local/gcloud \
 RUN gcloud config set project $PROJECT_ID
 
 EXPOSE 5000
+
+ENTRYPOINT ["python", "src/routes/signed_url.py"]
