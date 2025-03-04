@@ -24,8 +24,14 @@ jobs:
       - name: 📝 list sub-directories containing Dockerfile
         id: sub-directories
         run: |
-          DIRS=$(find . -type f -name 'Dockerfile' -exec dirname {} \; | sed 's|^\./||' | awk -F'/' '{print $NF}' | sort -u | jq --raw-input --slurp --compact-output 'split("\n")[:-1]')
+          DIRS=$(find . -type f -name 'Dockerfile' -exec dirname {} \; | sed 's|^\./||' | sort -u | jq --raw-input --slurp --compact-output 'split("\n")[:-1]')
+          echo $DIRS
           echo "DIRS=$DIRS" >> $GITHUB_OUTPUT 
+      # - name: 📝 list sub-directories containing Dockerfile
+      #   id: sub-directories
+      #   run: |
+      #     DIRS=$(find . -type f -name 'Dockerfile' -exec dirname {} \; | sed 's|^\./||' | awk -F'/' '{print $NF}' | sort -u | jq --raw-input --slurp --compact-output 'split("\n")[:-1]')
+      #     echo "DIRS=$DIRS" >> $GITHUB_OUTPUT 
   
   build-and-deploy:
     runs-on: "ubuntu-latest"
