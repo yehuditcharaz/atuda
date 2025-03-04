@@ -9,7 +9,8 @@ permissions:
 env:
   # IMAGE: project-for-version/ofer/server
   # IMAGE: project-for-version/ofer/services/signed-url-service
-  IMAGE: project-for-version/ofer/client-openwebui
+  IMAGE: project-for-version/ofer/client-pipeline
+  # IMAGE: project-for-version/ofer/client-openwebui
   PROJECT: us-central1-docker.pkg.dev
 
 jobs:
@@ -56,13 +57,15 @@ jobs:
       with:
         # context: ./server
         # context: ./services/signed-url-service
-        context: ./client/open-webui
+        # context: ./client/open-webui
+        context: ./client/pipeline
         push: true
         provenance: false
         labels: ${{ steps.meta.outputs.labels }}
         tags: ${{ steps.meta.outputs.tags }}
         # file: ./server/Dockerfile
         # file: ./services/signed-url-service/Dockerfile
-        file: ./client/open-webui/Dockerfile
+        # file: ./client/open-webui/Dockerfile
+        file: ./client/pipeline/Dockerfile
         build-args: |
           GOOGLE_CREDENTIALS=${{ secrets.ACCOUNT_KEY }}
