@@ -1,4 +1,5 @@
 import json
+import socketio
 from typing import List, Union, Generator, Iterator
 from pydantic import BaseModel,Field
 import re
@@ -9,20 +10,21 @@ import hashlib
 
 class Pipeline:
     class Valves(BaseModel):
-    #   SERVER_URL: str = config.SERVER_URL
+       #SERVER_URL: str = config.SERVER_URL
         SERVER_URL:str="https://server-199581308623.us-central1.run.app"
 
     def __init__(self):
         self.name = "Ofer Chat💬"
         self.valves = self.Valves()
 
+    async def on_startup(self): 
+        pass
 
     def pipe(
         self, user_message: str, model_id: str, messages: List[dict], body: dict
     ) -> Union[str, Generator, Iterator]:
-        history=[]
-        history.append(messages)
-        response = requests.get(self.valves.SERVER_URL, params={"query": history})
+        json_string = json.dumps({"messages":messages})
+        response = requests.get(self.valves.SERVER_URL+'/chat', params={"query": json_string})        
         return convert_to_md(response.json())
 
 def convert_to_md(response):
