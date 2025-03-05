@@ -14,7 +14,7 @@ class Pipeline:
         SERVER_URL:str="https://server-199581308623.us-central1.run.app"
 
     def __init__(self):
-        self.name = "Ofer Chat💬"
+        self.name = "Ofer Chat"
         self.valves = self.Valves()
 
     async def on_startup(self): 

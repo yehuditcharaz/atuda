@@ -8,8 +8,8 @@ permissions:
 
 env:
   ARTIFACT_LOCATION: us-central1-docker.pkg.dev
-  ARTIFACT_REPO_NAME: ofer
-  PROJECT_ID: project-for-version
+  ARTIFACT_REPO_NAME: knowledge-rag
+  PROJECT_ID: knowledge-rag
 
 jobs:
   setup:
@@ -42,7 +42,7 @@ jobs:
       - name: 🗝️ Login to Container Registry
         uses: 'google-github-actions/auth@v2'
         with:
-          credentials_json: '${{ secrets.ACCOUNT_KEY }}'
+          credentials_json: '${{ secrets.ACCOUNT_KEY_NEW_REPO }}'
 
       - name: ⛅ Set up Cloud SDK
         uses: 'google-github-actions/setup-gcloud@v2'
@@ -76,4 +76,4 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           file: ./${{ matrix.directory }}/Dockerfile
           build-args: |
-            GOOGLE_CREDENTIALS=${{ secrets.ACCOUNT_KEY }}
+            GOOGLE_CREDENTIALS=${{ secrets.ACCOUNT_KEY_NEW_REPO }}

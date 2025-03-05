@@ -1,26 +1,13 @@
-FROM python:3.10.0
-
-ENV PROJECT_ID=project-for-version
+FROM python:3.9-slim
 
 WORKDIR /app
-COPY . /app/
-USER root
 
-RUN pip install .
-RUN python3 -c "import nltk; nltk.download('all')"
-RUN apt-get update && apt-get install -y libgl1 \
-    && apt-get install -y poppler-utils \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y tesseract-ocr
+COPY requirements.txt .
 
-ENV PATH="/usr/local/gcloud/google-cloud-sdk/bin:$PATH"
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+COPY . .
 
-RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz
-RUN mkdir -p /usr/local/gcloud \
-  && tar -C /usr/local/gcloud -xvf /tmp/google-cloud-sdk.tar.gz \
-  && /usr/local/gcloud/google-cloud-sdk/install.sh
+EXPOSE  5000
 
-RUN gcloud config set project $PROJECT_ID
-
-EXPOSE 5000
-
-ENTRYPOINT ["python", "src/routes/signed_url.py"]
+CMD ["python", "app.py"]
