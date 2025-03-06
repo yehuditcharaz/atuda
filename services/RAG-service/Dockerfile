@@ -8,14 +8,10 @@ USER root
 
 RUN pip install .
 RUN python3 -c "import nltk; nltk.download('all')"
-# RUN apt-get update && apt-get install -y libgl1 \
-#     && apt-get install -y poppler-utils \
-#     && DEBIAN_FRONTEND=noninteractive apt-get install -y tesseract-ocr
 
 RUN apt-get update && apt-get install -y libgl1 \
     && apt-get install -y poppler-utils \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y tesseract-ocr \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y tesseract-ocr
 
 ENV PATH="/usr/local/gcloud/google-cloud-sdk/bin:$PATH"
 
