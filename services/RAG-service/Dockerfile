@@ -1,6 +1,6 @@
-FROM python:3.10.0
+FROM python:3.10.0-slim
 
-ENV PROJECT_ID=knowledge-rag
+ENV PROJECT_ID=project-for-version
 
 WORKDIR /app
 COPY . /app/
@@ -8,13 +8,9 @@ USER root
 
 RUN pip install .
 RUN python3 -c "import nltk; nltk.download('all')"
-
-# RUN apt-get update && apt-get install -y libgl1 \
-#     && apt-get install -y poppler-utils \
-#     && DEBIAN_FRONTEND=noninteractive apt-get install -y tesseract-ocr
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    apt-get install -y libgl1 poppler-utils tesseract-ocr && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y libgl1 \
+    && apt-get install -y poppler-utils \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y tesseract-ocr
 
 ENV PATH="/usr/local/gcloud/google-cloud-sdk/bin:$PATH"
 
