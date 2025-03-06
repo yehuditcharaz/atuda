@@ -1,5 +1,4 @@
-FROM python:3.10.0-slim
-
+FROM python:3.10.0
 ENV PROJECT_ID=project-for-version
 
 WORKDIR /app
