@@ -41,7 +41,10 @@ jobs:
       
     - name: Check disk usage
       run: df -h
-      
+
+    - name: Clear cache
+      run: rm -rf ~/.cache
+
     - name: 📃 Docker metadata
       id: meta
       uses: docker/metadata-action@v5
