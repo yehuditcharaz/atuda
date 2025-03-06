@@ -77,9 +77,9 @@ jobs:
         provenance: false
         labels: ${{ steps.meta.outputs.labels }}
         tags: ${{ steps.meta.outputs.tags }}
-        file: ./services/RAG-service/Dockerfile
+        # file: ./services/RAG-service/Dockerfile
         # file: ./services/signed-url-service/Dockerfile
-        # file: ./client/open-webui/Dockerfile
+        file: ./client/open-webui/Dockerfile
         # file: ./client/pipeline/Dockerfile
         build-args: |
           GOOGLE_CREDENTIALS=${{ secrets.ACCOUNT_KEY_NEW_REPO }}
