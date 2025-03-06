@@ -39,6 +39,9 @@ jobs:
     - name: 🔧 Configure Docker to use the gcloud
       run: gcloud auth configure-docker ${{ env.PROJECT }}
       
+    - name: Check disk usage
+      run: df -h
+      
     - name: 📃 Docker metadata
       id: meta
       uses: docker/metadata-action@v5
