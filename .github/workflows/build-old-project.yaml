@@ -7,7 +7,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE: project-for-version/ofer/serverwww
+  IMAGE: project-for-version/ofer/serverww
   # IMAGE: project-for-version/ofer/services/signed-url-service
   # IMAGE: project-for-version/ofer/client-pipeline
   # IMAGE: project-for-version/ofer/client-openwebui
@@ -58,7 +58,7 @@ jobs:
       uses: docker/build-push-action@v5
       id: docker_build
       with:
-        context: ./services/RAG-service
+        context: ./services/service
         # context: ./services/signed-url-service
         # context: ./client/open-webui
         # context: ./client/pipeline
@@ -66,7 +66,7 @@ jobs:
         provenance: false
         labels: ${{ steps.meta.outputs.labels }}
         tags: ${{ steps.meta.outputs.tags }}
-        file: ./services/RAG-service/Dockerfile
+        file: ./services/service/Dockerfile
         # file: ./services/signed-url-service/Dockerfile
         # file: ./client/open-webui/Dockerfile
         # file: ./client/pipeline/Dockerfile
