@@ -1,6 +1,6 @@
 FROM python:3.10.0
 
-ENV PROJECT_ID=project-for-version
+ENV PROJECT_ID=knowledge-rag
 
 WORKDIR /app
 COPY . /app/
@@ -20,8 +20,6 @@ RUN mkdir -p /usr/local/gcloud \
   && /usr/local/gcloud/google-cloud-sdk/install.sh 
 
 RUN gcloud config set project $PROJECT_ID 
-
-RUN pip install --upgrade flask-socketio
 
 EXPOSE 8080
 

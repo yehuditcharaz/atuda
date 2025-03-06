@@ -8,7 +8,7 @@ from langchain_google_vertexai import (
 )
 from utils.config import ModelConfig, UtilsConfig
 from utils.const import PromptConst
-from utils.data_preparing import is_image_chunk
+from utils.helpers import is_image_chunk
 
 
 def set_summaries(chunks):

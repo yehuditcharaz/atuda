@@ -1,25 +1,34 @@
 import base64
 import os
+import urllib.parse
 import uuid
 
 from unstructured.partition.pdf import partition_pdf
-from utils.config import UtilsConfig
+from utils.logger import logger
+from utils.config import GCPConfig, UtilsConfig
 from models.image_chunk import ImageChunk
 from models.text_chunk import TextChunk
 
 
 def get_chunks():
-    documents_pathes = get_files_pathes(UtilsConfig.DOCUMENTS_FOLDER_PATH)
-    chunks = [TextChunk(document_chunk.id, document_chunk.text, document_chunk.metadata.to_dict())
-              for document_path in documents_pathes
-              for document_chunk in get_document_chunks(document_path)]
+    try:
+        documents_pathes = get_files_pathes(UtilsConfig.DOCUMENTS_FOLDER_PATH)
+        chunks = [TextChunk(document_chunk.id, document_chunk.text, document_chunk.metadata.to_dict())
+                  for document_path in documents_pathes
+                  for document_chunk in get_document_chunks(document_path)]
 
-    images_pathes = get_files_pathes(UtilsConfig.IMAGES_FOLDER_PATH)
-    for image_path in images_pathes:
-        chunks.append(ImageChunk(
-            str(uuid.uuid4()), encode_image(image_path)))
+        images_pathes = get_files_pathes(UtilsConfig.IMAGES_FOLDER_PATH)
+        for image_path in images_pathes:
+            local_path = os.path.relpath(image_path, UtilsConfig.IMAGES_FOLDER_PATH)
+            chunks.append(ImageChunk(
+                str(uuid.uuid4()), encode_image(image_path),
+                urllib.parse.quote(GCPConfig.GCS_BUCKET +'/'+ local_path)
+            ))
 
-    return chunks
+        return chunks
+    except Exception as e:
+        logger.error(e)
+        
 
 
 def get_files_pathes(directory):

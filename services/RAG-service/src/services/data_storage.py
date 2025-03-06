@@ -1,12 +1,12 @@
 from langchain_core.documents import Document
 from utils.config import UtilsConfig
-from utils.data_preparing import is_image_chunk
+from utils.helpers import is_image_chunk
 from services.retriever import initialize_retriever
 
 
 def create_document(chunk, is_summary=False):
     content = chunk.summary if is_summary else chunk.content
-    metadata = {UtilsConfig.ID_KEY: chunk.id} if is_image_chunk(
+    metadata = {UtilsConfig.ID_KEY: chunk.id, UtilsConfig.URL: chunk.url} if is_image_chunk(
         chunk) else {**chunk.metadata, UtilsConfig.ID_KEY: chunk.id}
     return Document(page_content=content, metadata=metadata)
 
