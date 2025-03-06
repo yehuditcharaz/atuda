@@ -7,7 +7,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE: knowledge-rag/knowledge-rag/services/rag-service
+  IMAGE: knowledge-rag/knowledge-rag/services/RAG-service
   # IMAGE: knowledge-rag/knowledge-rag/services/signed-url-service
   # IMAGE: knowledge-rag/knowledge-rag/client-pipeline
   # IMAGE: knowledge-rag/knowledge-rag/client/openwebui
@@ -55,7 +55,7 @@ jobs:
       uses: docker/build-push-action@v5
       id: docker_build
       with:
-        context: ./services/rag-service
+        context: ./services/RAG-service
         # context: ./services/signed-url-service
         # context: ./client/open-webui
         # context: ./client/pipeline
@@ -63,7 +63,7 @@ jobs:
         provenance: false
         labels: ${{ steps.meta.outputs.labels }}
         tags: ${{ steps.meta.outputs.tags }}
-        file: ./services/rag-service/Dockerfile
+        file: ./services/RAG-service/Dockerfile
         # file: ./services/signed-url-service/Dockerfile
         # file: ./client/open-webui/Dockerfile
         # file: ./client/pipeline/Dockerfile
