@@ -1,12 +1,12 @@
 FROM ghcr.io/open-webui/open-webui:main
 
-COPY add.sh /usr/local/bin/add.sh
-COPY addCode.js /app/build/assets/
-COPY logo.png /app/build/static/favicon.png
-COPY logo2.jpg /app/build/assets/images/earth.jpg
-COPY logo2.jpg /app/build/assets/images/galaxy.jpg
-COPY logo2.jpg /app/build/assets/images/space.jpg
-COPY logo2.jpg /app/build/assets/images/adam.jpg
+COPY ./src/add.sh /usr/local/bin/add.sh
+COPY ./src/addCode.js /app/build/assets/
+COPY ./assets/logo.png /app/build/static/favicon.png
+COPY ./assets/logo2.jpg /app/build/assets/images/earth.jpg
+COPY ./assets/logo2.jpg /app/build/assets/images/galaxy.jpg
+COPY ./assets/logo2.jpg /app/build/assets/images/space.jpg
+COPY ./assets/logo2.jpg /app/build/assets/images/adam.jpg
 
 ENV WEBUI_NAME="ofer chat"
 ENV DEFAULT_LOCALE=he
@@ -16,7 +16,7 @@ ENV ENABLE_CODE_INTERPRETER=false
 ENV USER_PERMISSIONS_CHAT_FILE_UPLOAD=false
 ENV USER_PERMISSIONS_CHAT_TEMPORARY=false
 
-ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://client-pipeline-199581308623.us-central1.run.app
+ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://pipeline-633427059080.us-central1.run.app
 ENV OPENAI_API_KEY=;0p3n-w3bu!
 
 ENV ENABLE_OLLAMA_API=false

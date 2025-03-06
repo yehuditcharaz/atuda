@@ -1,35 +1,29 @@
 import json
-import socketio
-from typing import List, Union, Generator, Iterator
-from pydantic import BaseModel,Field
-import re
-import requests
 import os
-import hashlib
-# import config 
+import requests
+from dotenv import load_dotenv
+from pydantic import BaseModel
+from typing import Generator, Iterator, List, Union
+load_dotenv()
 
 class Pipeline:
     class Valves(BaseModel):
-       #SERVER_URL: str = config.SERVER_URL
-        SERVER_URL:str="https://server-199581308623.us-central1.run.app"
+        SERVER_URL: str = os.getenv("SERVER_URL")
 
     def __init__(self):
-        self.name = "Ofer Chat"
+        self.name = 'Ofer Chat'
         self.valves = self.Valves()
-
-    async def on_startup(self): 
-        pass
 
     def pipe(
         self, user_message: str, model_id: str, messages: List[dict], body: dict
     ) -> Union[str, Generator, Iterator]:
-        json_string = json.dumps({"messages":messages})
-        response = requests.get(self.valves.SERVER_URL+'/chat', params={"query": json_string})        
+        history = json.dumps({"messages":messages})
+        response = requests.get(self.valves.SERVER_URL+'/chat', params={"query": history})        
         return convert_to_md(response.json())
 
 def convert_to_md(response):
     md_output = []
-    md_output.append(response.get('answer', 'No answer provided.') + "\n")
+    md_output.append(response.get('answer','There was a system error, try again.') + "\n")
     links = response.get("links", [])
     images = response.get("images", [])
     if links:
