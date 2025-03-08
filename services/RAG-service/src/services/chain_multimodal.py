@@ -38,18 +38,22 @@ def query_processing(conversation_history):
     query = conversation_history['messages'][-1]['content']
     if not is_hebrew(query):
         return conversation_history
-    prompt = f"{PromptConst.TRANSLATION} \n Question: {query} \n Dictionary: {dictionary}"
+
+    prompt = f"{PromptConst.TRANSLATION}\n\nHebrew Question:\n{query}\n\nReference Dictionary (for technical terms only):\n{dictionary}"
+
     model = ChatVertexAI(model_name=ModelConfig.MODEL_NAME,
-                         max_output_tokens=ModelConfig.TOKEN_LIMIT)
+                         max_output_tokens=ModelConfig.TOKEN_LIMIT, temperature=ModelConfig.TRANSLATION_TEMPERATURE)
     result = model.invoke(prompt)
-    conversation_history['messages'][-1]['content'] = result.content
+
+    conversation_history['messages'][-1]['content'] = result.content.strip()
     return conversation_history
 
 
 def sources_retrieval(conversation):
     chat_history = conversation['messages']
     query = conversation['messages'][-1]['content']
-    history_docs = history_aware_retriever.invoke({"input": query, "chat_history": chat_history})[:30]
+    history_docs = history_aware_retriever.invoke(
+        {"input": query, "chat_history": chat_history})[:30]
     source_docs = split_image_text_types(history_docs)
     input_data = {
         "context": source_docs,
@@ -64,13 +68,12 @@ def split_image_text_types(docs):
     texts = []
     for doc in docs:
         metadata = doc.metadata
+        doc.metadata = {"doc_id": metadata['doc_id']}
         if is_base64(doc.page_content):
-            doc.metadata = {"doc_id": metadata['doc_id']}
             doc.page_content = resize_base64_image(
                 doc.page_content, size=(250, 250))
             b64_images.append(doc)
         else:
-            doc.metadata = {"doc_id": metadata['doc_id']}
             texts.append(doc)
     return {"images": b64_images, "texts": texts}
 
@@ -125,7 +128,10 @@ def get_chunks(docs_ids):
 
 
 def get_image_path(image_chunk):
-    return image_chunk.metadata['url']
+    sign_server_url = os.path.join(GCPConfig.SIGN_SERVER_URL,
+                                   GCPConfig.IMAGES_SIGN_URL)
+    link = image_chunk.metadata['url']
+    return f"![]({sign_server_url}{GCPConfig.REQUEST_PARAM}{link})".replace('\\', '/')
 
 
 def get_link(chunk):
@@ -143,11 +149,14 @@ def get_link_preview(chunk_metadata):
 
 def get_document_link(chunk_metadata):
     filename = quote(chunk_metadata[0])
-    return os.path.join(GCPConfig.GCS_BUCKET,
+    sign_server_url = os.path.join(GCPConfig.SIGN_SERVER_URL,
+                                   GCPConfig.LINKS_SIGN_URL)
+    link = os.path.join(GCPConfig.GCS_BUCKET,
                         GCPConfig.CORPUS_FOLDER,
                         get_filename_without_prefix(filename),
                         f"{filename}&page={chunk_metadata[1]}"
                         )
+    return f"{sign_server_url}{GCPConfig.REQUEST_PARAM}{link}".replace('\\', '/')
 
 
 def get_filename_without_prefix(filename):

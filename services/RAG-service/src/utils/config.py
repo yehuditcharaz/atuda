@@ -18,6 +18,10 @@ class GCPConfig:
     CHUNKS_FOLDER = "chunks"
     GOOGLE_CREDENTIALS = os.getenv("GOOGLE_CREDENTIALS")
     CORPUS_FOLDER = "corpus"
+    SIGN_SERVER_URL = os.getenv("SIGN_URL_SERVER")
+    LINKS_SIGN_URL = "get_link"
+    IMAGES_SIGN_URL = "get_image"
+    REQUEST_PARAM = "?url="
 
 
 class ModelConfig:
@@ -28,6 +32,7 @@ class ModelConfig:
     EMBEDDING_TOKEN_LIMIT = 4096
     TEMPERATURE = 0
     TOKEN_LIMIT = min(GEMINI_OUTPUT_TOKEN_LIMIT, EMBEDDING_TOKEN_LIMIT)
+    TRANSLATION_TEMPERATURE = 0.2
     RESPONSE_SCHEMA = {
         "type": "object",
         "properties": {
@@ -45,7 +50,7 @@ class ModelConfig:
         },
         "required": ["markdown_answer_with_reasoning", "doc_ids"],
     }
-    SEARCH_KWARGS = {"k": 30}
+    SEARCH_KWARGS = {"k": 24}
 
 
 class UtilsConfig:
@@ -57,7 +62,6 @@ class UtilsConfig:
     RETRY_AFTER_ATTEMPT = 2
     HOST = os.getenv('HOST')
     PORT = os.getenv('PORT')
-
 
 class LogsConfig:
     LOGS_PATH=os.getenv('LOGS_PATH')
