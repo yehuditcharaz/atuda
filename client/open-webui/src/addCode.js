@@ -1,5 +1,5 @@
 window.navigation.addEventListener("navigate", () => {
-    setTimeout(userLogin, 1000);
+    setTimeout(userLogin, 3500);
     setTimeout(UpdateElements, 3500);
     setTimeout(selectModel, 3500);
 })
@@ -61,6 +61,7 @@ function UpdateElements() {
         svgFile.appendChild(pathFile);
         iconFileDiv.appendChild(svgFile);
         filePlace.insertAdjacentElement('beforebegin', fileDiv);
+
         buttonF.addEventListener('click', function () { sources() });
     }
 
@@ -71,6 +72,7 @@ function UpdateElements() {
 
     const interpreter = document.querySelector('ml-1 self-end gap-0.5 flex items-center flex-1 max-w-[80%]');
     interpreter.style.display = 'none';
+
     let headphones = document.querySelector('path[d="M12 5a7 7 0 0 0-7 7v1.17c.313-.11.65-.17 1-.17h2a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H6a3 3 0 0 1-3-3v-6a9 9 0 0 1 18 0v6a3 3 0 0 1-3 3h-2a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h2c.35 0 .687.06 1 .17V12a7 7 0 0 0-7-7Z"]');
     headphones.style.display = 'none';
     const pElement = document.getElementById('chat-input');
@@ -82,12 +84,14 @@ function UpdateElements() {
     })
 
 }
+
 function sources() {
     const dialog = document.createElement('dialog');
     dialog.style.position = 'relative';
     dialog.style.width = "50%";
     dialog.style.bottom = '65%'
     dialog.style.left = '30%';
+    dialog.style.borderRadius = "8px";
     dialog.innerHTML = `
         <div class="m-auto max-w-full w-[56rem] shadow-3xl min-h-fit scrollbar-hidden bg-gray-50 dark:bg-gray-900 rounded-2xl svelte-fq1rhy">
             <div class="text-gray-700 dark:text-gray-100">
@@ -135,21 +139,16 @@ function ClickInfo() {
                 <p>הצ'אטבוט כאן כדי לעזור לך להבין את מערכות המסוק והפעלתן, עם מידע מדויק מהתיעוד הרשמי.</p>
 
                 <h2 class="mt-4 font-semibold text-xl">איך לשאול שאלות?</h2>
-                <p>💬 **הצ'אטבוט תומך בשאלות הן באנגלית והן בעברית.**  
-                עם זאת, **בגרסה הנוכחית עדיף לשאול באנגלית** כדי לקבל תשובות מדויקות יותר.  
-                אם אתה מעדיף לשאול בעברית, מומלץ לציין מושגים טכניים באנגלית, במיוחד כשמדובר במונחים מורכבים.</p>
+                <p><strong>המערכת תומכת בשאלות בעברית ובאנגלית, אבל התשובות תמיד יתקבלו באנגלית.</strong></p>
+                <p>כששואלים בעברית, <strong>מומלץ לציין מושגים טכניים באנגלית</strong> כדי לשפר את הדיוק של התשובה.</p>
 
-                <h2 class="mt-4 font-semibold text-lg">🎯 דוגמאות לשאלות טובות באנגלית:</h2>
-                <ul class="list-disc pr-5">
-                    <li><strong>How do I activate the Hydraulic System?</strong></li>
-                    <li><strong>What should I do in case of low oil pressure?</strong></li>
-                </ul>
-
-                <h2 class="mt-4 font-semibold text-lg">🔹 דוגמאות לשאלות בעברית עם מושגים באנגלית:</h2>
+                <h2 class="mt-4 font-semibold text-lg">🔹 דוגמה לשאלה בעברית עם מושגים באנגלית:</h2>
                 <div class="bg-gray-200 dark:bg-gray-700 p-3 rounded-lg my-2">
                     ❌ איך מפעילים את מערכת ההידראוליקה? <br>
                     ✅ איך מפעילים את ה-<strong>Hydraulic System</strong>?
                 </div>
+
+                <p class="mt-4"><strong>אם לא מתקבלת תשובה מדויקת או ברורה מספיק, כדאי לנסות לשאול מחדש ישירות באנגלית – זה עשוי לשפר את הדיוק והפירוט של התשובה.</strong></p>
 
                 <h2 class="mt-4 font-semibold text-xl">מה תקבל בתשובה?</h2>
                 <ul class="list-disc pr-5">
@@ -169,7 +168,7 @@ function ClickInfo() {
     `;
     document.body.appendChild(dialog);
     dialog.showModal();
-    dialog.querySelector('#closeDialog').onclick = function () {
+    dialog.querySelector('#closeDialog').onclick = function() {
         dialog.close();
         document.body.removeChild(dialog);
     };
