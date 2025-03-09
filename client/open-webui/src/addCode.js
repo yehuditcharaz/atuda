@@ -61,48 +61,7 @@ function UpdateElements() {
         svgFile.appendChild(pathFile);
         iconFileDiv.appendChild(svgFile);
         filePlace.insertAdjacentElement('beforebegin', fileDiv);
-
-        const ul = document.createElement('ul');
-        ul.style.position = 'absolute';
-        ul.style.bottom = '85%';
-        ul.style.left = '78%';
-
-        const options = [
-            {
-                name: "מקורות"
-            },
-            {
-                name: " RFM 🔗",
-                link: "https://signed-url-service-633427059080.us-central1.run.app/get_link?url=knowledge-rag/corpus/RFM%20%D7%A2%D7%93%D7%9B%D7%95%D7%9F%208.2.24/RFM%20%D7%A2%D7%93%D7%9B%D7%95%D7%9F%208.2.24.pdf&page=1"
-            },
-            {
-                name: " הסבה טכנאים 🔗",
-                link: "https://signed-url-service-633427059080.us-central1.run.app/get_link?url=knowledge-rag/corpus/%D7%97%D7%95%D7%91%D7%A8%D7%AA%20%D7%94%D7%A1%D7%91%D7%94%20%D7%9E%D7%90%D7%99%2024/%D7%97%D7%95%D7%91%D7%A8%D7%AA%20%D7%94%D7%A1%D7%91%D7%94%20%D7%9E%D7%90%D7%99%2024.pdf&page=1"
-            }
-        ];
-
-        options.forEach(option => {
-            const li = document.createElement('li');
-            li.className = 'text-[0.7rem] text-gray-500 font-primary'
-            li.style.textAlign = 'right';
-            if (option.link) {
-                const a = document.createElement('a');
-                a.href = option.link;
-                a.target = '_blank';
-                a.innerHTML = option.name
-                li.appendChild(a);
-            }
-            else{
-                li.innerHTML = option.name;
-                li.style.textAlign = 'center';
-            }
-            ul.appendChild(li);
-        })
-
-        const aa = document.getElementsByClassName('overflow-auto w-full h-full flex items-center');
-        [...aa].forEach((ab) => {
-            ab.appendChild(ul);
-        })
+        buttonF.addEventListener('click', function () { sources() });
     }
 
     const helps = document.getElementsByClassName('text-gray-600 dark:text-gray-300 bg-gray-300/20 size-5 flex items-center justify-center text-[0.7rem] rounded-full');
@@ -111,8 +70,7 @@ function UpdateElements() {
     });
 
     const interpreter = document.querySelector('ml-1 self-end gap-0.5 flex items-center flex-1 max-w-[80%]');
-    interpreter.style.display='none';
-
+    interpreter.style.display = 'none';
     let headphones = document.querySelector('path[d="M12 5a7 7 0 0 0-7 7v1.17c.313-.11.65-.17 1-.17h2a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H6a3 3 0 0 1-3-3v-6a9 9 0 0 1 18 0v6a3 3 0 0 1-3 3h-2a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h2c.35 0 .687.06 1 .17V12a7 7 0 0 0-7-7Z"]');
     headphones.style.display = 'none';
     const pElement = document.getElementById('chat-input');
@@ -122,6 +80,36 @@ function UpdateElements() {
             setTimeout(headPhonesNone, 20);
         }
     })
+
+}
+function sources() {
+    const dialog = document.createElement('dialog');
+    dialog.style.position = 'relative';
+    dialog.style.width = "50%";
+    dialog.style.bottom = '65%'
+    dialog.style.left = '30%';
+    dialog.innerHTML = `
+        <div class="m-auto max-w-full w-[56rem] shadow-3xl min-h-fit scrollbar-hidden bg-gray-50 dark:bg-gray-900 rounded-2xl svelte-fq1rhy">
+            <div class="text-gray-700 dark:text-gray-100">
+                <button id="closeDialog" class="self-center" style="text-align="left";">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                        <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"></path>
+                    </svg>
+                </button>
+                    <p style="text-align: center;">מקורות</p>
+                    <ul dir="rtl"; style="text-align: right;">
+                        <li><a href='https://signed-url-service-633427059080.us-central1.run.app/get_link?url=knowledge-rag/corpus/RFM%20%D7%A2%D7%93%D7%9B%D7%95%D7%9F%208.2.24/RFM%20%D7%A2%D7%93%D7%9B%D7%95%D7%9F%208.2.24.pdf&page=1' target='_blank'>🔗 RFM</a></li>
+                        <li><a href='https://signed-url-service-633427059080.us-central1.run.app/get_link?url=knowledge-rag/corpus/%D7%97%D7%95%D7%91%D7%A8%D7%AA%20%D7%94%D7%A1%D7%91%D7%94%20%D7%9E%D7%90%D7%99%2024/%D7%97%D7%95%D7%91%D7%A8%D7%AA%20%D7%94%D7%A1%D7%91%D7%94%20%D7%9E%D7%90%D7%99%2024.pdf&page=1' target='_blank'>🔗 הסבה טכנאים</a></li>
+                    </ul>
+            </div>
+        </div>
+    `
+    document.body.appendChild(dialog);
+    dialog.showModal();
+    dialog.querySelector('#closeDialog').onclick = function () {
+        dialog.close();
+        document.body.removeChild(dialog);
+    };
 }
 
 function headPhonesNone() {
@@ -132,7 +120,7 @@ function headPhonesNone() {
 function ClickInfo() {
     const dialog = document.createElement('dialog');
     dialog.innerHTML = `
-    <div class="m-auto max-w-full w-[56rem] mx-2 shadow-3xl min-h-fit scrollbar-hidden bg-gray-50 dark:bg-gray-900 rounded-2xl svelte-fq1rhy" dir="rtl" style="text-align: right;">
+    <div class="m-auto max-w-full w-[56rem] shadow-3xl min-h-fit scrollbar-hidden bg-gray-50 dark:bg-gray-900 rounded-2xl svelte-fq1rhy" dir="rtl" style="text-align: right;">
         <div class="text-gray-700 dark:text-gray-100">
             <div class="flex justify-between dark:text-gray-300 px-5 pt-4 pb-1">
                 <div class="text-lg font-medium self-center">הוראות שימוש בצ'אטבוט</div>
