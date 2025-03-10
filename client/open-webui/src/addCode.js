@@ -1,5 +1,5 @@
 window.navigation.addEventListener("navigate", () => {
-    setTimeout(userLogin, 3500);
+    setTimeout(userLogin, 2000);
     setTimeout(UpdateElements, 3500);
     setTimeout(selectModel, 3500);
 })
@@ -175,18 +175,15 @@ function ClickInfo() {
 }
 
 function userLogin() {
-    const login = document.getElementsByClassName('pf-v5-c-button pf-m-primary pf-m-block ');
+    const login = document.getElementsByClassName('bg-gray-700/5 hover:bg-gray-700/10 dark:bg-gray-100/5 dark:hover:bg-gray-100/10 dark:text-gray-300 dark:hover:text-white transition w-full rounded-full font-medium text-sm py-2.5');
     let userEmail, userPassword;
     [...login].forEach((entry) => {
         entry.addEventListener('click', function () {
-            console.log("click");
-            const emails = document.getElementById('username');
-            console.log("emails ", emails);
+            const emails = document.getElementsByName('email');
             [...emails].forEach((email) => {
                 userEmail = email.value;
             })
-            const passwords = document.getElementById('password');
-            console.log("password ", passwords);
+            const passwords = document.getElementsByName('current-password');
             [...passwords].forEach((password) => {
                 userPassword = password.value;
             })

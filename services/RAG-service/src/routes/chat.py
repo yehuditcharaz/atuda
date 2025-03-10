@@ -1,7 +1,6 @@
 import grpc
 import json
 from flask import Flask, request, jsonify
-
 from services.chain_multimodal import chain_multimodal_rag
 from utils.config import UtilsConfig
 
@@ -16,14 +15,11 @@ def chat():
             stop_after_attempt=UtilsConfig.RETRY_AFTER_ATTEMPT,
             retry_if_exception_type=(grpc.RpcError,),
         ).invoke(json.loads(query))
-        response = {
+    except:
+        result = {'answer': UtilsConfig.ANSWER}
+    response = {
             'status_code': 200,
             **result
-        }
-    except Exception as e:
-        response = {
-            'status_code': 500,
-            'error': str(e)
         }
     return jsonify(response)
 

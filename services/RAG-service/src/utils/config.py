@@ -62,10 +62,11 @@ class UtilsConfig:
     RETRY_AFTER_ATTEMPT = 2
     HOST = os.getenv('HOST')
     PORT = os.getenv('PORT')
+    ANSWER = "Something went wrong while generating the response, try again"
 
 class LogsConfig:
-    LOGS_PATH=os.getenv('LOGS_PATH')
-    TIME_ZONE="Asia/Jerusalem"
-    MAX_BYTES=30000
-    BACKUP_COUNT=3
-    FORMAT='time="%(asctime)s" level="%(levelname)s" source="%(module)s.%(funcName)s:%(lineno)d" thread=%(thread)d message="%(message)s"'
+    LOGS_PATH = os.getenv('LOGS_PATH')
+    TIME_ZONE = "Asia/Jerusalem"
+    MAX_BYTES = 30000
+    BACKUP_COUNT = 3
+    FORMAT = 'time="%(asctime)s" level="%(levelname)s" source="%(module)s.%(funcName)s:%(lineno)d" thread=%(thread)d message="%(message)s"'

@@ -10,7 +10,7 @@ def create_logger(logger_name):
     logger = logging.getLogger(logger_name)
     logger.setLevel(logging.DEBUG)
     os.makedirs(LogsConfig.LOGS_PATH, exist_ok=True)
-    handler=get_handler()
+    handler = get_handler()
     formatter = CustomFormatter(fmt=LogsConfig.FORMAT)
     handler.setFormatter(formatter)
     logger.addHandler(handler)
