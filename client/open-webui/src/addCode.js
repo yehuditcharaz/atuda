@@ -19,6 +19,7 @@ function userLogin() {
             [...passwords].forEach((password) => {
                 userPassword = password.value;
             })
+            console.log("--------------------- ", userEmail, userPassword);
             !(userEmail === "chaya@gmail.com" && userPassword === "chaya123!") ? flag = false : null;
         })
     })
