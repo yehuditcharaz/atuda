@@ -8,9 +8,9 @@ permissions:
 
 env:
   # IMAGE: knowledge-rag/knowledge-rag-dev/services/RAG-service-dev
-  IMAGE: knowledge-rag/knowledge-rag-dev/services/signed-url-service-dev
+  # IMAGE: knowledge-rag/knowledge-rag-dev/services/signed-url-service-dev
   # IMAGE: knowledge-rag/knowledge-rag-dev/client/openwebui-dev
-  # IMAGE: knowledge-rag/knowledge-rag-dev/client/pipeline-dev
+  IMAGE: knowledge-rag/knowledge-rag-dev/client/pipeline-dev
   PROJECT: us-central1-docker.pkg.dev
 jobs:
   build:
@@ -55,9 +55,9 @@ jobs:
       id: docker_build
       with:
         # context: ./services/RAG-service
-        context: ./services/signed-url-service
+        # context: ./services/signed-url-service
         # context: ./client/open-webui
-        # context: ./client/pipeline
+        context: ./client/pipeline
         push: true
         provenance: false
         labels: ${{ steps.meta.outputs.labels }}
@@ -65,6 +65,6 @@ jobs:
         # file: ./services/RAG-service//Dockerfile
         file: ./services/signed-url-service/Dockerfile
         # file: ./client/open-webui/Dockerfile
-        # file: ./client/pipeline/Dockerfile
+        file: ./client/pipeline/Dockerfile
         build-args: |
           GOOGLE_CREDENTIALS=${{ secrets.ACCOUNT_KEY_NEW_REPO }}
