@@ -1,13 +1,31 @@
 window.navigation.addEventListener("navigate", () => {
     setTimeout(userLogin, 2000);
-    setTimeout(UpdateElements, 3500);
+    setTimeout(UpdateElements, 3500);  
     setTimeout(selectModel, 3500);
 })
 
 let flag = true;
 
-function UpdateElements() {
-    if (!document.getElementById("InstructionsDiv")) {
+function userLogin() {
+    const login = document.getElementsByClassName('bg-gray-700/5 hover:bg-gray-700/10 dark:bg-gray-100/5 dark:hover:bg-gray-100/10 dark:text-gray-300 dark:hover:text-white transition w-full rounded-full font-medium text-sm py-2.5');
+    let userEmail, userPassword;
+    [...login].forEach((entry) => {
+        entry.addEventListener('click', function () {
+            const emails = document.getElementsByName('email');
+            [...emails].forEach((email) => {
+                userEmail = email.value;
+            })
+            const passwords = document.getElementsByName('current-password');
+            [...passwords].forEach((password) => {
+                userPassword = password.value;
+            })
+            !(userEmail === "chaya@gmail.com" && userPassword === "chaya123!") ? flag = false : null;
+        })
+    })
+}
+
+function UpdateElements(){
+    if (!document.getElementById("InstructionsDiv")){
         const infoPlace = document.querySelector('[aria-label="New Chat"]');
         const infoDiv = document.createElement('div');
         infoDiv.className = "flex"
@@ -16,7 +34,7 @@ function UpdateElements() {
         buttonI.id = "Instructions"
         buttonI.className = 'flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition';
         infoDiv.appendChild(buttonI)
-        buttonI.addEventListener('click', function () { ClickInfo() })
+        buttonI.addEventListener('click', function(){ClickInfo()})
         const iconDiv = document.createElement('div');
         iconDiv.className = "m-auto self-center"
         buttonI.appendChild(iconDiv)
@@ -31,7 +49,7 @@ function UpdateElements() {
         const pathInfo = document.createElementNS(svgInfoNamespace, "path");
         pathInfo.setAttribute("stroke-linecap", "round");
         pathInfo.setAttribute("stroke-linejoin", "round");
-        pathInfo.setAttribute("d", "M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z");
+        pathInfo.setAttribute("d","M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z");
         svgInfo.appendChild(pathInfo);
         iconDiv.appendChild(svgInfo);
         infoPlace.insertAdjacentElement('beforebegin', infoDiv)
@@ -43,6 +61,7 @@ function UpdateElements() {
         buttonF.id = "files"
         buttonF.className = 'flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition';
         fileDiv.appendChild(buttonF)
+        buttonF.addEventListener('click', function () { sources() });
         const iconFileDiv = document.createElement('div');
         iconFileDiv.className = "m-auto self-center"
         buttonF.appendChild(iconFileDiv);
@@ -57,68 +76,16 @@ function UpdateElements() {
         const pathFile = document.createElementNS(svgFileNamespace, "path");
         pathFile.setAttribute("stroke-linecap", "round");
         pathFile.setAttribute("stroke-linejoin", "round");
-        pathFile.setAttribute("d", "M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z");
+        pathFile.setAttribute("d","M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z");
         svgFile.appendChild(pathFile);
         iconFileDiv.appendChild(svgFile);
         filePlace.insertAdjacentElement('beforebegin', fileDiv);
-
-        buttonF.addEventListener('click', function () { sources() });
     }
 
     const helps = document.getElementsByClassName('text-gray-600 dark:text-gray-300 bg-gray-300/20 size-5 flex items-center justify-center text-[0.7rem] rounded-full');
     [...helps].forEach((help) => {
         help.style.display = 'none';
     });
-
-    const interpreter = document.querySelector('ml-1 self-end gap-0.5 flex items-center flex-1 max-w-[80%]');
-    interpreter.style.display = 'none';
-
-    let headphones = document.querySelector('path[d="M12 5a7 7 0 0 0-7 7v1.17c.313-.11.65-.17 1-.17h2a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H6a3 3 0 0 1-3-3v-6a9 9 0 0 1 18 0v6a3 3 0 0 1-3 3h-2a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h2c.35 0 .687.06 1 .17V12a7 7 0 0 0-7-7Z"]');
-    headphones.style.display = 'none';
-    const pElement = document.getElementById('chat-input');
-    pElement.addEventListener('input', (event) => {
-        const hasP = pElement.querySelector('p');
-        if (!(hasP && hasP.innerText.trim() !== '')) {
-            setTimeout(headPhonesNone, 20);
-        }
-    })
-
-}
-
-function sources() {
-    const dialog = document.createElement('dialog');
-    dialog.style.position = 'relative';
-    dialog.style.width = "50%";
-    dialog.style.bottom = '65%'
-    dialog.style.left = '30%';
-    dialog.style.borderRadius = "8px";
-    dialog.innerHTML = `
-        <div class="m-auto max-w-full w-[56rem] shadow-3xl min-h-fit scrollbar-hidden bg-gray-50 dark:bg-gray-900 rounded-2xl svelte-fq1rhy">
-            <div class="text-gray-700 dark:text-gray-100">
-                <button id="closeDialog" class="self-center" style="text-align="left";">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                        <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"></path>
-                    </svg>
-                </button>
-                    <p style="text-align: center;">מקורות</p>
-                    <ul dir="rtl"; style="text-align: right;">
-                        <li><a href='https://signed-url-service-633427059080.us-central1.run.app/get_link?url=knowledge-rag/corpus/RFM%20%D7%A2%D7%93%D7%9B%D7%95%D7%9F%208.2.24/RFM%20%D7%A2%D7%93%D7%9B%D7%95%D7%9F%208.2.24.pdf&page=1' target='_blank'>🔗 RFM</a></li>
-                        <li><a href='https://signed-url-service-633427059080.us-central1.run.app/get_link?url=knowledge-rag/corpus/%D7%97%D7%95%D7%91%D7%A8%D7%AA%20%D7%94%D7%A1%D7%91%D7%94%20%D7%9E%D7%90%D7%99%2024/%D7%97%D7%95%D7%91%D7%A8%D7%AA%20%D7%94%D7%A1%D7%91%D7%94%20%D7%9E%D7%90%D7%99%2024.pdf&page=1' target='_blank'>🔗 הסבה טכנאים</a></li>
-                    </ul>
-            </div>
-        </div>
-    `
-    document.body.appendChild(dialog);
-    dialog.showModal();
-    dialog.querySelector('#closeDialog').onclick = function () {
-        dialog.close();
-        document.body.removeChild(dialog);
-    };
-}
-
-function headPhonesNone() {
-    let headphones = document.querySelector('path[d="M12 5a7 7 0 0 0-7 7v1.17c.313-.11.65-.17 1-.17h2a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H6a3 3 0 0 1-3-3v-6a9 9 0 0 1 18 0v6a3 3 0 0 1-3 3h-2a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h2c.35 0 .687.06 1 .17V12a7 7 0 0 0-7-7Z"]');
-    headphones.style.display = 'none';
 }
 
 function ClickInfo() {
@@ -134,6 +101,7 @@ function ClickInfo() {
                     </svg>
                 </button>
             </div>
+
             <div class="px-5 py-4 text-gray-800 dark:text-gray-100">
                 <p class="mb-4 text-lg font-semibold">🚁 ברוך הבא לצ'אטבוט התמיכה למערכות המסוק! 🚁</p>
                 <p>הצ'אטבוט כאן כדי לעזור לך להבין את מערכות המסוק והפעלתן, עם מידע מדויק מהתיעוד הרשמי.</p>
@@ -174,22 +142,34 @@ function ClickInfo() {
     };
 }
 
-function userLogin() {
-    const login = document.getElementsByClassName('bg-gray-700/5 hover:bg-gray-700/10 dark:bg-gray-100/5 dark:hover:bg-gray-100/10 dark:text-gray-300 dark:hover:text-white transition w-full rounded-full font-medium text-sm py-2.5');
-    let userEmail, userPassword;
-    [...login].forEach((entry) => {
-        entry.addEventListener('click', function () {
-            const emails = document.getElementsByName('email');
-            [...emails].forEach((email) => {
-                userEmail = email.value;
-            })
-            const passwords = document.getElementsByName('current-password');
-            [...passwords].forEach((password) => {
-                userPassword = password.value;
-            })
-            !(userEmail === "chaya@gmail.com" && userPassword === "chaya123!") ? flag = false : null;
-        })
-    })
+function sources() {
+    const dialog = document.createElement('dialog');
+    dialog.style.position = 'relative';
+    dialog.style.width = "50%";
+    dialog.style.bottom = '65%'
+    dialog.style.left = '30%';
+    dialog.style.borderRadius = "8px";
+    dialog.innerHTML = 
+        `<div class="m-auto max-w-full w-[56rem] shadow-3xl min-h-fit scrollbar-hidden bg-gray-50 dark:bg-gray-900 rounded-2xl svelte-fq1rhy">
+            <div class="text-gray-700 dark:text-gray-100">
+                <button id="closeDialog" class="self-center" style="text-align="left";">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                        <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"></path>
+                    </svg>
+                </button>
+                    <p style="text-align: center;">מקורות</p>
+                    <ul dir="rtl"; style="text-align: right;"> 
+                        <li><a href='https://signed-url-service-633427059080.us-central1.run.app/get_link?url=knowledge-rag/corpus/RFM%20%D7%A2%D7%93%D7%9B%D7%95%D7%9F%208.2.24/RFM%20%D7%A2%D7%93%D7%9B%D7%95%D7%9F%208.2.24.pdf&page=1' target='_blank'>🔗 RFM</a></li>
+                        <li><a href='https://signed-url-service-633427059080.us-central1.run.app/get_link?url=knowledge-rag/corpus/%D7%97%D7%95%D7%91%D7%A8%D7%AA%20%D7%94%D7%A1%D7%91%D7%94%20%D7%9E%D7%90%D7%99%2024/%D7%97%D7%95%D7%91%D7%A8%D7%AA%20%D7%94%D7%A1%D7%91%D7%94%20%D7%9E%D7%90%D7%99%2024.pdf&page=1' target='_blank'>🔗 הסבה טכנאים</a></li>
+                    </ul>
+            </div>
+        </div>`
+    document.body.appendChild(dialog);
+    dialog.showModal();
+    dialog.querySelector('#closeDialog').onclick = function () {
+        dialog.close();
+        document.body.removeChild(dialog);
+    };
 }
 
 function selectModel() {
