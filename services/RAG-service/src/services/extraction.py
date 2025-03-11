@@ -13,28 +13,38 @@ from models.text_chunk import TextChunk
 def get_chunks():
     try:
         documents_pathes = get_files_pathes(UtilsConfig.DOCUMENTS_FOLDER_PATH)
-        chunks = [TextChunk(document_chunk.id, document_chunk.text, document_chunk.metadata.to_dict())
-                  for document_path in documents_pathes
-                  for document_chunk in get_document_chunks(document_path)]
+        chunks = [
+            TextChunk(
+                document_chunk.id,
+                document_chunk.text,
+                document_chunk.metadata.to_dict(),
+            )
+            for document_path in documents_pathes
+            for document_chunk in get_document_chunks(document_path)
+        ]
 
         images_pathes = get_files_pathes(UtilsConfig.IMAGES_FOLDER_PATH)
         for image_path in images_pathes:
             local_path = os.path.relpath(image_path, UtilsConfig.IMAGES_FOLDER_PATH)
-            chunks.append(ImageChunk(
-                str(uuid.uuid4()), encode_image(image_path),
-                urllib.parse.quote(GCPConfig.GCS_BUCKET +'/'+ local_path)
-            ))
+            chunks.append(
+                ImageChunk(
+                    str(uuid.uuid4()),
+                    encode_image(image_path),
+                    urllib.parse.quote(GCPConfig.GCS_BUCKET + "/" + local_path),
+                )
+            )
 
         return chunks
     except Exception as e:
         logger.error(e)
-        
 
 
 def get_files_pathes(directory):
-    return [os.path.join(root, file)
-            for root, _, filenames in os.walk(directory)
-            for file in filenames]
+    return [
+        os.path.join(root, file)
+        for root, _, filenames in os.walk(directory)
+        for file in filenames
+    ]
 
 
 def get_document_chunks(document_path):
@@ -48,7 +58,7 @@ def get_document_chunks(document_path):
         max_characters=4000,
         new_after_n_chars=3800,
         combine_text_under_n_chars=2000,
-        unique_element_ids=True
+        unique_element_ids=True,
     )
 
 

@@ -6,7 +6,7 @@ class BaseChunk(ABC):
         super().__init__()
         self.id = id
         self.content = content
-        self.summary = ''
+        self.summary = ""
 
     def set_summary(self, summary):
         self.summary = summary

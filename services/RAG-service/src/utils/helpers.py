@@ -8,7 +8,7 @@ def is_image_chunk(chunk):
 
 
 def is_hebrew(text):
-    return any("\u0590" <= letter <= "\u05EA" for letter in text)
+    return any("\u0590" <= letter <= "\u05ea" for letter in text)
 
 
 def is_base64(str):

@@ -11,7 +11,7 @@ class GCPConfig:
     PROJECT_ID = os.getenv("PROJECT_ID")
     LOCATION = os.getenv("LOCATION")
     GCS_BUCKET = os.getenv("GCS_BUCKET")
-    GCS_BUCKET_URI = f"gs://" + (os.getenv("GCS_BUCKET"))
+    GCS_BUCKET_URI = "gs://" + (os.getenv("GCS_BUCKET"))
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
     INDEX_ID = os.getenv("INDEX_ID")
     INDEX_ENDPOINT_ID = os.getenv("INDEX_ENDPOINT_ID")
@@ -38,15 +38,13 @@ class ModelConfig:
         "properties": {
             "markdown_answer_with_reasoning": {
                 "type": "string",
-                "description": SchemaDescription.ANSWER
+                "description": SchemaDescription.ANSWER,
             },
             "doc_ids": {
                 "type": "array",
-                "items": {
-                    "type": "string"
-                },
-                "description": SchemaDescription.DOC_IDS
-            }
+                "items": {"type": "string"},
+                "description": SchemaDescription.DOC_IDS,
+            },
         },
         "required": ["markdown_answer_with_reasoning", "doc_ids"],
     }
@@ -60,12 +58,12 @@ class UtilsConfig:
     ID_KEY = "doc_id"
     MAX_TRIES = 6
     RETRY_AFTER_ATTEMPT = 2
-    HOST = os.getenv('HOST')
-    PORT = os.getenv('PORT')
-    ANSWER = "Something went wrong while generating the response, try again"
+    HOST = os.getenv("HOST")
+    PORT = os.getenv("PORT")
+
 
 class LogsConfig:
-    LOGS_PATH = os.getenv('LOGS_PATH')
+    LOGS_PATH = os.getenv("LOGS_PATH")
     TIME_ZONE = "Asia/Jerusalem"
     MAX_BYTES = 30000
     BACKUP_COUNT = 3

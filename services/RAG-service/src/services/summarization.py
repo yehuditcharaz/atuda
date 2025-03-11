@@ -32,17 +32,19 @@ def generate_document_summary(chunk_content: str) -> str:
         lambda x: AIMessage(content="Error processing document")
     )
     model = VertexAI(
-        temperature=0, model_name=ModelConfig.MODEL_NAME, max_output_tokens=ModelConfig.TOKEN_LIMIT
+        temperature=0,
+        model_name=ModelConfig.MODEL_NAME,
+        max_output_tokens=ModelConfig.TOKEN_LIMIT,
     ).with_fallbacks([empty_response])
-    summarize_chain = {
-        "element": lambda x: x} | prompt | model | StrOutputParser()
+    summarize_chain = {"element": lambda x: x} | prompt | model | StrOutputParser()
 
     return summarize_chain.invoke(chunk_content)
 
 
 def generate_image_summary(base64_image: str) -> str:
-    model = ChatVertexAI(model_name=ModelConfig.MODEL_NAME,
-                         max_output_tokens=ModelConfig.TOKEN_LIMIT)
+    model = ChatVertexAI(
+        model_name=ModelConfig.MODEL_NAME, max_output_tokens=ModelConfig.TOKEN_LIMIT
+    )
     msg = model.invoke(
         [
             HumanMessage(
@@ -60,4 +62,4 @@ def generate_image_summary(base64_image: str) -> str:
 
 
 def is_valid_summary(summary: str) -> bool:
-    return len(summary) != 0 and summary != 'Error processing document'
+    return len(summary) != 0 and summary != "Error processing document"

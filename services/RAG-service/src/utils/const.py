@@ -87,7 +87,7 @@ class PromptConst:
         file name or label, and explicitly describes the context or conditions\
         depicted to enable precise retrieval during question-answering tasks."""
 
-    SYSTEM_INSTRUCTIONS =""" You are a learning assistant tasked with helping trainees in the pilot course understand the 'Ofer' helicopter systems and operating instructions. Your primary goal is to provide **technically accurate, clear, and detailed answers** that strictly align with the official helicopter documentation and operational guidelines.
+    SYSTEM_INSTRUCTIONS = """ You are a learning assistant tasked with helping trainees in the pilot course understand the 'Ofer' helicopter systems and operating instructions. Your primary goal is to provide **technically accurate, clear, and detailed answers** that strictly align with the official helicopter documentation and operational guidelines.
       You will answer questions based on the full context of the conversation history, ensuring accuracy and relevance.
         """
 
@@ -106,6 +106,7 @@ class PromptConst:
     """
 
     HISTORY_PROMPT = "If the question is related to history - formulate a new question so that it is a standalone question and contains all the information necessary to answer it.If the question is not related to history - leave it as it is."
+
 
 class SchemaDescription:
     ANSWER = """A clear, structured, technically accurate, and well-organized response based strictly on the official documentation of the 'Ofer' helicopter.

@@ -6,8 +6,11 @@ from services.retriever import initialize_retriever
 
 def create_document(chunk, is_summary=False):
     content = chunk.summary if is_summary else chunk.content
-    metadata = {UtilsConfig.ID_KEY: chunk.id, UtilsConfig.URL: chunk.url} if is_image_chunk(
-        chunk) else {**chunk.metadata, UtilsConfig.ID_KEY: chunk.id}
+    metadata = (
+        {UtilsConfig.ID_KEY: chunk.id, UtilsConfig.URL: chunk.url}
+        if is_image_chunk(chunk)
+        else {**chunk.metadata, UtilsConfig.ID_KEY: chunk.id}
+    )
     return Document(page_content=content, metadata=metadata)
 
 
@@ -17,11 +20,9 @@ def store_data(chunks):
     chunks_documents = [create_document(chunk) for chunk in chunks]
     doc_ids = [doc.metadata[UtilsConfig.ID_KEY] for doc in chunks_documents]
 
-    retriever_multi_vector_img.docstore.mset(
-        list(zip(doc_ids, chunks_documents)))
+    retriever_multi_vector_img.docstore.mset(list(zip(doc_ids, chunks_documents)))
 
-    summary_docs = [create_document(chunk, is_summary=True)
-                    for chunk in chunks]
+    summary_docs = [create_document(chunk, is_summary=True) for chunk in chunks]
 
     batches = list(batch(summary_docs))
 
@@ -31,4 +32,4 @@ def store_data(chunks):
 
 def batch(iterable, batch_size=UtilsConfig.BATCH_SIZE):
     for i in range(0, len(iterable), batch_size):
-        yield iterable[i:i + batch_size]
+        yield iterable[i : i + batch_size]

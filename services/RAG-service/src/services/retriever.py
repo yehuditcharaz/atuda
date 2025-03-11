@@ -17,18 +17,23 @@ import json
 
 
 credentials_dict = json.loads(GCPConfig.GOOGLE_CREDENTIALS)
-credentials = service_account.Credentials.from_service_account_info(
-    credentials_dict)
-aiplatform.init(project=GCPConfig.PROJECT_ID, location=GCPConfig.LOCATION,
-                staging_bucket=GCPConfig.GCS_BUCKET_URI, credentials=credentials)
+credentials = service_account.Credentials.from_service_account_info(credentials_dict)
+aiplatform.init(
+    project=GCPConfig.PROJECT_ID,
+    location=GCPConfig.LOCATION,
+    staging_bucket=GCPConfig.GCS_BUCKET_URI,
+    credentials=credentials,
+)
 
 
 def get_history_prompt():
-    history_prompt = ChatPromptTemplate.from_messages([
-        MessagesPlaceholder(variable_name="chat_history"),
-        ("user", "{input}"),  
-        ("user", PromptConst.HISTORY_PROMPT)
-    ])
+    history_prompt = ChatPromptTemplate.from_messages(
+        [
+            MessagesPlaceholder(variable_name="chat_history"),
+            ("user", "{input}"),
+            ("user", PromptConst.HISTORY_PROMPT),
+        ]
+    )
     return history_prompt
 
 
@@ -37,10 +42,10 @@ def initialize_history_retriever():
         llm=VertexAI(
             temperature=ModelConfig.TEMPERATURE,
             model_name=ModelConfig.MODEL_NAME,
-            max_output_tokens=ModelConfig.TOKEN_LIMIT
+            max_output_tokens=ModelConfig.TOKEN_LIMIT,
         ),
-        retriever=ensemble_retriever,  
-        prompt=get_history_prompt()
+        retriever=ensemble_retriever,
+        prompt=get_history_prompt(),
     )
     return history_aware_retriever
 
@@ -53,14 +58,12 @@ def initialize_ensemble_retriever():
         llm=VertexAI(
             temperature=ModelConfig.TEMPERATURE,
             model_name=ModelConfig.MODEL_NAME,
-            max_output_tokens=ModelConfig.TOKEN_LIMIT
-        )
+            max_output_tokens=ModelConfig.TOKEN_LIMIT,
+        ),
     )
 
     ensemble_retriever = EnsembleRetriever(
-        retrievers=[retriever,
-                    multi_query_retriever],
-        weights=[0.8, 0.2]
+        retrievers=[retriever, multi_query_retriever], weights=[0.8, 0.2]
     )
 
     return ensemble_retriever
@@ -72,7 +75,7 @@ def initialize_retriever():
         vectorstore=get_vectorstore(),
         docstore=get_docstore(),
         id_key=UtilsConfig.ID_KEY,
-        search_kwargs=ModelConfig.SEARCH_KWARGS
+        search_kwargs=ModelConfig.SEARCH_KWARGS,
     )
 
 
@@ -83,8 +86,7 @@ def get_vectorstore():
         gcs_bucket_name=GCPConfig.GCS_BUCKET,
         index_id=GCPConfig.INDEX_ID,
         endpoint_id=GCPConfig.INDEX_ENDPOINT_ID,
-        embedding=VertexAIEmbeddings(
-            model_name=ModelConfig.EMBEDDING_MODEL_NAME),
+        embedding=VertexAIEmbeddings(model_name=ModelConfig.EMBEDDING_MODEL_NAME),
         stream_update=True,
     )
 
