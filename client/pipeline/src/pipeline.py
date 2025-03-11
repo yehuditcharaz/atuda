@@ -9,7 +9,8 @@ load_dotenv()
 class Pipeline:
     class Valves(BaseModel):
         # SERVER_URL: str = os.getenv("SERVER_URL")
-        SERVER_URL: str = "https://rag-service-dev-633427059080.us-central1.run.app"
+        # SERVER_URL: str = "https://rag-service-dev-633427059080.us-central1.run.app"
+        SERVER_URL: str = "https://rag-service-633427059080.us-central1.run.app"
 
     def __init__(self):
         self.name = 'Ofer Chat'
