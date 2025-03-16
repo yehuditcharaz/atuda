@@ -57,7 +57,7 @@ jobs:
         provenance: false
         labels: ${{ steps.meta.outputs.labels }}
         tags: |
-            ${{ env.PROJECT }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+            ${{ env.PROJECT }}/${{ env.IMAGE }}:${{ env.IMAGE_TAG }}
         # tags: v1.0.0
         # tags: ${{ steps.meta.outputs.tags }}
         file: ./client/open-webui/Dockerfile
