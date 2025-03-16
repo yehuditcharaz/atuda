@@ -1,4 +1,5 @@
-FROM ghcr.io/open-webui/open-webui:main
+# FROM ghcr.io/open-webui/open-webui:main
+FROM ghcr.io/open-webui/open-webui:0.5.20
 
 COPY ./src/add.sh /usr/local/bin/add.sh
 COPY ./src/addCode.js /app/build/assets/
