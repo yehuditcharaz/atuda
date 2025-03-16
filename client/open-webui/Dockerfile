@@ -19,7 +19,7 @@ ENV USER_PERMISSIONS_CHAT_TEMPORARY=false
 
 ENV STORAGE_PROVIDER="gcs"
 # ENV GOOGLE_APPLICATION_CREDENTIALS_JSON=$GOOGLE_CREDENTIALS
-ENV GCS_BUCKET_NAME=gcs-openwebui
+ENV GCS_BUCKET_NAME="gcs-openwebui"
 
 # ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://pipeline-633427059080.us-central1.run.app
 ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://pipeline-dev-633427059080.us-central1.run.app
