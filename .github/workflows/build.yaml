@@ -7,7 +7,8 @@ permissions:
   packages: write
 
 env:
-  IMAGE: knowledge-rag/knowledge-rag-dev/client/openwebui-dev:v1.0.0
+  IMAGE: knowledge-rag/knowledge-rag-dev/client/openwebui-dev
+  TAG: v1.0.0
   PROJECT: us-central1-docker.pkg.dev
 jobs:
   build:
@@ -55,6 +56,8 @@ jobs:
         push: true
         provenance: false
         labels: ${{ steps.meta.outputs.labels }}
+        tags: |
+            ${{ env.PROJECT }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
         # tags: v1.0.0
         # tags: ${{ steps.meta.outputs.tags }}
         file: ./client/open-webui/Dockerfile
