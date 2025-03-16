@@ -17,8 +17,8 @@ ENV ENABLE_CODE_INTERPRETER=false
 ENV USER_PERMISSIONS_CHAT_FILE_UPLOAD=false
 ENV USER_PERMISSIONS_CHAT_TEMPORARY=false
 
-ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://pipeline-633427059080.us-central1.run.app
-# ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://pipeline-dev-633427059080.us-central1.run.app
+# ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://pipeline-633427059080.us-central1.run.app
+ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://pipeline-dev-633427059080.us-central1.run.app
 ENV OPENAI_API_KEY=;0p3n-w3bu!
 
 ENV ENABLE_OLLAMA_API=false
