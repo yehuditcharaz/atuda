@@ -7,8 +7,8 @@ permissions:
   packages: write
 
 env:
-  IMAGE: knowledge-rag/knowledge-rag-dev/client/openwebui-dev
-  IMAGE_TAG: v1.0.1
+  IMAGE: knowledge-rag/knowledge-rag/client/openwebui
+  IMAGE_TAG: v1.0.0
   PROJECT: us-central1-docker.pkg.dev
 jobs:
   build:

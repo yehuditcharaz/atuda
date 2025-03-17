@@ -1,4 +1,3 @@
-# FROM ghcr.io/open-webui/open-webui:main
 FROM ghcr.io/open-webui/open-webui:0.5.20
 
 COPY ./src/add.sh /usr/local/bin/add.sh
@@ -18,7 +17,6 @@ ENV USER_PERMISSIONS_CHAT_FILE_UPLOAD=false
 ENV USER_PERMISSIONS_CHAT_TEMPORARY=false
 
 ENV STORAGE_PROVIDER="gcs"
-# ENV GOOGLE_APPLICATION_CREDENTIALS_JSON=$GOOGLE_CREDENTIALS
 ENV GCS_BUCKET_NAME="gcs-openwebui"
 
 # ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://pipeline-633427059080.us-central1.run.app

@@ -19,8 +19,7 @@ function userLogin() {
             [...passwords].forEach((password) => {
                 userPassword = password.value;
             })
-            console.log("--------------------- ", userEmail, userPassword);
-            !(userEmail === "chaya@gmail.com" && userPassword === "chaya123!") ? flag = false : null;
+            !(userEmail === "ofer@gmail.com" && userPassword === "ofer123!") ? flag = false : null;
         })
     })
 }
@@ -150,8 +149,8 @@ function sources() {
     dialog.style.bottom = '65%'
     dialog.style.left = '30%';
     dialog.style.borderRadius = "8px";
-    dialog.innerHTML = 
-        `<div class="m-auto max-w-full w-[56rem] shadow-3xl min-h-fit scrollbar-hidden bg-gray-50 dark:bg-gray-900 rounded-2xl svelte-fq1rhy">
+    dialog.innerHTML = `
+        <div class="m-auto max-w-full w-[56rem] shadow-3xl min-h-fit scrollbar-hidden bg-gray-50 dark:bg-gray-900 rounded-2xl svelte-fq1rhy">
             <div class="text-gray-700 dark:text-gray-100">
                 <button id="closeDialog" class="self-center" style="text-align="left";">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -164,7 +163,8 @@ function sources() {
                         <li><a href='https://signed-url-service-633427059080.us-central1.run.app/get_link?url=knowledge-rag/corpus/%D7%97%D7%95%D7%91%D7%A8%D7%AA%20%D7%94%D7%A1%D7%91%D7%94%20%D7%9E%D7%90%D7%99%2024/%D7%97%D7%95%D7%91%D7%A8%D7%AA%20%D7%94%D7%A1%D7%91%D7%94%20%D7%9E%D7%90%D7%99%2024.pdf&page=1' target='_blank'>🔗 הסבה טכנאים</a></li>
                     </ul>
             </div>
-        </div>`
+        </div>
+    `    
     document.body.appendChild(dialog);
     dialog.showModal();
     dialog.querySelector('#closeDialog').onclick = function () {
