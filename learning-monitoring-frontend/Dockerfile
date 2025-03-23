@@ -1,4 +1,5 @@
-FROM node:latest-slim
+# FROM node:latest-slim
+FROM node:14-slim
 
 WORKDIR /app
 
