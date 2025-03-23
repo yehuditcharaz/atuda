@@ -1,0 +1,33 @@
+icon {
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 30%;
+    background-color: #f9f6f6;
+}
+
+.icon.check {
+    color: green;
+    border: 2px solid green;
+}
+
+.icon.times {
+    color: red;
+    border: 2px solid red;
+}
+
+.navigation-icon:hover{
+    cursor: pointer;
+}
+
+.navigation-icon{
+    border-bottom: 1px solid black;
+}
+
+.p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
+    color: rgb(241, 202, 103);
+}
+
+.p-rating .p-rating-item .p-rating-icon.p-icon {
+    width: 1rem;
+    height: 1rem;
+}

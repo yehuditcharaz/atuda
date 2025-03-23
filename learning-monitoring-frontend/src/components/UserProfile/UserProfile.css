@@ -1,0 +1,67 @@
+@import url(../../App.css);
+
+#button {
+    display: flex;
+    flex-direction: column;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: white;
+    background-color: var(--main-color);
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    z-index: 1000;
+}
+.sign-out-button {
+    color: var(--main-color);
+    margin-top: 130%;
+    margin-right: 65%;
+    height: 40px;
+    font-size: 20px;
+    border-color: var(--main-color);
+    background-color: white;
+}
+.details {
+    color: var(--main-color);
+    font-size: 20px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+}
+.details i {
+    color: var(--main-color);
+    font-size: 1.5rem;
+    padding-left: 10px;
+}
+#button:hover {
+    background-color: var(--second-color);
+    color: white;
+}
+.detail {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom: 2px solid rgb(225, 229, 229);
+}
+.detail:hover {
+    background-color: rgb(225, 229, 229);
+}
+.sidebar-user-profile {
+    background-color: rgb(255, 255, 255);
+    text-align: end;
+    direction: ltr;
+    position: absolute;
+    right: 0%;
+}
+.edit-button span , .save-button span {
+    color: black;
+}
+button.edit-button , button.save-button{
+    display: flex;
+    border: none;
+}
+.details input {
+    font-size: 1rem;
+}

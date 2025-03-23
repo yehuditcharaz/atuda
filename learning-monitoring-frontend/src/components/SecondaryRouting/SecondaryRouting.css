@@ -1,0 +1,19 @@
+.p-breadcrumb {
+    border: none;
+}
+
+.nav{
+    margin-top: 10px;
+}
+
+.pi {
+    margin-right: 10px;
+}
+
+.bread-crumb{
+    padding-bottom: 0;
+}
+
+.bread-crumb svg.p-icon {
+    rotate: 180deg;
+}

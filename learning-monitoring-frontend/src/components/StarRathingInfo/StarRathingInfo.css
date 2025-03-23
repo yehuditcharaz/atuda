@@ -1,0 +1,45 @@
+.star-info-btn {
+    color: var(--main-color);
+    background-color: #f2f2f2;
+}
+
+.star-info-btn .p-button-icon {
+    color: var(--main-color);
+}
+
+.wrap-star-info {
+    display: flex;
+    justify-content: center;
+}
+
+.wrap-star-info .star-info {
+    border: 1px solid black;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    align-items: center;
+}
+
+.star-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.star-number {
+    border-bottom: 2px black dotted;
+    padding-bottom: 1rem;
+}
+
+.star-number-info {
+    padding-top: 0.5rem;
+}
+
+.star-number .p-rating {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.wrap-star-rating {
+    position: fixed;
+    left: 3rem;
+    bottom: 3rem;
+}

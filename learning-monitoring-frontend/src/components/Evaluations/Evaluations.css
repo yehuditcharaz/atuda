@@ -1,0 +1,14 @@
+.add-and-search-evaluations {
+    display: flex;
+    margin-left: 3vw;
+    margin-right: 3vw;
+}
+
+.p-inputtextarea {
+    width: 100%;
+    text-align: start;
+}
+
+.text-evaluation .p-disabled, .p-component:disabled {
+    opacity: 1;
+}

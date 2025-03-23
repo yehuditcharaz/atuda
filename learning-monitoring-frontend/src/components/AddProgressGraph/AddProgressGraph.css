@@ -1,0 +1,47 @@
+.field-form-graph {
+    display: flex;
+    margin: 1rem 0;
+    justify-content: space-between;
+}
+
+.dialog-graph {
+    text-align: center;
+    color: var(--main-color);
+    direction: rtl;
+}
+
+.graph-field {
+    width: 30vw;
+    margin-bottom: 0%;
+    color: black;
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+#graph-input {
+    width: 30vw !important;
+}
+
+.p-tree-toggler svg.p-tree-toggler-icon {
+    rotate: 180deg;
+}
+
+.wrap-field-checkbox .field-form {
+    display: flex;
+    margin: 1rem 0;
+    justify-content: right;
+    margin-top: 8vh;
+}
+
+.wrap-field-checkbox .title-form {
+    margin-right: 1vw;
+}
+
+.wrap-submit-graph-form {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.p-treeselect-items-wrapper {
+    direction: rtl;
+}

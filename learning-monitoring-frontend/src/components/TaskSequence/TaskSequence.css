@@ -1,0 +1,41 @@
+@import url(../../App.css);
+
+.p-card-body {
+    text-align: center;
+}
+
+.p-timeline-event-separator>span {
+    padding: 6px;
+    color: white;
+    border-radius: 50%;
+}
+
+.p-timeline-event-content {
+    margin: 4px;
+}
+
+.customized-timeline {
+    position: absolute;
+    width: 35vw;
+}
+
+.wrap{
+    display: flex;
+    justify-content: center;
+}
+
+.p-timeline-event-opposite {
+    display: none;
+}
+
+.customized-timeline .pi{
+    margin: 0.25vw;
+}
+
+.p-timeline-event-content .p-card .p-card-body {
+    padding: 0.5rem;
+    color: var(--main-color);
+}
+.add-feedback{
+    color: black;
+}

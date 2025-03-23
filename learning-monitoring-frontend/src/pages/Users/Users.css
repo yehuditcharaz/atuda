@@ -1,0 +1,27 @@
+.user-tabim {
+    direction: rtl;
+}
+
+.p-tabview .p-tabview-panels {
+    padding: 0;
+    margin-top: 1vh;
+}
+
+.table-panel {
+    display: flex;
+    margin-left: 3vw;
+}
+
+.user-search {
+    display: flex;
+    margin-left: 3vw;
+}
+
+.p-tabview-panels .p-datatable-wrapper {
+    margin-right: 0;
+}
+
+.p-tabview-panels .p-datatable-sm {
+    margin-left: 0;
+    max-width: 100%;
+}

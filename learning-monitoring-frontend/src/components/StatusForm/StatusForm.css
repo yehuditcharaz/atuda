@@ -1,0 +1,170 @@
+.status-form-page{
+  direction: rtl;
+}
+
+.StatusForm {
+  text-align: right;
+  margin: 10px;
+  padding: 1rem;
+  width: 40%;
+}
+
+.chip {
+  margin-top: 5vw;
+  padding: 1rem;
+}
+
+.chip .p-chip {
+  margin-top: 1rem;
+}
+
+.p-chip {
+  font-size: 20px;
+}
+
+.Calendar {
+  z-index: 1000;
+}
+
+.Stepper {
+  margin-top: 80px;
+  flex-basis: 50rem;
+}
+
+.StepperPanel {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.p-stepper-header {
+  margin-top: 30px;
+}
+
+.DataTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.DataTable th,
+.DataTable td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.DataTable input[type="text"] {
+  padding: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.send-status-button:active {
+  background-color: var(--gray-color);
+}
+
+.FloatLabel {
+  margin: 10px;
+  padding: 1rem;
+}
+
+.send-status-button {
+  border: 4px solid red;
+  padding: 8px 16px;
+  background-color: var(--main-color);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  float: right;
+  clear: both;
+  margin: 20px;
+}
+
+.FloatLabel Chips {
+  display: inline-block;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.flex-auto {
+  display: flex;
+  align-items: center;
+}
+
+.p-float-label {
+  display: flex;
+  width: auto;
+  padding: 0.5rem;
+  font-size: 1rem;
+  float: right;
+  margin-left: 0px;
+  position: relative;
+  margin-bottom: 10px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.p-float-label input {
+  width: auto;
+  padding: 0.5rem;
+  font-size: 1rem;
+  float: right;
+  margin-right: 30px;
+}
+
+.p-float-label label {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #fff;
+  padding: 0 0.25rem;
+  transition: 0.2s;
+  pointer-events: none;
+}
+
+.flex-auto {
+  display: inline-block;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.button:active {
+  background-color: #0056b3;
+}
+
+.p-stepper.p-stepper-vertical .p-stepper-panel.p-stepper-panel-active {
+  position: relative;
+  bottom: 3vw;
+  right: 0.3vw;
+
+}
+
+.p-stepper.p-stepper-vertical .p-stepper-panel {
+  position: relative;
+  bottom: 3vw;
+  right: 0.3vw;
+}
+
+.p-stepper .p-stepper-header.p-highlight .p-stepper-number {
+  background-color: var(--main-color);
+  color: white;
+}
+
+.pi-clock {
+  color: var(--main-color);
+}
+
+.p-timepicker {
+  display: flex;
+}
+
+.p-hour {
+  direction: ltr;
+}
+
+.update-hours{
+  width: 50vw;
+}
+
+.update-hours .p-datatable-wrapper {
+  width: 100%;
+}

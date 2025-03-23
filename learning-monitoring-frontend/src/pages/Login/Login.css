@@ -1,0 +1,112 @@
+@import url(../../App.css);
+
+.login-page{
+    direction: rtl;
+}
+
+.side {
+    display: flex;
+    height: 100vh;
+}
+
+aside {
+    flex: 1;
+}
+
+aside#left {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+aside#right {
+    background-image: linear-gradient(var(--main-color), white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+aside#left h1 {
+    position: absolute; 
+    top: 18%;
+    color: var(--main-color);
+    font-size: 2.5rem;
+}
+
+aside#left #p {
+    position: absolute; 
+    top: 30%; 
+    color: var(--main-color);
+    font-size: 1.25rem;
+}
+
+.panel-container {   
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel {
+    width: 50%; 
+}
+
+img {
+    max-width: 100%; 
+}
+
+#email,#password{
+    margin-top: 4%;
+    border: 2px solid  var(--gray-color);
+    height: 5vh;
+    width: 0%;
+    background-color: white;
+    text-align: left;
+}
+
+#sp{
+    margin-top: 4%;
+    border: 2px solid  var(--gray-color);
+    border-right: none;
+    height: 5vh;
+    width: 10%;
+    background-color: white;
+    color: var(--gray-color);
+}
+
+#email::placeholder ,#password::placeholder{
+    opacity: 1;
+    text-align: center;
+    color:  #06084277;
+}
+
+#submit{
+    position: fixed;
+    bottom: 35vh;
+    width: 25%;
+    height: 5vh;
+    background-color:var(--main-color);
+    color:white;
+    margin-top: 4%;
+    z-index: 1000;
+}
+
+.pas{
+    position: fixed;
+    bottom: 27vh;
+    color:var(--main-color);
+}
+
+.input-icon{
+    direction: ltr;
+}
+
+.p-inputtext .p-component .p-filled{
+    background-color: white;
+
+}

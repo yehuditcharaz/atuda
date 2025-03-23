@@ -1,0 +1,32 @@
+.graph-card {
+  width: 35rem;
+  margin: 0 auto;
+  border: 1.5px solid black;
+}
+
+.p-panel-header-icon :hover {
+  background-color: rgb(236, 240, 240);
+}
+
+.pi .pi-ellipsis-h {
+  margin-right: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 1vw;
+}
+
+.pi.pi-ellipsis-h:hover {
+  cursor: pointer;
+}
+
+.div-graph-option {
+  display: flex;
+  direction: ltr;
+  justify-content: space-between;
+}
+
+.graph-date {
+  margin-top: 2vh;
+  position: absolute;
+  margin-left: 22vw;
+}

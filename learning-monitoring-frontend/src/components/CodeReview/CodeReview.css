@@ -1,0 +1,31 @@
+@import url(../../App.css);
+
+.add-and-search-reviews {
+    display: flex;
+    margin-left: 3vw;
+}
+
+.code-reviews{
+    width: 85vw;
+}
+
+.tag-level{
+    width: 10vw;
+    height: 5vh;
+    font-size: medium;
+}
+
+.add-review{
+    direction: ltr;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    padding: 20px;
+    border: solid 1px var(--gray-color);
+}
+
+.editor-table{
+    width: 43vw;
+}

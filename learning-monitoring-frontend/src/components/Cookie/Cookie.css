@@ -1,0 +1,14 @@
+.speechBubble {
+    position: absolute;
+    left: 35%;
+    top: 0;
+    transform: translateY(0);
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    max-width: 300px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    margin-top: 10px;
+    direction: rtl;
+}

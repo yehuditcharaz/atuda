@@ -1,0 +1,104 @@
+.dialog {
+    text-align: center;
+    color: var(--main-color);
+    width: 32%;
+    direction: rtl;
+}
+
+.dialog-review{
+    width: auto;
+}
+
+.dialog .p-dialog-title {
+    text-align: center;
+}
+
+.dialog .form {
+    display: flex;
+    flex-direction: column;
+}
+
+.field-form {
+    display: flex;
+    margin: 1rem 0;
+    justify-content: space-between;
+}
+
+.field-form .p-dropdown,
+.field-form .p-inputtext {
+    width: 50% !important;
+}
+
+.input-field {
+    width: 100%;
+    margin-bottom: 0%;
+    color: black;
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.label-field {
+    z-index: 10000;
+    right: 1rem;
+    font-weight: bold;
+}
+
+.p-float-label {
+    text-align: right;
+}
+
+.p-inline-message-error {
+    right: 1rem;
+    text-align: right;
+}
+
+.required-star {
+    color: red;
+}
+
+.field-container {
+    display: flex;
+    align-items: center;
+}
+
+.title-form {
+    margin-left: 1vw;
+}
+
+.submit-form {
+    width: 8vw;
+    text-align: center !important;
+}
+
+.wrap-submit-form {
+    display: flex;
+    justify-content: center;
+}
+
+.wrap-markdown-toolbar {
+    display: flex;
+    flex-direction: column;
+}
+
+.textarea-field{
+    height: 150px;
+    direction: ltr;
+}
+
+.p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
+    color: rgb(241, 202, 103);
+}
+
+.p-rating {
+    direction: ltr;
+}
+
+.editor-field{
+    margin-bottom: 3vh;
+    height: 20vh;
+}
+
+.p-dropdown-items li{
+    display: flex;
+    justify-content: center;
+}

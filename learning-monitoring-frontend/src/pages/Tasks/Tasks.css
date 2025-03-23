@@ -1,0 +1,39 @@
+@import url(../../App.css);
+
+.tasks-page {
+    direction: rtl;
+}
+
+.task-description {
+    display: flex;
+    justify-content: center;
+    color: var(--main-color);
+    margin: 0;
+}
+
+.task {
+    direction: rtl;
+    display: flex;
+}
+
+.img {
+    width: 40px;
+    height: 40px;
+}
+
+.select-task {
+    background-color: #f2f2f2;
+}
+
+.task .p-menu{
+    max-height: 69vh;
+}
+
+.task-label{
+    display: flex;
+    justify-content: center;
+}
+
+.task-label .p-button-rounded{
+    color: var(--gray-color);
+}

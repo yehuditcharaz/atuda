@@ -1,0 +1,834 @@
+[
+    {
+        "table_name": "users",
+        "translate": "משתמשים",
+        "description": "Table that contains all the users",
+        "notification_content": "נוספה משתמשת חדשה",
+        "columns": [
+            {
+                "name": "id",
+                "description": "ID (automatic)",
+                "type": "SERIAL PRIMARY KEY",
+                "translate": "מספר מזהה"
+            },
+            {
+                "name": "name",
+                "description": "Manager name",
+                "type": "VARCHAR(30) NOT NULL",
+                "translate": "שם"
+            },
+            {
+                "name": "password",
+                "description": "Manager password",
+                "type": "VARCHAR(100) NOT NULL",
+                "translate": "סיסמה"
+            },
+            {
+                "name": "email",
+                "description": "Mail",
+                "type": "VARCHAR(100) NOT NULL UNIQUE",
+                "translate": "מייל"
+            },
+            {
+                "name": "user_name",
+                "description": "User name",
+                "type": "VARCHAR(30) NOT NULL",
+                "translate": "שם משתמש"
+            },
+            {
+                "name": "phone",
+                "description": "Phone",
+                "type": "VARCHAR(10) NOT NULL",
+                "translate": "מספר טלפון"
+            },
+            {
+                "name": "role",
+                "description": "User role as an enum",
+                "type": "ENUM NOT NULL",
+                "enum_values": [
+                    "מנטור",
+                    "מוכשרת",
+                    "מנהל"
+                ],
+                "enum_type": "VARCHAR(30) NOT NULL",
+                "translate": "תפקיד"
+            },
+            {
+                "name": "mentor_id",
+                "relationship": "CONSTRAINT fk_mentor FOREIGN KEY(id) REFERENCES users(id)",
+                "description": "Mentor ID of the talented",
+                "type": "INT",
+                "translate": "מנטור"
+            },
+            {
+                "name": "start_date",
+                "description": "Training start date",
+                "type": "DATE",
+                "translate": "תאריך התחלה"
+            },
+            {
+                "name": "profile",
+                "description": "Profile as an enum",
+                "type": "ENUM",
+                "enum_values": [
+                    "פרופיל א",
+                    "פרופיל ב",
+                    "לא פעילה"
+                ],
+                "enum_type": "VARCHAR(30)",
+                "translate": "פרופיל"
+            },
+            {
+                "name": "address",
+                "description": "Talented address",
+                "type": "VARCHAR(30)",
+                "translate": "כתובת"
+            },
+            {
+                "name": "place_of_study",
+                "description": "Talented place of study",
+                "type": "VARCHAR(30)",
+                "translate": "מקום לימודים"
+            },
+            {
+                "name": "study_year",
+                "description": "Talented study date",
+                "type": "INT",
+                "translate": "שנת לימודים"
+            }
+        ]
+    },
+    {
+        "table_name": "tasks",
+        "translate": "משימות",
+        "description": "Table that contains all the tasks.",
+        "notification_content": "נוספה משימה חדשה במאגרי הידע",
+        "columns": [
+            {
+                "name": "id",
+                "description": "ID (automatic)",
+                "type": "SERIAL PRIMARY KEY",
+                "translate": "מספר מזהה"
+            },
+            {
+                "name": "label",
+                "description": "Task name",
+                "type": "VARCHAR(50) NOT NULL",
+                "translate": "שם"
+            },
+            {
+                "name": "conclusions",
+                "description": "Notes for the assignment",
+                "type": "TEXT",
+                "translate": "הערות"
+            },
+            {
+                "name": "github_link",
+                "description": "Link to GitHub (URL)",
+                "type": "VARCHAR(100)",
+                "translate": "קישור לגיטהאב"
+            },
+            {
+                "name": "mail_template_subject",
+                "description": "The subject of the email for the email template",
+                "type": "VARCHAR(200)",
+                "translate": "נושא המייל"
+            },
+            {
+                "name": "mail_template_body",
+                "description": "The email body for the email template",
+                "type": "TEXT",
+                "translate": "גוף המייל"
+            },
+            {
+                "name": "duration_days",
+                "description": "The number of days to complete the task",
+                "type": "INT",
+                "translate": "משך ימים"
+            },
+            {
+                "name": "icon",
+                "description": "icon",
+                "type": "VARCHAR(200)",
+                "translate": "סמל"
+            },
+            {
+                "name": "color",
+                "description": "color",
+                "type": "VARCHAR(200)",
+                "translate": "צבע"
+            }
+        ]
+    },
+    {
+        "table_name": "progress_trackings",
+        "translate": "מעקבי התקדמות",
+        "description": "Table that contains all the track the progress.",
+        "notification_content": "עברת למשימה הבאה, מסקנות למשימה הקודמת תוכלי לראות במידע הכללי",
+        "columns": [
+            {
+                "name": "id",
+                "description": "ID (automatic)",
+                "type": "SERIAL PRIMARY KEY",
+                "translate": "מספר מזהה"
+            },
+            {
+                "name": "trainig_student_id",
+                "relationship": "CONSTRAINT fk_trainig_student FOREIGN KEY(trainig_student_id) REFERENCES users(id)",
+                "description": "Talented ID",
+                "type": "INT NOT NULL",
+                "translate": "מוכשרת"
+            },
+            {
+                "name": "mentor_id",
+                "relationship": "CONSTRAINT fk_mentor FOREIGN KEY(mentor_id) REFERENCES users(id)",
+                "description": "Mentor ID",
+                "type": "INT NOT NULL",
+                "translate": "מנטור"
+            },
+            {
+                "name": "task_id",
+                "relationship": "CONSTRAINT fk_task FOREIGN KEY(task_id) REFERENCES tasks(id)",
+                "description": "Task ID",
+                "type": "INT NOT NULL",
+                "translate": "משימה"
+            },
+            {
+                "name": "start_date",
+                "description": "Task start date",
+                "type": "DATE NOT NULL",
+                "translate": "תאריך תחילת המשימה"
+            },
+            {
+                "name": "end_date",
+                "description": "Task end date",
+                "type": "DATE",
+                "translate": "תאריך סיום המשימה"
+            },
+            {
+                "name": "execution_level",
+                "description": "execution_level (0-6)",
+                "type": "INT DEFAULT 0",
+                "translate": "רמת ביצוע"
+            },
+            {
+                "name": "comprehension_rate",
+                "description": "Task comprehension rate(0-6)",
+                "type": "INT DEFAULT 0",
+                "translate": "קצב הבנת המשימה"
+            },
+            {
+                "name": "communication_frequency",
+                "description": "Communication frequency (0-6)",
+                "type": "INT DEFAULT 0",
+                "translate": "תדירות תקשורת"
+            },
+            {
+                "name": "conduct_in_git",
+                "description": "Managements in Git (0-6)",
+                "type": "INT DEFAULT 0",
+                "translate": "התנהלות בגיט"
+            },
+            {
+                "name": "response_to_code_review",
+                "description": "Reference to code review (0-6)",
+                "type": "INT DEFAULT 0",
+                "translate": "CR-התיחסות ל"
+            },
+            {
+                "name": "serving_speed",
+                "description": "Speed of task submission (0-6)",
+                "type": "INT DEFAULT 0",
+                "translate": "מהירות הגשה"
+            },
+            {
+                "name": "drawing_conclusions",
+                "description": "Drawing conclusions (0-6)",
+                "type": "INT DEFAULT 0",
+                "translate": "הסקת מסקנות"
+            },
+            {
+                "name": "language",
+                "description": "He language selected for execution the task",
+                "type": "VARCHAR(30)",
+                "translate": "שפה"
+            },
+            {
+                "name": "done",
+                "description": "Is the task accomplished",
+                "type": "BOOLEAN DEFAULT FALSE",
+                "translate": "המשימה בוצעה"
+            }
+        ]
+    },
+    {
+        "table_name": "code_reviews",
+        "translate": "סקירות קוד",
+        "description": "Table that contains all the code reviews.",
+        "notification_content": "נוספה הערה חדשה לטבלת קוד ריוויו",
+        "columns": [
+            {
+                "name": "id",
+                "description": "ID (automatic)",
+                "type": "SERIAL PRIMARY KEY",
+                "translate": "מספר מזהה"
+            },
+            {
+                "name": "task_id",
+                "relationship": "CONSTRAINT fk_task FOREIGN KEY(task_id) REFERENCES tasks(id)",
+                "description": "Task ID",
+                "type": "INT",
+                "translate": "משימה"
+            },
+            {
+                "name": "mentor_id",
+                "relationship": "CONSTRAINT fk_mentor FOREIGN KEY(mentor_id) REFERENCES users(id)",
+                "description": "Mentor ID",
+                "type": "INT NOT NULL",
+                "translate": "מנטור"
+            },
+            {
+                "name": "sentence",
+                "description": "Sentence",
+                "type": "TEXT NOT NULL",
+                "translate": "משפט"
+            },
+            {
+                "name": "tag",
+                "description": "Tag",
+                "type": "ENUM NOT NULL",
+                "enum_values": [
+                    "נפוץ",
+                    "חובה",
+                    "בונוס",
+                    "חשוב"
+                ],
+                "enum_type": "VARCHAR(30)",
+                "translate": "תגית"
+            },
+            {
+                "name": "date",
+                "description": "Date",
+                "type": "DATE NOT NULL",
+                "translate": "תאריך"
+            }
+        ]
+    },
+    {
+        "table_name": "attachments",
+        "translate": "קבצים מצורפים",
+        "description": "Table that contains all the attachments.",
+        "notification_content": "נוסף קובץ חדש במאגרי הידע",
+        "columns": [
+            {
+                "name": "id",
+                "description": "ID (automatic)",
+                "type": "SERIAL PRIMARY KEY",
+                "translate": "מספר מזהה"
+            },
+            {
+                "name": "name",
+                "description": "File name",
+                "type": "VARCHAR(100) NOT NULL",
+                "translate": "שם"
+            },
+            {
+                "name": "file",
+                "description": "Contents of the file",
+                "type": "BYTEA",
+                "translate": "קובץ"
+            },
+            {
+                "name": "task_id",
+                "relationship": "CONSTRAINT fk_task FOREIGN KEY(task_id) REFERENCES tasks(id)",
+                "description": "Task ID",
+                "type": "INT",
+                "translate": "משימה"
+            }
+        ]
+    },
+    {
+        "table_name": "statuses",
+        "translate": "סטטוסים",
+        "description": "Table that contains all the statuses.",
+        "columns": [
+            {
+                "name": "id",
+                "description": "ID (automatic)",
+                "type": "SERIAL PRIMARY KEY",
+                "translate": "מספר מזהה"
+            },
+            {
+                "name": "trainig_student_id",
+                "relationship": "CONSTRAINT fk_trainig_student FOREIGN KEY(trainig_student_id) REFERENCES users(id)",
+                "description": "Talented ID",
+                "type": "INT NOT NULL",
+                "translate": "מוכשרת"
+            },
+            {
+                "name": "date",
+                "description": "Date",
+                "type": "DATE NOT NULL",
+                "translate": "תאריך"
+            },
+            {
+                "name": "start_status",
+                "description": "Start status",
+                "type": "VARCHAR(300) NOT NULL",
+                "translate": "סטטוס התחלה"
+            },
+            {
+                "name": "end_status",
+                "description": "Completion status",
+                "type": "VARCHAR(300)",
+                "translate": "סטטוס סיום"
+            }
+        ]
+    },
+    {
+        "table_name": "attendance_reports",
+        "translate": "דוחות נוכחות",
+        "description": "Table that contains all the attachments.",
+        "columns": [
+            {
+                "name": "id",
+                "description": "ID (automatic)",
+                "type": "SERIAL PRIMARY KEY",
+                "translate": "מספר מזהה"
+            },
+            {
+                "name": "trainig_student_id",
+                "relationship": "CONSTRAINT fk_trainig_student FOREIGN KEY(trainig_student_id) REFERENCES users(id)",
+                "description": "Talented ID",
+                "type": "INT NOT NULL",
+                "translate": "מוכשרת"
+            },
+            {
+                "name": "date",
+                "description": "Date",
+                "type": "DATE NOT NULL",
+                "translate": "תאריך"
+            },
+            {
+                "name": "entry1",
+                "description": "Entry 1",
+                "type": "TIME",
+                "translate": "כניסה 1"
+            },
+            {
+                "name": "exit1",
+                "description": "Exit 1",
+                "type": "TIME",
+                "translate": "יציאה 1"
+            },
+            {
+                "name": "entry2",
+                "description": "Entry 2",
+                "type": "TIME",
+                "translate": "כניסה 2"
+            },
+            {
+                "name": "exit2",
+                "description": "Exit 2",
+                "type": "TIME",
+                "translate": "יציאה 2"
+            },
+            {
+                "name": "entry3",
+                "description": "Entry 3",
+                "type": "TIME",
+                "translate": "כניסה 3"
+            },
+            {
+                "name": "exit3",
+                "description": "Exit 3",
+                "type": "TIME",
+                "translate": "יציאה 3"
+            },
+            {
+                "name": "training_hour",
+                "description": "Hours of training tasks",
+                "type": "TIME",
+                "translate": "שעות הכשרה"
+            },
+            {
+                "name": "team_hour",
+                "description": "Hours of team tasks",
+                "type": "TIME",
+                "translate": "שעות צוות"
+            }
+        ]
+    },
+    {
+        "table_name": "feedbacks",
+        "translate": "פידבקים",
+        "description": "Table that contains feedback from the manager and the mentor.",
+        "notification_content": "נוסף פידבק חדש",
+        "columns": [
+            {
+                "name": "id",
+                "description": "ID (automatic)",
+                "type": "SERIAL PRIMARY KEY",
+                "translate": "מספר מזהה"
+            },
+            {
+                "name": "trainig_student_id",
+                "relationship": "CONSTRAINT fk_trainig_student FOREIGN KEY(trainig_student_id) REFERENCES users(id)",
+                "description": "Talented ID",
+                "type": "INT NOT NULL",
+                "translate": "מוכשרת"
+            },
+            {
+                "name": "date",
+                "description": "Date",
+                "type": "DATE NOT NULL",
+                "translate": "תאריך"
+            },
+            {
+                "name": "writer_id",
+                "relationship": "CONSTRAINT fk_writer FOREIGN KEY(writer_id) REFERENCES users(id) ON DELETE CASCADE",
+                "description": "Writer id for the training_student",
+                "type": "INT",
+                "translate": "כותב הפידבק"
+            },
+            {
+                "name": "feedback",
+                "description": "Feedback from the writer",
+                "type": "VARCHAR(300)",
+                "translate": "פידבק מהכותב"
+            }
+        ]
+    },
+    {
+        "table_name": "task_notes",
+        "translate": "הדגשים חיוניים למשימה",
+        "description": "Table that contains notes for the task.",
+        "columns": [
+            {
+                "name": "id",
+                "description": "ID (automatic)",
+                "type": "SERIAL PRIMARY KEY",
+                "translate": "מספר מזהה"
+            },
+            {
+                "name": "note",
+                "description": "Mission Essential Notes",
+                "type": "VARCHAR(300)",
+                "translate": "הערה"
+            },
+            {
+                "name": "task_id",
+                "relationship": "CONSTRAINT fk_task FOREIGN KEY(task_id) REFERENCES tasks(id)",
+                "description": "Task ID",
+                "type": "INT",
+                "translate": "משימה"
+            },
+            {
+                "name": "written_id",
+                "relationship": "CONSTRAINT fk_writter FOREIGN KEY(written_id) REFERENCES users(id)",
+                "description": "Written ID",
+                "type": "INT NOT NULL",
+                "translate": "כותב ההדגש"
+            }
+        ]
+    },
+    {
+        "table_name": "evaluations",
+        "translate": " הערכות כלליות",
+        "description": "Table that contains evaluations from the mentor.",
+        "notification_content": "נוספה הערכה כללית למוכשרת",
+        "columns": [
+            {
+                "name": "id",
+                "description": "ID (automatic)",
+                "type": "SERIAL PRIMARY KEY",
+                "translate": "מספר מזהה"
+            },
+            {
+                "name": "trainig_student_id",
+                "relationship": "CONSTRAINT fk_trainig_student FOREIGN KEY(trainig_student_id) REFERENCES users(id)",
+                "description": "Talented ID",
+                "type": "INT NOT NULL",
+                "translate": "מוכשרת"
+            },
+            {
+                "name": "writer_id",
+                "relationship": "CONSTRAINT fk_writer FOREIGN KEY(writer_id) REFERENCES users(id) ON DELETE CASCADE",
+                "description": "Writer id for the training_student",
+                "type": "INT",
+                "translate": "כותבת ההערכה"
+            },
+            {
+                "name": "date",
+                "description": "Date",
+                "type": "DATE NOT NULL",
+                "translate": "תאריך"
+            },
+            {
+                "name": "evaluation",
+                "description": "evaluation from the writer",
+                "type": "VARCHAR(300) NOT NULL",
+                "translate": "הערכה כללית"
+            },
+            {
+                "name": "professionalism",
+                "description": "professionalism (0-6)",
+                "type": "INT DEFAULT 0",
+                "translate": "מקצועיות"
+            },
+            {
+                "name": "conduct",
+                "description": "conduct (0-6)",
+                "type": "INT DEFAULT 0",
+                "translate": "התנהלות"
+            },
+            {
+                "name": "independence",
+                "description": "independence (0-6)",
+                "type": "INT DEFAULT 0",
+                "translate": "עצמאות"
+            },
+            {
+                "name": "knowledge_sharing",
+                "description": "knowledge_sharing (0-6)",
+                "type": "INT DEFAULT 0",
+                "translate": "שיתוף ידע"
+            },
+            {
+                "name": "pace",
+                "description": "pace (0-6)",
+                "type": "INT DEFAULT 0",
+                "translate": "קצב"
+            },
+            {
+                "name": "speed_​​of_integration",
+                "description": "speed_​​of_integration (0-6)",
+                "type": "INT DEFAULT 0",
+                "translate": "מהירות השתלבות בצוות"
+            },
+            {
+                "name": "quality_of_integration",
+                "description": "quality_of_integration (0-6)",
+                "type": "INT DEFAULT 0",
+                "translate": "איכות השתלבות בצוות"
+            }
+        ]
+    },
+    {
+        "table_name": "graphs",
+        "translate": "גרפים",
+        "description": "Table that contains all the graphs.",
+        "notification_content": "נוסף פילוח נתונים חדש",
+        "columns": [
+            {
+                "name": "id",
+                "description": "ID (automatic)",
+                "type": "SERIAL PRIMARY KEY",
+                "translate": "מספר מזהה"
+            },
+            {
+                "name": "date",
+                "description": "Date of graph creating",
+                "type": "TEXT",
+                "translate": "תאריך"
+            },
+            {
+                "name": "title",
+                "description": "title of graph",
+                "type": "VARCHAR(300) NOT NULL",
+                "translate": "כותרת"
+            },
+            {
+                "name": "owner_id",
+                "relationship": "CONSTRAINT fk_onwer FOREIGN KEY(owner_id) REFERENCES users(id)",
+                "description": "Owner of graph",
+                "type": "INT NOT NULL",
+                "translate": "בעל הגרף"
+            },
+            {
+                "name": "training_student_id",
+                "relationship": "CONSTRAINT fk_training_student FOREIGN KEY(training_student_id) REFERENCES users(id)",
+                "description": "Training student id",
+                "type": "INT",
+                "translate": "מוכשרת"
+            },
+            {
+                "name": "display_for_training_student",
+                "description": "Display the graph for training student",
+                "type": "BOOLEAN DEFAULT FALSE",
+                "translate": "תצוגת הגרף למוכשרת"
+            },
+            {
+                "name": "x_array",
+                "description": "An array of X",
+                "type": "VARCHAR(300)[]",
+                "translate": "מערך של X"
+            },
+            {
+                "name": "x_table_name",
+                "description": "Label of X",
+                "type": "VARCHAR(300) NOT NULL",
+                "translate": "טבלה של X"
+            },
+            {
+                "name": "y_array",
+                "description": "An array of Y",
+                "type": "VARCHAR(300)[]",
+                "translate": "מערך של Y"
+            },
+            {
+                "name": "y_table_name",
+                "description": "Label of Y",
+                "type": "VARCHAR(300) NOT NULL",
+                "translate": "טבלה של Y"
+            },
+            {
+                "name": "condition_field",
+                "description": "The condition feild",
+                "type": "VARCHAR(300)",
+                "translate": "שדה תנאי"
+            },
+            {
+                "name": "condition_value",
+                "description": "The condition value",
+                "type": "VARCHAR(200) NOT NULL",
+                "translate": "ערך תנאי"
+            }
+        ]
+    },
+    {
+        "table_name": "general_informations",
+        "translate": "מידע כללי",
+        "description": "Table that contains general informations about tasks.",
+        "notification_content": "נוסף מידע כללי חדש",
+        "columns": [
+            {
+                "name": "id",
+                "description": "ID (automatic)",
+                "type": "SERIAL PRIMARY KEY",
+                "translate": "מספר מזהה"
+            },
+            {
+                "name": "task_id",
+                "relationship": "CONSTRAINT fk_task FOREIGN KEY(task_id) REFERENCES tasks(id)",
+                "description": "Task ID",
+                "type": "INT",
+                "translate": "משימה"
+            },
+            {
+                "name": "title",
+                "description": "Title of the task",
+                "type": "TEXT NOT NULL",
+                "translate": "כותרת"
+            },
+            {
+                "name": "content",
+                "description": "content of the task",
+                "type": "TEXT NOT NULL",
+                "translate": "תוכן"
+            },
+            {
+                "name": "information_for",
+                "description": "Who is the information for",
+                "type": "ENUM",
+                "enum_values": [
+                    "מנטור",
+                    "מוכשרת"
+                ],
+                "enum_type": "VARCHAR(30)",
+                "translate": "מידע עבור"
+            }
+        ]
+    },
+    {
+        "table_name": "notifications",
+        "translate": "הודעות",
+        "description": "Table that contains the unread notifications.",
+        "columns": [
+            {
+                "name": "id",
+                "description": "ID (automatic)",
+                "type": "SERIAL PRIMARY KEY",
+                "translate": "מספר מזהה"
+            },
+            {
+                "name": "date",
+                "description": "Date of notification",
+                "type": "TEXT NOT NULL",
+                "translate": "תאריך"
+            },
+            {
+                "name": "role",
+                "description": "Role that notification send to it",
+                "type": "ENUM",
+                "enum_values": [
+                    "מנטור",
+                    "מוכשרת",
+                    "מנהל"
+                ],
+                "enum_type": "TEXT",
+                "translate": "תפקיד"
+            },
+            {
+                "name": "user_id",
+                "relationship": "CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES user(id)",
+                "description": "User ID",
+                "type": "INT",
+                "translate": "משתמש"
+            },
+            {
+                "name": "content",
+                "relationship": "CONSTRAINT fk_notifications_content FOREIGN KEY(content) REFERENCES notifications_content(id)",
+                "description": "notification content",
+                "type": "TEXT NOT NULL",
+                "translate": "תוכן ההודעה"
+            },
+            {
+                "name": "link",
+                "description": "A link that when clicked on the message will go to",
+                "type": "TEXT NOT NULL",
+                "translate": "קישור"
+            }
+        ]
+    },
+    {
+        "table_name": "tasks_feedback",
+        "translate": "משוב משימות",
+        "description": "Table that contains tasks feadbacks from the training student",
+        "notification_content": "נוסף משוב חדש על משימה",
+        "columns": [
+            {
+                "name": "id",
+                "description": "ID (automatic)",
+                "type": "SERIAL PRIMARY KEY",
+                "translate": "מספר מזהה"
+            },
+            {
+                "name": "trainig_student_id",
+                "relationship": "CONSTRAINT fk_trainig_student FOREIGN KEY(trainig_student_id) REFERENCES users(id)",
+                "description": "Talented ID",
+                "type": "INT NOT NULL",
+                "translate": "מוכשרת"
+            },
+            {
+                "name": "task_id",
+                "relationship": "CONSTRAINT fk_task FOREIGN KEY(task_id) REFERENCES tasks(id)",
+                "description": "Task ID",
+                "type": "INT NOT NULL",
+                "translate": "משימה"
+            },
+            {
+                "name": "date",
+                "description": "Date",
+                "type": "DATE NOT NULL",
+                "translate": "תאריך"
+            },
+            {
+                "name": "feedback",
+                "description": "Feedback from the writer",
+                "type": "VARCHAR(300)",
+                "translate": "פידבק מהכותב"
+            }
+        ]
+    }
+]

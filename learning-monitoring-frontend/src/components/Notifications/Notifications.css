@@ -1,0 +1,69 @@
+.div-notification {
+    direction: rtl;
+}
+
+.p-orderlist-controls {
+    display: none;
+}
+
+.pi.pi-bell.p-overlay-badge:hover {
+    cursor: pointer;
+}
+
+.sidebar-notification.p-sidebar.p-component.p-ripple-disabled.p-sidebar-enter-done {
+    text-align: center;
+}
+
+.pi.pi-times {
+    display: flex;
+}
+
+.p-orderlist-list {
+    border: 0;
+    text-align: right;
+    max-height: max-content;
+}
+
+.notification-date {
+    font-size: 14px;
+}
+
+.p-orderlist-item {
+    border-bottom: 2px solid #f2f2f2;
+}
+
+.p-orderlist-item:hover {
+    background-color: #dddddd;
+}
+
+.order-list-notifications .pi-times {
+    margin-right: 0;
+    margin-bottom: 0.5vh;
+}
+
+.order-list-notifications .p-orderlist-item {
+    direction: rtl;
+}
+
+.order-list-notifications div div {
+    direction: ltr;
+    padding-top: 3%;
+}
+
+.p-orderlist .p-orderlist-list .p-orderlist-item {
+    padding: 0.5rem 0.5rem;
+}
+
+.sidebar-notification .p-sidebar-header {
+    padding: 1rem;
+    direction: rtl;
+}
+
+.p-badge.p-component {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: black;
+}

@@ -1,0 +1,43 @@
+const { createRecord, readRecord, updateRecord, deleteRecord } = require("../services/sql/sql-operations");
+const table = 'task_notes'
+const validation = require("../services/validation")
+
+async function create(data) {
+    const obj = { table, columns: Object.keys(data), values: Object.values(data) }
+    const validate = validation.validateTaskNotesTable(data, "create")
+    if (Object.values(validate).every(item => item === "")) {
+        const response = await createRecord(obj)
+        return response.rows[0];
+    }
+    else {
+        Object.keys(validate).forEach(value => validate[value] !== "" ? console.log(`${value} : ${validate[value]}`) : null);
+        return false;
+    }
+}
+
+async function update(data) {
+    const obj = { table, columns: Object.keys(data), values: Object.values(data), condition: `ID =${data.id}` };
+    const validate = validation.validateTaskNotesTable(data, "update")
+    if (Object.values(validate).every(item => item === "")) {
+        const response = await updateRecord(obj)
+        return response
+    }
+    else {
+        Object.keys(validate).forEach(value => validate[value] !== "" ? console.log(`${value} : ${validate[value]}`) : null);
+        return false;
+    }
+}
+
+async function read(data) {
+    const obj = { table, select: data.select === undefined ? "*" : data.select, condition: data.condition === undefined ? "1=1" : data.condition }
+    const response = await readRecord(obj)
+    return response
+}
+
+async function deleteRow(data) {
+    const obj = { table, condition: `ID =${data.id}` }
+    const response = await deleteRecord(obj)
+    return response
+}
+
+module.exports = { create, read, update, deleteRow };

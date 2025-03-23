@@ -1,0 +1,30 @@
+.download-data {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: -6vh;
+    left: 3vw;
+    gap: 0.3em;
+}
+
+.circular-button {
+    border-radius: 50%;
+    width: 2.5em;
+    height: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.1em;
+}
+
+.circular-button:nth-child(1) {
+    background-color: var(--main-color);
+}
+
+.circular-button:nth-child(2) {
+    background-color: var(--gray-color);
+}
+
+.circular-button:nth-child(3) {
+    background-color: rgb(237, 237, 237);
+}

@@ -1,0 +1,30 @@
+@import url(../../App.css);
+
+.conc {
+    width: 700px;
+    border: 1px var(--gray-color) solid;
+    border-radius: 5px;
+    height: 51vh;
+    direction:ltr;
+}
+
+.b {
+    background-color: white;
+    border-radius: 5px;
+    height: 30px;
+    margin-top: 2%;
+}
+
+.read-con {
+    padding: 2vw;
+}
+
+.cons {
+    margin-top: 1vh;
+    position: relative;
+    width: 65vw;
+    border: 1px var(--gray-color) solid;
+    border-radius: 5px;
+    height: 51vh;
+    direction: ltr;
+}

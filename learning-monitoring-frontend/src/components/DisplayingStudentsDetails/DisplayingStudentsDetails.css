@@ -1,0 +1,41 @@
+.profile-container h2 {
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.profile-data {
+    color: #666;
+    font-size: 1.2rem;
+}
+
+.profile-data strong {
+    font-weight: bold;
+}
+
+.profile-card p {
+    display: inline;
+    margin-right: 10px;
+}
+
+.p-card .p-card-content,
+.p-card .p-card-title {
+    padding: 0;
+}
+
+.custom-dropdown {
+    left: 0.5%;
+    width: 8rem;
+}
+
+.profile-card {
+    position: absolute;
+    width: 20vw;
+    left: 0;
+    font-size: medium;
+    top: 8rem;
+}
+
+.student-profile {
+    padding: 0.5rem;
+    font-weight: bold;
+}

@@ -1,0 +1,75 @@
+name: Build and Push Docker Image
+
+on: [push]
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE: learning-monitoring/learning-monitoring/learning-monitoring-frontend
+  # IMAGE: learning-monitoring/learning-monitoring/learning-monitoring-backend
+  PROJECT: us-central1-docker.pkg.dev
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - name: 📁 Checkout repository
+      uses: actions/checkout@v4
+
+    - name: 🛠️ Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: 🗝️ Login to Container Registry
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.ACCOUNT_KEY_PTC_REPO }}'
+
+    - name: ⛅ Set up Cloud SDK
+      uses: 'google-github-actions/setup-gcloud@v2'
+
+    - name: 🔧 Configure Docker to use the gcloud
+      run: gcloud auth configure-docker ${{ env.PROJECT }}
+      
+    - name: 📃 Docker metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.PROJECT }}/${{ env.IMAGE }}
+        flavor: |
+          latest=false
+        tags: |
+          type=raw,value=latest
+          type=semver,pattern=v{{version}}
+          type=semver,pattern=v{{major}}.{{minor}}
+
+    - name: 🐳 Docker Build & Push
+      uses: docker/build-push-action@v5
+      id: docker_build
+      with:
+        context: ./learning-monitoring-frontend
+        # context: ./learning-monitoring-backend
+        push: true
+        provenance: false
+        labels: ${{ steps.meta.outputs.labels }}
+        tags: ${{ steps.meta.outputs.tags }}
+        file: ./learning-monitoring-frontend/Dockerfile
+        # file: ./learning-monitoring-backend/Dockerfile
+        build-args: |
+          GOOGLE_CREDENTIALS=${{ secrets.ACCOUNT_KEY_PTC_REPO }}
+
+    - name: Deploy to Cloud Run
+      uses: google-github-actions/deploy-cloudrun@v2
+      with:
+        service: learning-monitoring-frontend
+        image: ${{ env.PROJECT }}/${{ env.IMAGE }}:latest
+        project_id: learning-monitoring
+        region: us-central1
+        # allow_unauthenticated: true
+        env: DB_USER=postgres,DB_PASSWORD=123456,DB_NAME=learning-monitoring,DB_PORT=5432,DB_HOST=127.0.0.1,PORT=6868,HOST=127.0.0.1,EMAIL=your_email@example.com,PASSWORD=your_email_password,JWT_SECRET_KEY='skyvar_2024_practicum_3101',MANAGER_NAME=manager,MANAGER_PASSWORD=Manager123!,MANAGER_EMAIL=manager@gmail.com,MANAGER_PHONE=0556730222,MANAGER_USERNAME=manager

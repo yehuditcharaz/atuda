@@ -1,0 +1,64 @@
+#table {
+    direction: rtl;
+}
+
+th.p-column-title {
+    text-align: center;
+}
+
+.p-datatable-sm .p-datatable-tbody tr:nth-child(odd) {
+    background-color: #f1f1f1;
+}
+
+.p-datatable-sm .p-datatable-thead th,
+.p-datatable-sm .p-datatable-tbody td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.p-datatable-sm .p-datatable-tbody tr {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.p-datatable-sm .p-datatable-tbody td {
+    text-align: center;
+}
+
+.p-datatable-sm .p-datatable-tbody tr:hover {
+    background-color: #e9ecef;
+    text-align: center;
+}
+
+.p-datatable-sm .p-datatable-tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+.p-datatable .p-column-header-content {
+    justify-content: center;
+}
+
+.copy-value {
+    direction: rtl;
+}
+
+.p-datatable.p-component.p-datatable-responsive-scroll {
+    max-height: 55vh;
+    overflow-y: auto;
+}
+
+.p-column-filter-row .p-column-filter-element {
+    width: 100%;
+}
+
+.p-column-filter-row .p-column-filter-menu-button,
+.p-column-filter-row .p-column-filter-clear-button {
+    margin-left: 0;
+}
+
+.p-tabview-nav {
+    display: flex;
+    flex-wrap: wrap;
+}

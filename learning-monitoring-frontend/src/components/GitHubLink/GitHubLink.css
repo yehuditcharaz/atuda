@@ -1,0 +1,42 @@
+.link-button {
+    margin-top: 1vh;
+    width: 4vw;
+    height: 4vh;
+    justify-content: center;
+    border-color: #ced4da;
+    font-size: 14px;
+}
+
+.larger-icon {
+    font-size: 2rem;
+}
+
+.edit-link {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    border: solid 1px var(--gray-color);
+}
+
+.edit-link .p-inputtext.p-component.p-filled {
+    width: 100%;
+}
+
+.link-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.a-link {
+    color: var(--main-color);
+}
+
+.pi.pi-github.larger-icon {
+    cursor: pointer;
+}
+
+.link-input{
+    text-align: start;
+}

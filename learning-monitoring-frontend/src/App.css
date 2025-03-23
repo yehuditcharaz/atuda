@@ -1,0 +1,71 @@
+:root {
+  --main-color: #092949;
+  --second-color: #ff6600;
+  --gray-color: #a49c98;
+}
+
+body {
+  color: var(--main-color);
+  z-index: 999;
+  font-size: larger;
+}
+
+.card {
+  color: var(--main-color);
+}
+
+li.p-unselectable-text.p-tabview-selected.p-highlight .p-tabview-title {
+  color: var(--main-color);
+}
+
+li.p-unselectable-text.p-tabview-selected.p-highlight a {
+  border-bottom: 0.15vw solid var(--main-color);
+  padding-bottom: 0.6rem;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  border: none;
+}
+
+.p-tabview-title {
+  color: var(--gray-color);
+}
+
+.p-unselectable-text :hover {
+  color: var(--main-color);
+}
+
+.p-tabview-nav {
+  border: none;
+}
+
+.p-menu {
+  width: 13vw;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  border-top: none;
+  border-bottom: none;
+  border-right: none;
+  padding: 0px;
+}
+
+.p-menu ul {
+  text-align: right;
+}
+
+.p-menu .p-menuitem>.p-menuitem-content .p-menuitem-link .p-menuitem-text {
+  color: var(--gray-color);
+}
+
+.p-component {
+  background-color: white;
+  text-align: end;
+}
+
+.p-toast {
+  text-align: start;
+}
+
+.p-button-danger.p-confirm-dialog-accept{
+  background-color: #c02929;;
+}

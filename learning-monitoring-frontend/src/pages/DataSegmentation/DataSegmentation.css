@@ -1,0 +1,46 @@
+@import url(../../App.css);
+
+.segmentation-page{
+    direction: rtl;
+}
+
+.all-graphs {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5vw;
+}
+
+.graph-container {
+    display: flex;
+    justify-content: center;
+}
+
+.p-chart{
+    width: 90%;
+    height: 50vh;
+}
+
+.graph-container .graph-card {
+    margin: 1vw;
+    width: 29vw;
+    border: 2px solid var(--main-color);
+}
+
+.p-galleria-item-prev-icon,.p-galleria-item-next-icon{
+    color: var(--main-color);
+}
+
+.graph-card p{
+    text-align: center;
+}
+
+.graph-card .pi-ellipsis-h {
+    margin-top: 2vh;
+    margin-right: 93%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.add-graph{
+    margin-right: 90%;
+}

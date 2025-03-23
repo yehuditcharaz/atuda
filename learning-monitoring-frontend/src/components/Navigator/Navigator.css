@@ -1,0 +1,123 @@
+.custom-menubar .p-menuitem-link>.p-menuitem-icon {
+    transform: scaleX(1);
+}
+
+.tab-container {
+    direction: rtl;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    justify-content: center;
+}
+
+.p-submenu-list {
+    flex-direction: row-reverse;
+}
+
+.p-menubar .p-submenu-list>.p-menuitem-active>.p-submenu-list {
+    right: 100%;
+}
+
+.p-menubar .p-submenu-list .p-menuitem .p-menuitem-content .p-menuitem-link .p-submenu-icon {
+    transform: scaleX(-1);
+}
+
+.p-menubar .p-menubar-root-list>.p-menuitem>.p-menuitem-content .p-menuitem-link .p-menuitem-icon {
+    margin-left: 0.5rem;
+}
+
+.p-menubar {
+    border-radius: 30px;
+}
+
+.p-general-information {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.active {
+    border: 2px solid var(--main-color);
+    border-radius: 5px;
+}
+
+.p-badge.p-component.p-badge-no-gutter {
+    background-color: var(--main-color);
+    display: flex;
+    justify-content: center;
+}
+
+.p-menuitem-link {
+    padding: 8px;
+}
+
+.p-megamenu.p-component.p-megamenu-horizontal {
+    display: flex;
+    justify-content: center;
+}
+
+.p-megamenu {
+    padding: 0px;
+    background-color: white;
+    border: 2px solid #dee2e6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.p-megamenu .p-menuitem-link {
+    overflow: visible;
+}
+
+.pi {
+    margin-left: 8px;
+}
+
+.date {
+    color: var(--main-color);
+}
+
+.no-hover :hover {
+    background-color: transparent;
+}
+
+.pi .pi-calendar .p-overlay-badge {
+    margin: 5px;
+}
+
+.time {
+    color: var(--main-color);
+}
+
+.numtime {
+    margin: 0;
+}
+
+.nav-menu .p-megamenu-root-list li.margin-nav-student{
+    margin-right: 10vw;
+    margin-left: 1vw;
+}
+
+
+.nav-menu .p-megamenu-root-list li.margin-date-manager{
+    margin-right: 21vw;
+    margin-left: 1vw;
+}
+
+.nav-menu .p-megamenu-root-list li.margin-date-mentor{
+    margin-right: 21vw;
+    margin-left: 1vw;
+}
+
+.nav-menu .p-megamenu-root-list>.p-menuitem {
+    position: relative;
+    margin-right: 0.5vw;
+    margin-left: 0.5vw;
+}
+
+.notification-bell{
+    right: 2%;
+}
+
+.pi.pi-bell.p-overlay-badge{
+    left: 50%;
+    top: 0.5vw;
+}

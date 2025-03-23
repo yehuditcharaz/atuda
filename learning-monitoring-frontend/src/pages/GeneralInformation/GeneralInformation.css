@@ -1,0 +1,85 @@
+@import url(../../App.css);
+
+.info-page{
+    direction: rtl;
+}
+
+.info{
+    direction: rtl;
+}
+
+.p-menu{
+    max-height: 75vh; 
+    overflow-y: auto;
+}
+
+.ql-toolbar {
+    display: flex;
+    align-items: center;
+    height: 6vh;
+}
+
+.card-edit {
+    position: absolute;
+    width: 80vw;
+    height: 60vh;
+    overflow: auto;
+    border: solid 1px var(--gray-color);
+}
+
+.card-edit .ql-container.ql-snow{
+    border: none;
+}
+
+.text-info {
+    width: 85vw;
+    margin: 2vw;
+    margin-top: 0;
+}
+
+.title-input {
+    width: 40%;
+    margin: 1vw;
+    direction: ltr;
+}
+
+.text-btn {
+    position: absolute;
+    left: 1vw;
+    top: 1vh;
+    width: 5vw;
+    height: 4vh;
+    z-index: 100;
+}
+
+.info {
+    display: flex;
+}
+
+.wrap-title{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+    direction: rtl;
+}
+
+.p-menu .p-submenu-header {
+    padding: 0.75rem 0rem;
+}
+
+.read{
+    margin: 2vw;
+}
+
+.menu-options{
+    position: absolute;
+    left: 1vw;
+    top: 1vw;
+}
+
+.toast-info{
+    direction: rtl;
+}

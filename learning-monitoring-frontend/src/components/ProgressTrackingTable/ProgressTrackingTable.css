@@ -1,0 +1,100 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+th,
+td {
+    border: 1px solid #dddddd;
+    text-align: right;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.p-datatable-wrapper {
+    display: flex;
+    margin-right: 3vw;
+    margin-left: 3vw;
+}
+
+.tabim {
+    margin-right: 3vw;
+}
+
+.btnandtabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    height: 60px;
+    margin-left: 3vw;
+
+}
+
+.add {
+    display: flex;
+    justify-content: center;
+    border-color: #ced4da;
+    color: var(--main-color);
+    height: 80%;
+    width: 100%;
+    font-size: 14px;
+}
+
+.buttos-expand-collapse {
+    margin-top: 15px;
+    align-items: flex-end;
+}
+
+.input {
+    height: 25px;
+    width: 98%;
+    border-radius: 0%;
+    border: none;
+    text-align: start;
+}
+
+#icon {
+    margin: 5px;
+}
+
+.btnadd {
+    display: flex;
+    align-items: center;
+    width: 5%;
+}
+
+.addandsearch {
+    display: flex;
+    margin-right: 3vw;
+    margin-left: 3vw;
+}
+
+.inputsearch {
+    width: 95%;
+    margin: 5px;
+    margin-right: 0px;
+    justify-content: flex-end;
+    display: flex;
+    align-items: baseline;
+    border: 1px solid #ced4da;
+}
+
+.buttos-expand-collapse Button {
+    color: var(--main-color);
+    border: none;
+    background-color: #f2f2f2;
+    font-weight: 500;
+    border-radius: 0%;
+}
+
+.p-row-toggler {
+    transform: rotate(180deg);
+}
+
+.p-row-toggler.p-row-toggler-expanded {
+    transform: rotate(360deg);
+}
