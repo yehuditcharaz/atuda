@@ -7,8 +7,8 @@ permissions:
   packages: write
 
 env: 
-  IMAGE: learning-monitoring-454313/learning-monitoring/learning-monitoring-frontend
-  # IMAGE: learning-monitoring-454313/learning-monitoring/learning-monitoring-backend
+  # IMAGE: learning-monitoring-454313/learning-monitoring/learning-monitoring-frontend
+  IMAGE: learning-monitoring-454313/learning-monitoring/learning-monitoring-backend
   PROJECT: us-central1-docker.pkg.dev
   
 jobs:
@@ -53,24 +53,24 @@ jobs:
       uses: docker/build-push-action@v5
       id: docker_build
       with:
-        context: ./learning-monitoring-frontend
-        # context: ./learning-monitoring-backend
+        # context: ./learning-monitoring-frontend
+        context: ./learning-monitoring-backend
         push: true
         provenance: false
         labels: ${{ steps.meta.outputs.labels }}
         tags: ${{ steps.meta.outputs.tags }}
-        file: ./learning-monitoring-frontend/Dockerfile
-        # file: ./learning-monitoring-backend/Dockerfile
+        # file: ./learning-monitoring-frontend/Dockerfile
+        file: ./learning-monitoring-backend/Dockerfile
         build-args: |
           GOOGLE_CREDENTIALS=${{ secrets.ACCOUNT_KEY_PTC_REPO }}
 
     - name: Deploy to Cloud Run
       uses: google-github-actions/deploy-cloudrun@v2
       with:
-        service: learning-monitoring-frontend1
+        service: learning-monitoring-backend
+        # service: learning-monitoring-frontend
         image: ${{ env.PROJECT }}/${{ env.IMAGE }}:latest
         project_id: learning-monitoring-454313
         region: us-central1
         flags: '--allow-unauthenticated'
-        # allow_unauthenticated: true
-        # env_vars: DB_USER=postgres,DB_PASSWORD=123456,DB_NAME=learning-monitoring,DB_PORT=5432,DB_HOST=34.28.189.158,HOST=127.0.0.1,EMAIL=your_email@example.com,PASSWORD=your_email_password,JWT_SECRET_KEY='skyvar_2024_practicum_3101',MANAGER_NAME=manager,MANAGER_PASSWORD=Manager123!,MANAGER_EMAIL=manager@gmail.com,MANAGER_PHONE=0556730222,MANAGER_USERNAME=manager
+        env_vars: ${{ secrets.BACKEND_VARS }}
