@@ -67,7 +67,7 @@ jobs:
     - name: Deploy to Cloud Run
       uses: google-github-actions/deploy-cloudrun@v2
       with:
-        service: learning-monitoring-frontend
+        service: learning-monitoring-frontend1
         image: ${{ env.PROJECT }}/${{ env.IMAGE }}:latest
         project_id: learning-monitoring-454313
         region: us-central1
