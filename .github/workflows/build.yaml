@@ -71,5 +71,6 @@ jobs:
         image: ${{ env.PROJECT }}/${{ env.IMAGE }}:latest
         project_id: learning-monitoring-454313
         region: us-central1
-        allow_unauthenticated: true
+        flags: '--allow-unauthenticated'
+        # allow_unauthenticated: true
         # env_vars: DB_USER=postgres,DB_PASSWORD=123456,DB_NAME=learning-monitoring,DB_PORT=5432,DB_HOST=34.28.189.158,HOST=127.0.0.1,EMAIL=your_email@example.com,PASSWORD=your_email_password,JWT_SECRET_KEY='skyvar_2024_practicum_3101',MANAGER_NAME=manager,MANAGER_PASSWORD=Manager123!,MANAGER_EMAIL=manager@gmail.com,MANAGER_PHONE=0556730222,MANAGER_USERNAME=manager
