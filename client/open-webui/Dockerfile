@@ -23,7 +23,7 @@ ENV GCS_BUCKET_NAME="gcs-openwebui"
 ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://pipeline-dev-633427059080.us-central1.run.app
 ENV OPENAI_API_KEY=;0p3n-w3bu!
 
-ENV DATABASE_URL=postgresql://postgres:1234@34.46.228.220:5432/openwebui
+ENV DATABASE_URL=postgresql://postgres:1234@34.46.228.220:5432/openwebui-db
 
 ENV ENABLE_OLLAMA_API=false
 ENV ENABLE_EVALUATION_ARENA_MODELS=false
