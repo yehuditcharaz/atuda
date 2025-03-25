@@ -1,28 +1,6 @@
 window.navigation.addEventListener("navigate", () => {
-    setTimeout(userLogin, 2000);
-    setTimeout(UpdateElements, 3500);  
-    setTimeout(selectModel, 3500);
+    setTimeout(UpdateElements, 2500);  
 })
-
-let flag = true;
-
-function userLogin() {
-    const login = document.getElementsByClassName('bg-gray-700/5 hover:bg-gray-700/10 dark:bg-gray-100/5 dark:hover:bg-gray-100/10 dark:text-gray-300 dark:hover:text-white transition w-full rounded-full font-medium text-sm py-2.5');
-    let userEmail, userPassword;
-    [...login].forEach((entry) => {
-        entry.addEventListener('click', function () {
-            const emails = document.getElementsByName('email');
-            [...emails].forEach((email) => {
-                userEmail = email.value;
-            })
-            const passwords = document.getElementsByName('current-password');
-            [...passwords].forEach((password) => {
-                userPassword = password.value;
-            })
-            !(userEmail === "ofer@gmail.com" && userPassword === "ofer123!") ? flag = false : null;
-        })
-    })
-}
 
 function UpdateElements(){
     if (!document.getElementById("InstructionsDiv")){
@@ -146,7 +124,7 @@ function sources() {
     const dialog = document.createElement('dialog');
     dialog.style.position = 'relative';
     dialog.style.width = "50%";
-    dialog.style.bottom = '65%'
+    dialog.style.bottom = '75%'
     dialog.style.left = '30%';
     dialog.style.borderRadius = "8px";
     dialog.innerHTML = `
@@ -171,41 +149,4 @@ function sources() {
         dialog.close();
         document.body.removeChild(dialog);
     };
-}
-
-function selectModel() {
-    const setAsDefaults = document.getElementsByClassName('absolute text-left mt-[1px] ml-1 text-[0.7rem] text-gray-500 font-primary');
-    if (flag) {
-        [...setAsDefaults].forEach((setAsDefault) => {
-            setAsDefault.addEventListener('click', function () {
-                if (!document.getElementById('Ofer-chat')) {
-                    this.style.display = 'none';
-                    flag = false;
-                    currentModel('flex w-full max-w-fit');
-                }
-            })
-        });
-    }
-    else {
-        [...setAsDefaults].forEach((setAsDefault) => {
-            setAsDefault.style.display = 'none';
-        });
-        if (!document.getElementById('Ofer-chat')) {
-            currentModel('flex flex-col w-full items-start');
-        }
-    }
-}
-
-function currentModel(className) {
-    const selectedPipeline = document.getElementsByClassName(className);
-    [...selectedPipeline].forEach((pipeline) => {
-        pipeline.style.display = 'none';
-    });
-    const pipelines = document.getElementsByClassName('flex-1 overflow-hidden max-w-full py-0.5 ');
-    const model = document.createElement('div');
-    model.id = 'Ofer-chat'
-    model.textContent = "Ofer chat";
-    [...pipelines].forEach((pipeline) => {
-        pipeline.appendChild(model);
-    });
 }
