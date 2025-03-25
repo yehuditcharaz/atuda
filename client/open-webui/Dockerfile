@@ -24,8 +24,7 @@ ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://pipeline-dev-63342705
 ENV OPENAI_API_KEY=;0p3n-w3bu!
 
 # ENV DATABASE_URL=postgresql://postgres:123@34.46.228.220:5432/openwebui-db
-ENV DATABASE_URL=postgresql://postgres:123@34.46.228.220:5432/postgres
-
+ENV DATABASE_URL=postgresql://postgres:123@34.46.228.220/postgres
 ENV ENABLE_OLLAMA_API=false
 ENV ENABLE_EVALUATION_ARENA_MODELS=false
 ENV TITLE_GENERATION_PROMPT_TEMPLATE="Create a concise 3-5 word title with an emoji that summarizes the chat conversation."
