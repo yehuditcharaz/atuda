@@ -26,8 +26,8 @@ ENV GCS_BUCKET_NAME="gcs-openwebui"
 # engine = create_engine("postgresql+psycopg2://scott:tiger@localhost:5432/mydatabase")
 
 # ENV OPENAI_API_BASE_URLS=https://pipeline-dev-633427059080.us-central1.run.app
-ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://pipeline-dev-633427059080.us-central1.run.app
-ENV OPENAI_API_KEY=0p3n-w3bu!
+ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://pipeline-633427059080.us-central1.run.app
+ENV OPENAI_API_KEY=;0p3n-w3bu!
 ENV RESET_CONFIG_ON_START=false
 ENV TITLE_GENERATION_PROMPT_TEMPLATE="Create a concise 3-5 word title with an emoji that summarizes the chat conversation."
 ENV USER_PERMISSIONS_CHAT_FILE_UPLOAD=false
