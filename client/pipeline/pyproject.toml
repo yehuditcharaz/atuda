@@ -4,22 +4,25 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ofer-knowledge-rag"
-version = "2025.1"
+version = "1.0.0"
 readme = {file = "README.md", content-type = "markdown"}
 requires-python = ">=3.10"
 dependencies = [
     "python-dotenv == 1.0.1"
 ]
-[project.optional-dependencies]
-dev = [
-    "pytest==8.2.2",
-    "ruff==0.8.6",
-    "pre-commit==4.0.1",
-    "black==25.1.0"
-]
-[tool.setuptools.packages.find]
-[tool.hatch.build.hooks.custom] 
 
-[tool.hatch.build.targets.wheel]
-sources = ["backend"]
+[project.optional-dependencies]
+test = [
+  "pytest==8.3.4",
+  "pytest_mock==3.14",
+]
+lint = [
+  "ruff==0.9.6",
+  "pre-commit==4.1"
+]
+
+[tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
