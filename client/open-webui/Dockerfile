@@ -22,7 +22,7 @@ ENV ENABLE_TAGS_GENERATION=false
 ENV STORAGE_PROVIDER="gcs"
 ENV GCS_BUCKET_NAME="gcs-openwebui"
 
-ENV DATABASE_URL=postgresql://postgres:123@34.46.228.220/postgres
+# ENV DATABASE_URL=postgresql://postgres:123@34.46.228.220/postgres
 # engine = create_engine("postgresql+psycopg2://scott:tiger@localhost:5432/mydatabase")
 
 ENV OPENAI_API_BASE_URLS=https://pipeline-dev-633427059080.us-central1.run.app
