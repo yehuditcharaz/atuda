@@ -1,3 +1,9 @@
 FROM ghcr.io/open-webui/pipelines:main
+
+WORKDIR /app
+COPY ./ /app
+
+COPY src/pipelines /app/pipelines
+
+RUN pip install .
 COPY ./src /app/pipelines
-# ENV SERVER_URL="https://rag-service-dev-633427059080.us-central1.run.app"

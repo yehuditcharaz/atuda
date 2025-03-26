@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ofer-knowledge-rag"
+version = "2025.1"
+requires-python = ">=3.10"
+dependencies = [
+]
+[project.optional-dependencies]
+dev = [
+    "pytest==8.2.2",
+    "ruff==0.8.6",
+    "pre-commit==4.0.1",
+    "black==25.1.0"
+]
+[tool.setuptools.packages.find]
+where = ["assets","src"]

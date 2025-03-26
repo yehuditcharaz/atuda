@@ -1,14 +1,14 @@
 import os
 from pathlib import Path
-
 from langchain_core.output_parsers.json import JsonOutputParser
 from langchain_core.messages import HumanMessage
 from langchain_core.runnables import RunnableLambda
 from langchain_google_vertexai import ChatVertexAI
+from utils.helpers import trim_array
+from utils.logger import logger
 from urllib.parse import quote
-
 from services.retriever import ensemble_retriever, history_aware_retriever
-from utils.config import GCPConfig, ModelConfig
+from utils.config import GCPConfig, ModelConfig, LimitsConfig
 from utils.const import PromptConst
 from utils.helpers import is_hebrew, is_base64, resize_base64_image
 from utils.dictionary import dictionary
@@ -35,32 +35,48 @@ def initialize_chain():
 
 
 def query_processing(conversation_history):
-    query = conversation_history["messages"][-1]["content"]
-    if not is_hebrew(query):
+    try:
+        query = conversation_history["messages"][-1]["content"]
+        if not is_hebrew(query):
+            return conversation_history
+
+        prompt = f"{PromptConst.TRANSLATION}\n\nHebrew Question:\n{query}\n\nReference Dictionary (for technical terms only):\n{dictionary}"
+
+        model = ChatVertexAI(
+            model_name=ModelConfig.MODEL_NAME,
+            max_output_tokens=ModelConfig.TOKEN_LIMIT,
+            temperature=ModelConfig.TRANSLATION_TEMPERATURE,
+        )
+        result = model.invoke(prompt)
+
+        conversation_history["messages"][-1]["content"] = result.content.strip()
+        logger.info("Successfully completed query processing")
         return conversation_history
-
-    prompt = f"{PromptConst.TRANSLATION}\n\nHebrew Question:\n{query}\n\nReference Dictionary (for technical terms only):\n{dictionary}"
-
-    model = ChatVertexAI(
-        model_name=ModelConfig.MODEL_NAME,
-        max_output_tokens=ModelConfig.TOKEN_LIMIT,
-        temperature=ModelConfig.TRANSLATION_TEMPERATURE,
-    )
-    result = model.invoke(prompt)
-
-    conversation_history["messages"][-1]["content"] = result.content.strip()
-    return conversation_history
+    except Exception as error:
+        error_log = f"Failed when translating the query: {error}"
+        logger.error(error_log)
+        raise Exception(error_log)
 
 
 def sources_retrieval(conversation):
-    chat_history = conversation["messages"]
-    query = conversation["messages"][-1]["content"]
-    history_docs = history_aware_retriever.invoke(
-        {"input": query, "chat_history": chat_history}
-    )[:30]
-    source_docs = split_image_text_types(history_docs)
-    input_data = {"context": source_docs, "question": query, "history": chat_history}
-    return input_data
+    try:
+        chat_history = conversation["messages"]
+        query = conversation["messages"][-1]["content"]
+        history_docs = history_aware_retriever.invoke(
+            {"input": query, "chat_history": chat_history}
+        )[:30]
+        source_docs = split_image_text_types(history_docs)
+        input_data = {
+            "context": source_docs,
+            "question": query,
+            "history": chat_history,
+        }
+        logger.info("Successfully completed sources retrieval")
+        return input_data
+    except Exception as error:
+        error_log = f"Failed when retrieving sources: {error}"
+        logger.error(error_log)
+        raise Exception(error_log)
 
 
 def split_image_text_types(docs):
@@ -78,51 +94,73 @@ def split_image_text_types(docs):
 
 
 def format_model_input(data_dict):
-    formatted_chunks = str(data_dict["context"]["texts"])
-    full_prompt = f"User-provided question: {data_dict['question']}\n conversation history:{data_dict['history']}\nText and / or tables:\n{formatted_chunks}"
-    messages = [
-        {
-            "type": "text",
-            "text": (full_prompt),
-        }
-    ]
-    if data_dict["context"]["images"]:
-        for image in data_dict["context"]["images"]:
-            messages.append({"type": "text", "text": f"metadata:\n{image.metadata}"})
-            messages.append(
-                {
-                    "type": "image_url",
-                    "image_url": {
-                        "url": f"data:image/jpeg;base64,{image.page_content}"
-                    },
-                }
-            )
-    return [HumanMessage(content=messages)]
+    try:
+        formatted_chunks = str(data_dict["context"]["texts"])
+        full_prompt = f"User-provided question: {data_dict['question']}\n conversation history:{data_dict['history']}\nText and / or tables:\n{formatted_chunks}"
+        messages = [
+            {
+                "type": "text",
+                "text": (full_prompt),
+            }
+        ]
+        if data_dict["context"]["images"]:
+            for image in data_dict["context"]["images"]:
+                messages.append(
+                    {"type": "text", "text": f"metadata:\n{image.metadata}"}
+                )
+                messages.append(
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": f"data:image/jpeg;base64,{image.page_content}"
+                        },
+                    }
+                )
+        logger.info("Successfully completed format model input")
+        return [HumanMessage(content=messages)]
+    except Exception as error:
+        error_log = f"Failed at format_model_input function: {error}"
+        logger.error(error_log)
+        raise Exception(error_log)
 
 
 def set_links(result):
-    sources_links = get_sources(result["doc_ids"])
-    return {"answer": result["markdown_answer_with_reasoning"], **sources_links}
+    try:
+        sources_links = get_sources(result["doc_ids"])
+        logger.info("Successfully completed set links")
+        return {"answer": result["markdown_answer_with_reasoning"], **sources_links}
+    except Exception as error:
+        raise Exception(error)
 
 
 def get_sources(doc_ids):
-    chunks = get_chunks(doc_ids)
-    result = {"images": [], "links": []}
+    try:
+        chunks = get_chunks(doc_ids)
+        result = {"images": [], "links": []}
 
-    {
-        (
-            result["images"].append(get_image_path(chunk))
-            if is_base64(chunk.page_content)
-            else result["links"].append(get_link(chunk))
-        )
-        for chunk in chunks
-    }
+        {
+            (
+                result["images"].append(get_image_path(chunk))
+                if is_base64(chunk.page_content)
+                else result["links"].append(get_link(chunk))
+            )
+            for chunk in chunks
+        }
+        result["images"] = trim_array(result["images"], LimitsConfig.MAX_IMAGES_LIMIT)
+        result["links"] = trim_array(result["images"], LimitsConfig.MAX_LINKS_LIMIT)
+        logger.info("Successfully completed get sources")
+        return result
 
-    return result
+    except Exception as error:
+        error_log = f"Failed when get sources: {error}"
+        logger.error(error_log)
+        raise Exception(error_log)
 
 
 def get_chunks(docs_ids):
-    return ensemble_retriever.retrievers[0].docstore.mget(docs_ids)
+    chunks = ensemble_retriever.retrievers[0].docstore.mget(docs_ids)
+    validate_chunks = [chunk for chunk in chunks if chunk is not None]
+    return validate_chunks
 
 
 def get_image_path(image_chunk):

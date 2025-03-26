@@ -1,6 +1,6 @@
 import os
+from datetime import time
 from dotenv import load_dotenv
-
 from utils.const import SchemaDescription
 
 
@@ -18,7 +18,7 @@ class GCPConfig:
     CHUNKS_FOLDER = "chunks"
     GOOGLE_CREDENTIALS = os.getenv("GOOGLE_CREDENTIALS")
     CORPUS_FOLDER = "corpus"
-    SIGN_SERVER_URL = os.getenv("SIGN_URL_SERVER")
+    SIGN_SERVER_URL = os.getenv("SIGN_SERVER_URL")
     LINKS_SIGN_URL = "get_link"
     IMAGES_SIGN_URL = "get_image"
     REQUEST_PARAM = "?url="
@@ -60,11 +60,20 @@ class UtilsConfig:
     RETRY_AFTER_ATTEMPT = 2
     HOST = os.getenv("HOST")
     PORT = os.getenv("PORT")
+    ERROR_MESSAGE = "Something went wrong while generating the response, try again"
 
 
 class LogsConfig:
     LOGS_PATH = os.getenv("LOGS_PATH")
-    TIME_ZONE = "Asia/Jerusalem"
-    MAX_BYTES = 30000
-    BACKUP_COUNT = 3
+    FILE_NAME = "chat_logs.log"
+    WHEN = "midnight"
+    AT_TIME = time(7, 0)
+    INTERVAL = 1
+    BACKUPCOUNT = 7
+    ENCODING = "utf-8"
     FORMAT = 'time="%(asctime)s" level="%(levelname)s" source="%(module)s.%(funcName)s:%(lineno)d" thread=%(thread)d message="%(message)s"'
+
+
+class LimitsConfig:
+    MAX_IMAGES_LIMIT = 4
+    MAX_LINKS_LIMIT = 5

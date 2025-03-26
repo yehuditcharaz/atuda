@@ -98,31 +98,47 @@ class PromptConst:
     **Important Guidelines:**
     1. Use the dictionary below only as a **reference for technical terms** — do not blindly follow it if a more natural or appropriate term exists based on context.
     2. If the Hebrew term has a plural, gender, or tense adjustment needed, apply it naturally in English.
-    3. If the question contains **acronyms written in English** (such as RFM, EEC), leave them **unchanged** exactly as written.
+    3. If the question contains **acronyms written in English** (such as RFM, EEC, NR), leave them **unchanged** exactly as written.  
+       - However, **adjust capitalization as needed** to match official helicopter documentation style (e.g., "rpm" → "RPM", "eec" → "EEC" if referring to a system).
     4. If the question contains acronyms written in Hebrew, translate them to the most appropriate technical term used in helicopter documentation, using the provided dictionary if relevant.
-    5. Do not add explanations, assumptions, or background information — just translate the question itself.
+    5. Ensure **context-aware terminology matching**, adapting word forms as needed:
+       - **Pluralization** (e.g., "ממסר" → "Transmission", "ממסרים" → "Transmissions").
+       - **Gender and verb tense adjustments** for natural readability in English.
+    6. **Strictly maintain any values, acronyms, or numbers as they appear** in the original text—do not modify or translate numerical values, units, or predefined English abbreviations.
+    7. Do not add explanations, assumptions, or background information—**translate only the question itself**.
 
     Please return only the translated question, nothing else.
     """
 
-    HISTORY_PROMPT = "If the question is related to history - formulate a new question so that it is a standalone question and contains all the information necessary to answer it.If the question is not related to history - leave it as it is."
+    HISTORY_PROMPT = """Chat history data and the user's last question \
+which may relate to the context in the chat history, formulate a stand-alone question \
+that can be understood without the chat history. Do not answer the question, \
+just rephrase it if necessary, otherwise return the last question as is without adding a personal opinion."""
 
 
 class SchemaDescription:
-    ANSWER = """A clear, structured, technically accurate, and well-organized response based strictly on the official documentation of the 'Ofer' helicopter.
-    The answer must focus exclusively on directly answering the specific question asked, addressing only relevant systems, components, or procedures necessary to answer it.
-    The response must be clear, short, and to the point, including only essential operational details (such as required conditions, numerical thresholds, or critical actions).
-    Avoid any procedural background or system overviews unless explicitly requested.
-    Where multiple modes, conditions, or configurations are directly relevant to the question, all such variations should be covered — but still presented concisely.
-    All terminology and explanations must adhere strictly to official definitions and operational logic as documented.
-    If specific numbers, steps, or limitations exist, they must be provided exactly as documented.
-    If the official documentation does not fully answer the question, the response should indicate that clarification is needed, rather than making assumptions.
-    The response should be formatted for easy reading, using sections, bullet points, and emphasis where useful, while maintaining concise wording.
-    **Do NOT include document IDs or references inside the response text.**"""
+    ANSWER = """Provide a **concise, accurate, and structured response** based strictly on the official documentation of the 'Ofer' helicopter.
 
-    DOC_IDS = """List up to 3 of the most relevant images and all directly relevant text documents used to generate this response.
-    Only include images that directly enhance understanding and are essential for supporting the answer.
-    If more than 3 relevant images exist, select the 3 most important.
-    Avoid including tables unless they are the primary or only source for the information.
-    List only documents and images that directly contributed to the response — do not include items that were merely reviewed or skimmed.
-    **Do NOT mention or embed these IDs within the answer itself.**"""
+- **Answer the specific question directly**, focusing only on essential operational details (e.g., numerical thresholds, required conditions, or critical steps).
+- If multiple configurations, modes, or conditions exist, include only those relevant to the question.
+- **Use official terminology** and adhere strictly to documented operational logic.
+- If exact numbers, steps, or limitations exist, **provide them exactly as documented**.
+- If the documentation does **not** fully answer the question, state that clarification is required rather than making assumptions.
+- **Do NOT include document IDs or references within the response text.**
+
+### **Handling Image Requests**
+- If the user requests an image of a specific component or system, return **only an image that clearly and exclusively represents that component or system**.
+- Do **not** return images where the requested component appears as part of a larger system unless explicitly requested.
+- If multiple relevant images exist, return only the **most representative** and **clear** image of the requested component.
+- If the user requests multiple images, return **only those that directly match the request**, avoiding additional context.
+- Do **not** provide explanations unless explicitly requested.
+- Format the response for images as:
+  - *"Here is the requested image of [component/system]:"*
+  - *"Here are the requested images of [component/system]:"*"""
+
+    DOC_IDS = """List **up to 3 of the most relevant images** and **all directly relevant text documents** used to generate this response.
+
+- **Only include images that specifically and clearly depict the requested component/system.**
+- Avoid images where the requested component is only a **small part** of a broader system, unless no better alternative exists.
+- If more than 3 relevant images exist, select the **most representative** ones.
+- **Do NOT reference or embed these IDs in the answer itself.**"""

@@ -1,7 +1,7 @@
 import logging
 import os
 from logging.handlers import TimedRotatingFileHandler
-from utils.config import LogsConfig
+from src.constants_utils.const import LogsConfig
 
 
 def create_logger(logger_name):
@@ -16,6 +16,7 @@ def create_logger(logger_name):
     stream_handler.setLevel(logging.DEBUG)
     stream_handler.setFormatter(formatter)
     logger.addHandler(stream_handler)
+
     return logger
 
 
