@@ -6,3 +6,5 @@ COPY ./ /app
 COPY src/pipelines /app/pipelines
 
 RUN pip install .
+
+COPY ./src /app/pipelines
