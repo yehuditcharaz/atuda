@@ -1,9 +1,9 @@
 window.navigation.addEventListener("navigate", () => {
-    setTimeout(UpdateElements, 2500);  
+    setTimeout(UpdateElements, 2500);
 })
 
-function UpdateElements(){
-    if (!document.getElementById("InstructionsDiv")){
+function UpdateElements() {
+    if (!document.getElementById("InstructionsDiv")) {
         const infoPlace = document.querySelector('[aria-label="New Chat"]');
         const infoDiv = document.createElement('div');
         infoDiv.className = "flex"
@@ -12,7 +12,7 @@ function UpdateElements(){
         buttonI.id = "Instructions"
         buttonI.className = 'flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition';
         infoDiv.appendChild(buttonI)
-        buttonI.addEventListener('click', function(){ClickInfo()})
+        buttonI.addEventListener('click', function () { ClickInfo() })
         const iconDiv = document.createElement('div');
         iconDiv.className = "m-auto self-center"
         buttonI.appendChild(iconDiv)
@@ -27,7 +27,7 @@ function UpdateElements(){
         const pathInfo = document.createElementNS(svgInfoNamespace, "path");
         pathInfo.setAttribute("stroke-linecap", "round");
         pathInfo.setAttribute("stroke-linejoin", "round");
-        pathInfo.setAttribute("d","M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z");
+        pathInfo.setAttribute("d", "M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z");
         svgInfo.appendChild(pathInfo);
         iconDiv.appendChild(svgInfo);
         infoPlace.insertAdjacentElement('beforebegin', infoDiv)
@@ -54,7 +54,7 @@ function UpdateElements(){
         const pathFile = document.createElementNS(svgFileNamespace, "path");
         pathFile.setAttribute("stroke-linecap", "round");
         pathFile.setAttribute("stroke-linejoin", "round");
-        pathFile.setAttribute("d","M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z");
+        pathFile.setAttribute("d", "M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z");
         svgFile.appendChild(pathFile);
         iconFileDiv.appendChild(svgFile);
         filePlace.insertAdjacentElement('beforebegin', fileDiv);
@@ -114,7 +114,7 @@ function ClickInfo() {
     `;
     document.body.appendChild(dialog);
     dialog.showModal();
-    dialog.querySelector('#closeDialog').onclick = function() {
+    dialog.querySelector('#closeDialog').onclick = function () {
         dialog.close();
         document.body.removeChild(dialog);
     };
@@ -142,7 +142,7 @@ function sources() {
                     </ul>
             </div>
         </div>
-    `    
+    `
     document.body.appendChild(dialog);
     dialog.showModal();
     dialog.querySelector('#closeDialog').onclick = function () {

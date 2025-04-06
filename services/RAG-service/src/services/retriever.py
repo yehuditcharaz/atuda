@@ -52,7 +52,6 @@ def initialize_history_retriever():
 
 def initialize_ensemble_retriever():
     retriever = initialize_retriever()
-
     multi_query_retriever = MultiQueryRetriever.from_llm(
         retriever=retriever,
         llm=VertexAI(

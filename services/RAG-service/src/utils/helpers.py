@@ -28,7 +28,3 @@ def resize_base64_image(base64_string, size=(128, 128)):
     resized_img.save(buffered, format=img.format)
 
     return base64.b64encode(buffered.getvalue()).decode("utf-8")
-
-
-def trim_array(arr, max_length):
-    return arr[:max_length] if len(arr) > max_length else arr

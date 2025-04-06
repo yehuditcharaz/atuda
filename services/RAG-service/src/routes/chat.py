@@ -2,7 +2,7 @@ import grpc
 import json
 from flask import Flask, request, jsonify
 
-from services.chain_multimodal import chain_multimodal_rag
+from services.chain_multimodal.chain import chain_multimodal_rag
 from utils.config import UtilsConfig
 
 app = Flask(__name__)

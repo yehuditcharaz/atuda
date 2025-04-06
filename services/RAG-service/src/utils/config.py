@@ -57,7 +57,7 @@ class UtilsConfig:
     BATCH_SIZE = 1000
     ID_KEY = "doc_id"
     MAX_TRIES = 6
-    RETRY_AFTER_ATTEMPT = 2
+    RETRY_AFTER_ATTEMPT = 4
     HOST = os.getenv("HOST")
     PORT = os.getenv("PORT")
     ERROR_MESSAGE = "Something went wrong while generating the response, try again"
