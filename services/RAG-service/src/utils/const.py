@@ -118,14 +118,12 @@ just rephrase it if necessary, otherwise return the last question as is without 
 
 class SchemaDescription:
     ANSWER = """Provide a **concise, accurate, and structured response** based strictly on the official documentation of the 'Ofer' helicopter.
-
 - **Answer the specific question directly**, focusing only on essential operational details (e.g., numerical thresholds, required conditions, or critical steps).
 - If multiple configurations, modes, or conditions exist, include only those relevant to the question.
 - **Use official terminology** and adhere strictly to documented operational logic.
 - If exact numbers, steps, or limitations exist, **provide them exactly as documented**.
 - If the documentation does **not** fully answer the question, state that clarification is required rather than making assumptions.
 - **Do NOT include document IDs or references within the response text.**
-
 ### **Handling Image Requests**
 - If the user requests an image of a specific component or system, return **only an image that clearly and exclusively represents that component or system**.
 - Do **not** return images where the requested component appears as part of a larger system unless explicitly requested.
@@ -137,7 +135,6 @@ class SchemaDescription:
   - *"Here are the requested images of [component/system]:"*"""
 
     DOC_IDS = """List **up to 3 of the most relevant images** and **all directly relevant text documents** used to generate this response.
-
 - **Only include images that specifically and clearly depict the requested component/system.**
 - Avoid images where the requested component is only a **small part** of a broader system, unless no better alternative exists.
 - If more than 3 relevant images exist, select the **most representative** ones.
