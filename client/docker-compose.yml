@@ -1,27 +1,28 @@
-version: '3'
 services:
-
   openwebui:
     build: 
-      context: .
-      dockerfile: Dockerfile.service2
-    image: my-custom-openwebui
+      context: ./custom_open
+      dockerfile: Dockerfile.openwebui
     container_name: openwebui_custom
     ports:
       - "3000:8080"
     volumes:
       - open-webui:/app/backend/data
-       
+    env_file:
+          - .env
+
   pipelines:
     build: 
-      context: .
-      dockerfile: Dockerfile.service1
-    image: my-custom-pipelines
+      context: ./custom_pipeline
+      dockerfile: Dockerfile.pipelines
     ports:
       - "9099:9099"
     extra_hosts:
       host.docker.internal: host-gateway
     restart: always
+    env_file:
+          - .env
+     
 volumes:
   open-webui:
   pipelines:
