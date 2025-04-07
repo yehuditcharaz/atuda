@@ -53,14 +53,14 @@ jobs:
       uses: docker/build-push-action@v5
       id: docker_build
       with:
-        context: ./services/rag-service
+        context: ./services/RAG-service
         push: true
         provenance: false
         labels: ${{ steps.meta.outputs.labels }}
-        tags: |
-            ${{ env.PROJECT }}/${{ env.IMAGE }}:${{ env.IMAGE_TAG }}
-        # tags: ${{ steps.meta.outputs.tags }}
-        file: ./services/rag-service/Dockerfile
+        # tags: |
+        #     ${{ env.PROJECT }}/${{ env.IMAGE }}:${{ env.IMAGE_TAG }}
+        tags: ${{ steps.meta.outputs.tags }}
+        file: ./services/RAG-service/Dockerfile
         build-args: |
           GOOGLE_CREDENTIALS=${{ secrets.ACCOUNT_KEY_NEW_REPO }}
 
