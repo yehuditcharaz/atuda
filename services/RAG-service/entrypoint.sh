@@ -9,12 +9,12 @@ fi
 echo "$GOOGLE_CREDENTIALS" | sed "s/^'//;s/'$//" > /key.json
 echo "✏️ service account writed successfully"
 
-gcloud auth activate-service-account --key-file=/key.json
+export GOOGLE_APPLICATION_CREDENTIALS="/key.json"
+
+gcloud auth activate-service-account --key-file=/app/key.json
 echo "🔐 after service account authorization"
 
 echo "🚚 run the code"
 cd /app
-# python src/services/data_preparation.py
-# echo "🔚 after run the code"
 
 python src/routes/chat.py

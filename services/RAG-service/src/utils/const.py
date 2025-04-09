@@ -123,19 +123,29 @@ class SchemaDescription:
 - **Use official terminology** and adhere strictly to documented operational logic.
 - If exact numbers, steps, or limitations exist, **provide them exactly as documented**.
 - If the documentation does **not** fully answer the question, state that clarification is required rather than making assumptions.
-- **Do NOT include document IDs or references within the response text.**
-### **Handling Image Requests**
-- If the user requests an image of a specific component or system, return **only an image that clearly and exclusively represents that component or system**.
-- Do **not** return images where the requested component appears as part of a larger system unless explicitly requested.
-- If multiple relevant images exist, return only the **most representative** and **clear** image of the requested component.
-- If the user requests multiple images, return **only those that directly match the request**, avoiding additional context.
-- Do **not** provide explanations unless explicitly requested.
-- Format the response for images as:
-  - *"Here is the requested image of [component/system]:"*
-  - *"Here are the requested images of [component/system]:"*"""
-
-    DOC_IDS = """List **up to 3 of the most relevant images** and **all directly relevant text documents** used to generate this response.
-- **Only include images that specifically and clearly depict the requested component/system.**
-- Avoid images where the requested component is only a **small part** of a broader system, unless no better alternative exists.
-- If more than 3 relevant images exist, select the **most representative** ones.
-- **Do NOT reference or embed these IDs in the answer itself.**"""
+**Important rules:**
+- :exclamation:️Never include links to images or documents inside the answer itself.
+- :exclamation:️Do not reuse, hallucinate, or fabricate image URLs or embedded media.
+- :exclamation:️Do not mention or reference any document/image IDs in the answer text.
+- :white_check_mark: All source references (text or image) must appear **only** in the `doc_ids` field.
+### **Handling Image Relevance**
+Include an image in the `doc_ids` field only if it meets **one of the following conditions**:
+1. It was **explicitly requested** by the user.
+2. It was **used directly** to formulate part of the answer.
+3. It provides **essential visual enrichment** that helps clarify or support the textual answer (e.g., a diagram of a specific component mentioned in the answer).
+Avoid including images that are merely thematically related or part of generic startup/checklist procedures unless they are directly connected to the specific question and answer.
+"""
+    DOC_IDS = """Return the list of documents and images that were essential for answering the question.
+**Text sources:**
+- Include only text documents that were **actually used to formulate the answer**.
+- If the answer relies on information, logic, or procedures, it must include the corresponding text source.
+- :white_check_mark: In most cases, there should be **at least one relevant text source** in this list.
+**Images and diagrams:**
+- Include images only if:
+  - They were directly used in the answer,
+  - Were explicitly requested by the user,
+  - Or clearly enrich the understanding of the answer in a visual way.
+- If multiple similar images exist, include only the most representative (up to 3 total).
+- :exclamation:️Do not include an image if the answer would be equally valid without it.
+Only include raw `doc_id` strings. Do not embed links, captions, or explanations.
+"""

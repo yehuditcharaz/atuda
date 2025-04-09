@@ -12,9 +12,6 @@ def format_model_input(data_dict):
                 "text": (full_prompt),
             }
         ]
-        logger.critical("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-        logger.critical(messages)
-        logger.critical("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         if data_dict["context"]["images"]:
             for image in data_dict["context"]["images"]:
                 messages.append(

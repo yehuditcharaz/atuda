@@ -3,6 +3,9 @@ FROM ghcr.io/open-webui/open-webui:0.5.20
 WORKDIR /app
 COPY ./ /app
 
+COPY src/add.sh /usr/local/bin/add.sh
+COPY src/addCode.js /app/build/assets/
+
 COPY assets/logo.jpg /app/build/assets/images/adam.jpg
 COPY assets/logo.jpg /app/build/assets/images/earth.jpg
 COPY assets/logo.jpg /app/build/assets/images/galaxy.jpg
@@ -28,3 +31,7 @@ ENV USER_PERMISSIONS_CHAT_TEMPORARY=false
 ENV WEBUI_NAME="ofer chat"
 
 CMD ["/bin/bash", "-c", "/app/backend/start.sh"]
+
+RUN chmod +x /usr/local/bin/add.sh
+
+RUN /usr/local/bin/add.sh
