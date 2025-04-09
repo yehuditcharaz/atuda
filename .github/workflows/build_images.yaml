@@ -8,7 +8,7 @@ permissions:
 
 env:
   ARTIFACT_LOCATION: us-central1-docker.pkg.dev
-  ARTIFACT_REPO_NAME: knowledge-rag-dev
+  ARTIFACT_REPO_NAME: knowledge-rag
   PROJECT_ID: knowledge-rag
 
 jobs:
