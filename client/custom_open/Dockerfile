@@ -6,6 +6,7 @@ COPY ./ /app
 COPY src/add.sh /usr/local/bin/add.sh
 COPY src/addCode.js /app/build/assets/
 
+COPY assets/logo.png /app/build/static/favicon.png
 COPY assets/logo.jpg /app/build/assets/images/adam.jpg
 COPY assets/logo.jpg /app/build/assets/images/earth.jpg
 COPY assets/logo.jpg /app/build/assets/images/galaxy.jpg
@@ -16,7 +17,6 @@ ENV DEFAULT_USER_ROLE=user
 ENV ENABLE_AUTOCOMPLETE_GENERATION=false
 ENV ENABLE_CODE_INTERPRETER=false
 ENV ENABLE_EVALUATION_ARENA_MODELS=false
-ENV ENABLE_NEW_SIGNUP=true
 ENV ENABLE_OLLAMA_API=false
 ENV ENABLE_RETRIEVAL_QUERY_GENERATION=false
 ENV ENABLE_SEARCH_QUERY_GENERATION=false
