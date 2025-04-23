@@ -7,8 +7,8 @@ permissions:
   packages: write
 
 env:
-  IMAGE: knowledge-rag/knowledge-rag-dev/client/custom_open-new
-  # IMAGE: knowledge-rag/knowledge-rag/server/rag-service-v2
+  # IMAGE: knowledge-rag/knowledge-rag-dev/client/custom_open-new
+  IMAGE: knowledge-rag/knowledge-rag/services/rag-service-new
   IMAGE_TAG: v1.0.2
   PROJECT: us-central1-docker.pkg.dev
 jobs:
@@ -53,14 +53,14 @@ jobs:
       uses: docker/build-push-action@v5
       id: docker_build
       with:
-        context: ./client/custom_open
+        context: ./services/RAG-service
         push: true
         provenance: false
         labels: ${{ steps.meta.outputs.labels }}
         # tags: |
         #     ${{ env.PROJECT }}/${{ env.IMAGE }}:${{ env.IMAGE_TAG }}
         tags: ${{ steps.meta.outputs.tags }}
-        file: ./client/custom_open/Dockerfile
+        file: ./services/RAG-service/Dockerfile
         build-args: |
           GOOGLE_CREDENTIALS=${{ secrets.ACCOUNT_KEY_NEW_REPO }}
 
