@@ -4,35 +4,45 @@ window.navigation.addEventListener("navigate", () => {
 
 function UpdateElements() {
     if (!document.getElementById("InstructionsDiv")) {
-        const infoPlace = document.querySelector('[aria-label="New Chat"]');
-        const infoDiv = document.createElement('div');
-        infoDiv.className = "flex"
-        infoDiv.id = "InstructionsDiv"
-        const buttonI = document.createElement('button');
-        buttonI.id = "Instructions"
-        buttonI.className = 'flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition';
-        infoDiv.appendChild(buttonI)
-        buttonI.addEventListener('click', function () { ClickInfo() })
-        const iconDiv = document.createElement('div');
-        iconDiv.className = "m-auto self-center"
-        buttonI.appendChild(iconDiv)
-        const svgInfoNamespace = "http://www.w3.org/2000/svg";
-        const svgInfo = document.createElementNS(svgInfoNamespace, "svg");
-        svgInfo.setAttribute("xmlns", svgInfoNamespace);
-        svgInfo.setAttribute("fill", "none");
-        svgInfo.setAttribute("viewBox", "0 0 24 24");
-        svgInfo.setAttribute("stroke-width", "2");
-        svgInfo.setAttribute("stroke", "currentColor");
-        svgInfo.setAttribute("class", "size-5");
-        const pathInfo = document.createElementNS(svgInfoNamespace, "path");
-        pathInfo.setAttribute("stroke-linecap", "round");
-        pathInfo.setAttribute("stroke-linejoin", "round");
-        pathInfo.setAttribute("d", "M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z");
-        svgInfo.appendChild(pathInfo);
-        iconDiv.appendChild(svgInfo);
-        infoPlace.insertAdjacentElement('beforebegin', infoDiv)
+        setInfo();
+        setFiles();
+    }
 
-        const filePlace = document.getElementById("InstructionsDiv")
+    deleteHelps();
+}
+
+function setInfo(){
+    const infoPlace = document.querySelector('[aria-label="New Chat"]');
+    const infoDiv = document.createElement('div');
+    infoDiv.className = "flex"
+    infoDiv.id = "InstructionsDiv"
+    const buttonI = document.createElement('button');
+    buttonI.id = "Instructions"
+    buttonI.className = 'flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition';
+    infoDiv.appendChild(buttonI)
+    buttonI.addEventListener('click', function () { ClickInfo() })
+    const iconDiv = document.createElement('div');
+    iconDiv.className = "m-auto self-center"
+    buttonI.appendChild(iconDiv)
+    const svgInfoNamespace = "http://www.w3.org/2000/svg";
+    const svgInfo = document.createElementNS(svgInfoNamespace, "svg");
+    svgInfo.setAttribute("xmlns", svgInfoNamespace);
+    svgInfo.setAttribute("fill", "none");
+    svgInfo.setAttribute("viewBox", "0 0 24 24");
+    svgInfo.setAttribute("stroke-width", "2");
+    svgInfo.setAttribute("stroke", "currentColor");
+    svgInfo.setAttribute("class", "size-5");
+    const pathInfo = document.createElementNS(svgInfoNamespace, "path");
+    pathInfo.setAttribute("stroke-linecap", "round");
+    pathInfo.setAttribute("stroke-linejoin", "round");
+    pathInfo.setAttribute("d", "M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z");
+    svgInfo.appendChild(pathInfo);
+    iconDiv.appendChild(svgInfo);
+    infoPlace.insertAdjacentElement('beforebegin', infoDiv)
+}
+
+function setFiles(){
+    const filePlace = document.getElementById("InstructionsDiv")
         const fileDiv = document.createElement('div');
         fileDiv.className = "flex";
         const buttonF = document.createElement('button');
@@ -58,8 +68,9 @@ function UpdateElements() {
         svgFile.appendChild(pathFile);
         iconFileDiv.appendChild(svgFile);
         filePlace.insertAdjacentElement('beforebegin', fileDiv);
-    }
+}
 
+function deleteHelps(){
     const helps = document.getElementsByClassName('text-gray-600 dark:text-gray-300 bg-gray-300/20 size-5 flex items-center justify-center text-[0.7rem] rounded-full');
     [...helps].forEach((help) => {
         help.style.display = 'none';
