@@ -4,10 +4,9 @@ window.navigation.addEventListener("navigate", () => {
 
 function UpdateElements() {
     if (!document.getElementById("InstructionsDiv")) {
-        setInfo();
+        // setInfo();
         setFiles();
     }
-
     deleteHelps();
 }
 
