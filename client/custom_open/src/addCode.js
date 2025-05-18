@@ -2,16 +2,41 @@ window.navigation.addEventListener("navigate", () => {
     setTimeout(UpdateElements, 2500);
 })
 
-function UpdateElements() {
-    if (!document.getElementById("InstructionsDiv")) {
-        setInfo();
-        setFiles();
-    }
+function waitForElement(selector, timeout = 5000) {
+    return new Promise((resolve, reject) => {
+        const intervalTime = 100;
+        let timeElapsed = 0;
 
-    deleteHelps();
+        const interval = setInterval(() => {
+            const element = document.querySelector(selector);
+            if (element) {
+                clearInterval(interval);
+                resolve(element);
+            }
+            timeElapsed += intervalTime;
+            if (timeElapsed >= timeout) {
+                clearInterval(interval);
+                reject(new Error(`Element ${selector} not found after ${timeout}ms`));
+            }
+        }, intervalTime);
+    });
 }
 
-function setInfo() {
+async function UpdateElements() {
+    try {
+        const infoPlace = await waitForElement('[aria-label="New Chat"]');
+        if (!document.getElementById("InstructionsDiv")) {
+            setInfo(infoPlace);  // Pass as argument
+            await waitForElement("#InstructionsDiv");
+            setFiles();
+        }
+        deleteHelps();
+    } catch (error) {
+        console.error("❌ Element not found in time:", error);
+    }
+}
+
+function setInfo(infoPlace) {
     const infoDiv = document.createElement('div');
     infoDiv.className = "flex";
     infoDiv.id = "InstructionsDiv";
@@ -37,7 +62,7 @@ function setInfo() {
     pathInfo.setAttribute("d", "M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z");
     svgInfo.appendChild(pathInfo);
     iconDiv.appendChild(svgInfo);
-    const infoPlace = document.querySelector('[aria-label="New Chat"]');
+    // const infoPlace = document.querySelector('[aria-label="New Chat"]');
     console.log({ infoPlace });
     infoPlace.insertAdjacentElement('beforebegin', infoDiv);
 }
