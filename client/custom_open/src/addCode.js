@@ -4,25 +4,25 @@ window.navigation.addEventListener("navigate", () => {
 
 function UpdateElements() {
     if (!document.getElementById("InstructionsDiv")) {
-        // setInfo();
+        setInfo();
         setFiles();
     }
+
     deleteHelps();
 }
 
-function setInfo(){
-    const infoPlace = document.querySelector('[aria-label="New Chat"]');
+function setInfo() {
     const infoDiv = document.createElement('div');
-    infoDiv.className = "flex"
-    infoDiv.id = "InstructionsDiv"
+    infoDiv.className = "flex";
+    infoDiv.id = "InstructionsDiv";
     const buttonI = document.createElement('button');
-    buttonI.id = "Instructions"
+    buttonI.id = "Instructions";
     buttonI.className = 'flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition';
-    infoDiv.appendChild(buttonI)
-    buttonI.addEventListener('click', function () { ClickInfo() })
+    infoDiv.appendChild(buttonI);
+    buttonI.addEventListener('click', function () { ClickInfo() });
     const iconDiv = document.createElement('div');
-    iconDiv.className = "m-auto self-center"
-    buttonI.appendChild(iconDiv)
+    iconDiv.className = "m-auto self-center";
+    buttonI.appendChild(iconDiv);
     const svgInfoNamespace = "http://www.w3.org/2000/svg";
     const svgInfo = document.createElementNS(svgInfoNamespace, "svg");
     svgInfo.setAttribute("xmlns", svgInfoNamespace);
@@ -37,39 +37,42 @@ function setInfo(){
     pathInfo.setAttribute("d", "M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z");
     svgInfo.appendChild(pathInfo);
     iconDiv.appendChild(svgInfo);
-    infoPlace.insertAdjacentElement('beforebegin', infoDiv)
+    const infoPlace = document.querySelector('[aria-label="New Chat"]');
+    console.log({ infoPlace });
+    infoPlace.insertAdjacentElement('beforebegin', infoDiv);
 }
 
-function setFiles(){
-    const filePlace = document.getElementById("InstructionsDiv")
-        const fileDiv = document.createElement('div');
-        fileDiv.className = "flex";
-        const buttonF = document.createElement('button');
-        buttonF.id = "files"
-        buttonF.className = 'flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition';
-        fileDiv.appendChild(buttonF)
-        buttonF.addEventListener('click', function () { sources() });
-        const iconFileDiv = document.createElement('div');
-        iconFileDiv.className = "m-auto self-center"
-        buttonF.appendChild(iconFileDiv);
-        const svgFileNamespace = "http://www.w3.org/2000/svg";
-        const svgFile = document.createElementNS(svgFileNamespace, "svg");
-        svgFile.setAttribute("xmlns", svgFileNamespace);
-        svgFile.setAttribute("fill", "none");
-        svgFile.setAttribute("viewBox", "0 0 24 24");
-        svgFile.setAttribute("stroke-width", "2");
-        svgFile.setAttribute("stroke", "currentColor");
-        svgFile.setAttribute("class", "size-5");
-        const pathFile = document.createElementNS(svgFileNamespace, "path");
-        pathFile.setAttribute("stroke-linecap", "round");
-        pathFile.setAttribute("stroke-linejoin", "round");
-        pathFile.setAttribute("d", "M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z");
-        svgFile.appendChild(pathFile);
-        iconFileDiv.appendChild(svgFile);
-        filePlace.insertAdjacentElement('beforebegin', fileDiv);
+function setFiles() {
+    const fileDiv = document.createElement('div');
+    fileDiv.className = "flex";
+    const buttonF = document.createElement('button');
+    buttonF.id = "files";
+    buttonF.className = 'flex cursor-pointer px-2 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-850 transition';
+    fileDiv.appendChild(buttonF);
+    buttonF.addEventListener('click', function () { sources() });
+    const iconFileDiv = document.createElement('div');
+    iconFileDiv.className = "m-auto self-center";
+    buttonF.appendChild(iconFileDiv);
+    const svgFileNamespace = "http://www.w3.org/2000/svg";
+    const svgFile = document.createElementNS(svgFileNamespace, "svg");
+    svgFile.setAttribute("xmlns", svgFileNamespace);
+    svgFile.setAttribute("fill", "none");
+    svgFile.setAttribute("viewBox", "0 0 24 24");
+    svgFile.setAttribute("stroke-width", "2");
+    svgFile.setAttribute("stroke", "currentColor");
+    svgFile.setAttribute("class", "size-5");
+    const pathFile = document.createElementNS(svgFileNamespace, "path");
+    pathFile.setAttribute("stroke-linecap", "round");
+    pathFile.setAttribute("stroke-linejoin", "round");
+    pathFile.setAttribute("d", "M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z");
+    svgFile.appendChild(pathFile);
+    iconFileDiv.appendChild(svgFile);
+    const filePlace = document.getElementById("InstructionsDiv");
+    console.log({filePlace});
+    filePlace.insertAdjacentElement('beforebegin', fileDiv);
 }
 
-function deleteHelps(){
+function deleteHelps() {
     const helps = document.getElementsByClassName('text-gray-600 dark:text-gray-300 bg-gray-300/20 size-5 flex items-center justify-center text-[0.7rem] rounded-full');
     [...helps].forEach((help) => {
         help.style.display = 'none';
