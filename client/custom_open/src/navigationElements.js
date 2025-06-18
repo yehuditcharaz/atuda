@@ -300,7 +300,7 @@ function createLabel(){
 }
 
 function ClickFeedback() {
-    fetch("https://custom-open-new-633427059080.us-central1.run.app/download/feedback-report")
+    fetch("https://custom-open-new-feedback-633427059080.europe-west1.run.app/download/feedback-report")
     .then(response => {
         if (response.status === 404) {
             return response.json().then(err => {
