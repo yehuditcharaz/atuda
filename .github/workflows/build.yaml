@@ -60,4 +60,4 @@ jobs:
         file: ./client/custom_open/Dockerfile
         build-args: |
           GOOGLE_CREDENTIALS=${{ secrets.ACCOUNT_KEY_NEW_REPO }}
-          # OPEN_API_BASE_URLS=${{ secrets.OPEN_API_BASE_URLS }}
+          OPEN_API_BASE_URLS=${{ secrets.OPEN_API_BASE_URLS }}
