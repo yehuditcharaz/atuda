@@ -6,7 +6,6 @@ from services.chain_multimodal.source_retriever import sources_retrieval
 from services.chain_multimodal.input_formatter import format_model_input
 from services.chain_multimodal.link_formatter import set_links
 from utils.config import ModelConfig
-from utils.const import PromptConst
 
 
 def initialize_chain():
@@ -21,7 +20,6 @@ def initialize_chain():
             max_output_tokens=ModelConfig.TOKEN_LIMIT,
             response_mime_type="application/json",
             response_schema=ModelConfig.RESPONSE_SCHEMA,
-            system_instruction=PromptConst.SYSTEM_INSTRUCTIONS,
         )
         | JsonOutputParser()
         | RunnableLambda(set_links)

@@ -1,12 +1,12 @@
 # :helicopter:  Ofer knowledge rag - RAG service
 
-## :card_index_dividers: Table of Contents
+## :card_index_dividers: Table Of Contents
 
-* [Overview](#overview)
-* [Technologies Used](#technologies-used)
-* [Configuration](#configuration)
-* [Installation](#installation)
-* [Learning Resources](#learning-resources)
+* [Overview](#rocket-overview)
+* [Technologies Used](#computer-technologies-used)
+* [Configuration](#wrench-configuration)
+* [Installation](#gear-installation)
+* [Learning Resources](#books-learning-resources)
 
 ## :rocket: Overview
 

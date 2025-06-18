@@ -58,6 +58,7 @@ dictionary = {
     "לצפות": "observe",
     "להשיג": "obtain",
     "נוסעים": "occupants",
+    "עופר": "Ofer",
     "תנודה": "oscillation",
     "מקביל": "parallel",
     "חימום צינורות פיטו": "Pitot Tube Heating",

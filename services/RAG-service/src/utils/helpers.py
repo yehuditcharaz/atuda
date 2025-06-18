@@ -7,6 +7,11 @@ def is_image_chunk(chunk):
     return "models.image_chunk.ImageChunk" in str(type(chunk))
 
 
+def encode_image(image_path):
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode("utf-8")
+
+
 def is_hebrew(text):
     return any("\u0590" <= letter <= "\u05ea" for letter in text)
 

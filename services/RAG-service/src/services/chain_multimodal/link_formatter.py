@@ -28,9 +28,10 @@ def get_sources(doc_ids):
             )
             for chunk in chunks
         }
-
         result["images"] = result["images"][: LimitsConfig.MAX_IMAGES_LIMIT]
-        result["links"] = result["links"][: LimitsConfig.MAX_LINKS_LIMIT]
+        result["links"] = list(dict.fromkeys(result["links"]))[
+            : LimitsConfig.MAX_LINKS_LIMIT
+        ]
 
         logger.info("Successfully completed get sources")
         return result

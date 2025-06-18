@@ -1,11 +1,11 @@
 # :helicopter: Ofer knowledge rag - signed url service
 
-## :card_index_dividers: Table of Contents
+## :card_index_dividers: Table Of Contents
 
-- [Overview](#overview)
-- [Configuration](#configuration)
-- [Installation](#installation)
-- [Learning Resources](learning-resources)
+- [Overview](#rocket-overview)
+- [Configuration](#wrench-configuration)
+- [Installation](#gear-installation)
+- [Learning Resources](#books-learning-resources)
 
 ## :rocket: Overview
 

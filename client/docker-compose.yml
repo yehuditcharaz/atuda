@@ -6,11 +6,16 @@ services:
     container_name: openwebui_custom
     ports:
       - "3000:8080"
+      - "5454:5454"
     volumes:
       - open-webui:/app/backend/data
+      - ./shared_output:/app/output            
     env_file:
-          - .env
-
+      - .env
+    restart: always
+    command: >
+      sh -c "node src/feedback/app.js & exec /app/backend/start.sh"
+      
   pipelines:
     build: 
       context: ./custom_pipeline
@@ -21,7 +26,7 @@ services:
       host.docker.internal: host-gateway
     restart: always
     env_file:
-          - .env
+      - .env
      
 volumes:
   open-webui:

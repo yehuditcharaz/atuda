@@ -1,9 +1,9 @@
-import base64
 import os
 import urllib.parse
 import uuid
 
 from unstructured.partition.pdf import partition_pdf
+from utils.helpers import encode_image
 from utils.logger import logger
 from utils.config import GCPConfig, UtilsConfig
 from models.image_chunk import ImageChunk
@@ -60,8 +60,3 @@ def get_document_chunks(document_path):
         combine_text_under_n_chars=2000,
         unique_element_ids=True,
     )
-
-
-def encode_image(image_path):
-    with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode("utf-8")

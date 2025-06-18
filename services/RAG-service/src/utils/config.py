@@ -11,7 +11,7 @@ class GCPConfig:
     PROJECT_ID = os.getenv("PROJECT_ID")
     LOCATION = os.getenv("LOCATION")
     GCS_BUCKET = os.getenv("GCS_BUCKET")
-    GCS_BUCKET_URI = "gs://" + (os.getenv("GCS_BUCKET"))
+    GCS_BUCKET_URI = "gs://" + (os.getenv("GCS_BUCKET", "try_bucket"))
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
     INDEX_ID = os.getenv("INDEX_ID")
     INDEX_ENDPOINT_ID = os.getenv("INDEX_ENDPOINT_ID")
@@ -64,7 +64,7 @@ class UtilsConfig:
 
 
 class LogsConfig:
-    LOGS_PATH = os.getenv("LOGS_PATH")
+    LOGS_PATH = os.getenv("LOGS_PATH", "var/log/defualt")
     FILE_NAME = "chat_logs.log"
     WHEN = "midnight"
     AT_TIME = time(7, 0)
