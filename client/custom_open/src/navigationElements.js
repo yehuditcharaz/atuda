@@ -300,13 +300,15 @@ function createLabel(){
 }
 
 function ClickFeedback() {
-    fetch("https://aaaa-open-webui-v1-633427059080.us-central1.run.app/download/feedback-report")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok', response.statusText);
-            }
-            return response.blob();
-        })
+    fetch("https://custom-open-new-633427059080.us-central1.run.app/download/feedback-report")
+    .then(response => {
+        if (response.status === 404) {
+            return response.json().then(err => {
+                alert(err.error); 
+            });
+        }
+        return response.blob();
+    })
         .then(blob => {
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');

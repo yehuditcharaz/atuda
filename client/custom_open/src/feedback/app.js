@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 app.get(Paths.ROUTE, async (req, res) => {
     let result = await createFeedbackReportFromRows(Paths.EXCEL_FILE);
     if (result === Paths.FEEDBACK_NOT_FOUND) {
-        return res.send(Paths.FEEDBACK_NOT_FOUND); 
+        return res.status(APP.ERROR).json({ error: Paths.FEEDBACK_NOT_FOUND }); 
     }
     
     const filePath = path.join(Paths.DIRECTORY, Paths.EXCEL_FILE);
