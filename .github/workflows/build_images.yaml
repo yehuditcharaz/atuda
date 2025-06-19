@@ -8,7 +8,8 @@ permissions:
 
 env:
   ARTIFACT_LOCATION: us-central1-docker.pkg.dev
-  ARTIFACT_REPO_NAME: knowledge-rag
+  # ARTIFACT_REPO_NAME: knowledge-rag
+  ARTIFACT_REPO_NAME: knowledge-rag-dev
   PROJECT_ID: knowledge-rag
 
 jobs:
@@ -57,7 +58,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.ARTIFACT_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REPO_NAME }}/${{ matrix.directory }}-v5
+          images: ${{ env.ARTIFACT_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REPO_NAME }}/${{ matrix.directory }}-kubernetes
           flavor: |
             latest=false
           tags: |
