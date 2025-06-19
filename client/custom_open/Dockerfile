@@ -33,7 +33,7 @@ ENV ENABLE_RETRIEVAL_QUERY_GENERATION=false
 ENV ENABLE_SEARCH_QUERY_GENERATION=false
 ENV ENABLE_TAGS_GENERATION=false
 
-ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://pipeline-dev-633427059080.us-central1.run.app
+ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://custom-pipeline-v3-633427059080.us-central1.run.app
 # ARG OPENAI_API_BASE_URLS
 # ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;${OPENAI_API_BASE_URLS}
 # ENV OPENAI_API_BASE_URLS=https://api.openai.com/v1;https://custom-pipeline-v3-633427059080.us-central1.run.app
