@@ -8,8 +8,8 @@ class URLs:
     MOCK_IMAGE_URL = "http://mock-signed-url.com/image"
     MOCK_DOCUMENT_URL = "http://mock-signed-url.com/document"
     EXAMPLE_IMAGE_URL = "http://example.com/image"
-    GET_IMAGE_URL = f"/get_image?url={EXAMPLE_IMAGE_URL}"
-    GET_LINK_URL = f"/get_link?url={MOCK_DOCUMENT_URL}&page=1"
+    GET_IMAGE_URL = f"/sign_url/get_image?url={EXAMPLE_IMAGE_URL}"
+    GET_LINK_URL = f"/sign_url/get_link?url={MOCK_DOCUMENT_URL}&page=1"
     EXPECTED_DOCUMENT_LOCATION = "http://mock-signed-url.com/document#page=1"
 
 

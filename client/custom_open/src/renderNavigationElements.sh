@@ -5,4 +5,4 @@ echo "-------------" > /abc.txt
 
 random_value=$RANDOM
 
-sed -i "s|</body>|<script src="/assets/navigationElements.js?${random_value}"></script></body>|g" /app/build/index.html
+sed -i "s|</body>|<script type=\"module\" src="/assets/navigationElements.js?${random_value}"></script></body>|g" /app/build/index.html

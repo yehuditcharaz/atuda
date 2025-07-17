@@ -3,18 +3,19 @@ services:
     build: 
       context: ./custom_open
       dockerfile: Dockerfile.openwebui
+      args:
+        OPENAI_API_BASE_URLS: ${OPENAI_API_BASE_URLS}
     container_name: openwebui_custom
     ports:
       - "3000:8080"
-      - "5454:5454"
     volumes:
       - open-webui:/app/backend/data
       - ./shared_output:/app/output            
     env_file:
-      - .env
+      - ./custom_open/.env
     restart: always
     command: >
-      sh -c "node src/feedback/app.js & exec /app/backend/start.sh"
+      sh -c "exec /app/backend/start.sh"
       
   pipelines:
     build: 
@@ -26,8 +27,8 @@ services:
       host.docker.internal: host-gateway
     restart: always
     env_file:
-      - .env
-     
+      - ./custom_pipeline/.env
+        
 volumes:
   open-webui:
   pipelines:

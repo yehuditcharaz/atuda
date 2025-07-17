@@ -48,9 +48,13 @@ def get_chunks(docs_ids):
 
 
 def get_image_path(image_chunk):
-    sign_server_url = os.path.join(GCPConfig.SIGN_SERVER_URL, GCPConfig.IMAGES_SIGN_URL)
+    document_manager_url = os.path.join(
+        GCPConfig.DOCUMENT_MANAGER_URL, GCPConfig.IMAGES_SIGN_URL
+    )
     link = image_chunk.metadata["url"]
-    return f"![]({sign_server_url}{GCPConfig.REQUEST_PARAM}{link})".replace("\\", "/")
+    return f"![]({document_manager_url}{GCPConfig.REQUEST_PARAM}{link})".replace(
+        "\\", "/"
+    )
 
 
 def get_link(chunk):
@@ -68,14 +72,16 @@ def get_link_preview(chunk_metadata):
 
 def get_document_link(chunk_metadata):
     filename = quote(chunk_metadata[0])
-    sign_server_url = os.path.join(GCPConfig.SIGN_SERVER_URL, GCPConfig.LINKS_SIGN_URL)
+    document_manager_url = os.path.join(
+        GCPConfig.DOCUMENT_MANAGER_URL, GCPConfig.LINKS_SIGN_URL
+    )
     link = os.path.join(
         GCPConfig.GCS_BUCKET,
         GCPConfig.CORPUS_FOLDER,
         get_filename_without_prefix(filename),
         f"{filename}&page={chunk_metadata[1]}",
     )
-    return f"{sign_server_url}{GCPConfig.REQUEST_PARAM}{link}".replace("\\", "/")
+    return f"{document_manager_url}{GCPConfig.REQUEST_PARAM}{link}".replace("\\", "/")
 
 
 def get_filename_without_prefix(filename):

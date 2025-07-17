@@ -19,18 +19,8 @@ Uses `OpenWebUI` as the user interface.
 Serves as an interface for deploying machine learning models, and provides a web interface for interaction, while customizing it for the user.
 
 ## :wrench: Configuration
-
-1. You need to set the `.env` settings for that service .
-   For instructions click [here](../README.md#configuration).
-2. You must ensure that the `ENV OPENAI_API_BASE_URLS` variable in the `Dockerfile.openwebui` file contains the address of the `pipeline` server.
-
-   * If the file is taken from a container, complete it like this:
-   
-     `https://api.openai.com/v1;http://host.docker.internal:9099`
-
-   * If from a deployed server, complete it like this:
-
-     `https://api.openai.com/v1;https://deployed/server/url`
+You need to set the `.env` settings for each service (e.g. `openwebui` and `pipeline`) 
+for instructions click [here](../README.md#configuration).
 
 ## :gear: Installation
 

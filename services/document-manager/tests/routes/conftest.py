@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import patch
-from routes.signed_url import app
+from routes.app import app
 from .stub import URLs, StatusCodes, Utils
 
 
@@ -21,7 +21,7 @@ def mock_requests_get():
 
 @pytest.fixture
 def mock_generate_signed_url_success():
-    with patch("routes.signed_url.generate_signed_url") as mock:
+    with patch("routes.app.generate_signed_url") as mock:
         mock.side_effect = lambda url: (
             URLs.MOCK_IMAGE_URL
             if url == URLs.EXAMPLE_IMAGE_URL
@@ -34,6 +34,6 @@ def mock_generate_signed_url_success():
 
 @pytest.fixture
 def mock_generate_signed_url_failure():
-    with patch("routes.signed_url.generate_signed_url") as mock:
+    with patch("routes.app.generate_signed_url") as mock:
         mock.side_effect = Exception(Utils.ERROR_GENERATING_SIGNED_URL)
         yield mock

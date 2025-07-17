@@ -18,9 +18,9 @@ class GCPConfig:
     CHUNKS_FOLDER = "chunks"
     GOOGLE_CREDENTIALS = os.getenv("GOOGLE_CREDENTIALS")
     CORPUS_FOLDER = "corpus"
-    SIGN_SERVER_URL = os.getenv("SIGN_SERVER_URL")
-    LINKS_SIGN_URL = "get_link"
-    IMAGES_SIGN_URL = "get_image"
+    DOCUMENT_MANAGER_URL = os.getenv("DOCUMENT_MANAGER_URL")
+    LINKS_SIGN_URL = "sign_url/get_link"
+    IMAGES_SIGN_URL = "sign_url/get_image"
     REQUEST_PARAM = "?url="
 
 
@@ -52,15 +52,16 @@ class ModelConfig:
 
 
 class UtilsConfig:
-    DOCUMENTS_FOLDER_PATH = os.getenv("DOCUMENTS_FOLDER_PATH")
-    IMAGES_FOLDER_PATH = os.getenv("IMAGES_FOLDER_PATH")
     BATCH_SIZE = 1000
-    ID_KEY = "doc_id"
-    MAX_TRIES = 6
-    RETRY_AFTER_ATTEMPT = 4
-    HOST = os.getenv("HOST")
-    PORT = os.getenv("PORT")
+    DOCUMENTS_FOLDER_PATH = os.getenv("DOCUMENTS_FOLDER_PATH")
     ERROR_MESSAGE = "Something went wrong while generating the response, try again"
+    HOST = os.getenv("HOST")
+    ID_KEY = "doc_id"
+    IMAGES_FOLDER_PATH = os.getenv("IMAGES_FOLDER_PATH")
+    MAX_TRIES = 6
+    PORT = os.getenv("PORT")
+    RETRY_AFTER_ATTEMPT = 4
+    URL = "url"
 
 
 class LogsConfig:

@@ -63,7 +63,7 @@ const HTMLElements = {
 };
 
 const DocumentsLinks = {
-    PREFIX: "https://signurl-service:5000/get_link?url=knowledge-rag-v1/corpus/",
+    PREFIX: "https://signed-url-service-633427059080.us-central1.run.app/get_link?url=knowledge-rag-v1/corpus/",
     DOCUMENTS: [
         {
             text: 'RFM',
@@ -75,7 +75,7 @@ const DocumentsLinks = {
         },
         {
             text: 'GARMIN G1000H NXi',
-            url: 'GARMIN%20G1000H%20NXi/GARMIN%20G1000H%20NXi.pdf'
+            url: 'GARMIN_G1000H_NXi/GARMIN_G1000H_NXi.pdf'
         },
         {
             text: 'חוברת הסבה מאי 24',
@@ -172,7 +172,7 @@ function setInfo(infoPlace) {
     infoPlace.insertAdjacentElement('beforebegin', infoDiv);
 }
 
-function createSVGElement(d){
+function createSVGElement(d) {
     const svgElementNamespace = "http://www.w3.org/2000/svg";
 
     const svgElement = document.createElementNS(svgElementNamespace, "svg");
@@ -182,13 +182,13 @@ function createSVGElement(d){
     svgElement.setAttribute("stroke-width", "2");
     svgElement.setAttribute("stroke", "currentColor");
     svgElement.setAttribute("class", "size-5");
-    
+
     const pathElement = createPathElement(svgElementNamespace, d);
     svgElement.appendChild(pathElement);
     return svgElement;
 }
 
-function createPathElement(svgElementNamespace, d){
+function createPathElement(svgElementNamespace, d) {
     const pathElement = document.createElementNS(svgElementNamespace, "path");
     pathElement.setAttribute("stroke-linecap", "round");
     pathElement.setAttribute("stroke-linejoin", "round");
@@ -196,7 +196,7 @@ function createPathElement(svgElementNamespace, d){
     return pathElement;
 }
 
-function createButton(ClickFunction, buttonID, className){
+function createButton(ClickFunction, buttonID, className) {
     const button = document.createElement('button');
     button.id = buttonID;
     button.className = className;
@@ -248,7 +248,7 @@ function ClickSources() {
     };
 }
 
-function createDialog(){
+function createDialog() {
     const dialog = document.createElement('dialog');
     dialog.style.position = 'relative';
     dialog.style.width = "50%";
@@ -259,7 +259,7 @@ function createDialog(){
     return dialog;
 }
 
-function createUL(){
+function createUL() {
     const ul = document.createElement('ul');
     ul.setAttribute('dir', 'rtl');
     ul.style.textAlign = 'right';
@@ -292,7 +292,7 @@ function setFeedback(menu) {
     menu.appendChild(feedbackDiv)
 }
 
-function createLabel(){
+function createLabel() {
     const feedbackLabel = document.createElement('div');
     feedbackLabel.className = "self-center truncate";
     feedbackLabel.innerHTML = "פידבק";
@@ -300,23 +300,22 @@ function createLabel(){
 }
 
 function ClickFeedback() {
-    fetch("https://open-service:8080/download/feedback-report")
-    .then(response => {
-        if (response.status === 404) {
-            return response.json().then(err => {
-                alert(err.error); 
-            });
-        }
-        return response.blob();
-    })
-        .then(blob => {
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'feedback-report';
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
+    fetch("http://localhost:5000/download/feedback-report")
+        .then(async response => {
+            if (response.status === 404) {
+                const err = await response.json();
+                alert(err.error);
+            }
+            else {
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'feedback-report';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            }
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);

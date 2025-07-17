@@ -58,7 +58,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.ARTIFACT_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REPO_NAME }}/${{ matrix.directory }}-kubernetes
+          images: ${{ env.ARTIFACT_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REPO_NAME }}/${{ matrix.directory }}-v6
           flavor: |
             latest=false
           tags: |
