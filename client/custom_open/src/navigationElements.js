@@ -63,7 +63,7 @@ const HTMLElements = {
 };
 
 const DocumentsLinks = {
-    PREFIX: "http://signed-url-service:5000/get_link?url=knowledge-rag-v1/corpus/",
+    PREFIX: "https://signed-url-service-633427059080.us-central1.run.app/get_link?url=knowledge-rag-v1/corpus/",
     DOCUMENTS: [
         {
             text: 'RFM',
@@ -300,7 +300,7 @@ function createLabel() {
 }
 
 function ClickFeedback() {
-    fetch("http://signed-url-service:5000/download/feedback-report")
+    fetch("https://signed-url-service-633427059080.us-central1.run.app/download/feedback-report")
         .then(async response => {
             if (response.status === 404) {
                 const err = await response.json();
