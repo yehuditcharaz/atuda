@@ -63,7 +63,7 @@ const HTMLElements = {
 };
 
 const DocumentsLinks = {
-    PREFIX: "https://signed-url-service-633427059080.us-central1.run.app/get_link?url=knowledge-rag-v1/corpus/",
+    PREFIX: "https://signed-url-service-633427059080.us-central1.run.app/sign_url/get_link?url=knowledge-rag-v1/corpus/",
     DOCUMENTS: [
         {
             text: 'RFM',
