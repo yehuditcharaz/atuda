@@ -7,7 +7,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE: knowledge-rag/knowledge-rag-dev/client/custom_open-v6
+  IMAGE: knowledge-rag/knowledge-rag-dev/client/custom_open_kubernetes
   IMAGE_TAG: v1.0.2
   PROJECT: us-central1-docker.pkg.dev
 jobs:
