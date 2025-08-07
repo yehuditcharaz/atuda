@@ -129,7 +129,7 @@ async def add_all_resumes_to_db(user_id):
 
                 # שליחת בקשה לשרת
                 async with session.post(
-                    "http://127.0.0.1:8080/resumes",
+                    "http://104.155.153.158:8080/resumes",
                     json=resume,
                     headers={"Content-Type": "application/json"},
                     ssl=False  # במידה ויש שגיאת SSL

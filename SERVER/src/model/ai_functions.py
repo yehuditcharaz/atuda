@@ -99,7 +99,7 @@ def read_file(document_path):
 #     return resumes,resume_vectors
 
 def get_jobs_from_db():
-    response=requests.get("http://127.0.0.1:8080/jobs", verify=False)
+    response=requests.get("http://104.155.153.158:8080/jobs", verify=False)
     print(response)
     jobs=response.json()
     print(jobs)
@@ -159,13 +159,13 @@ def get_job_id(jobs, job_summary):
     return None
 
 def get_resumes_from_db():
-    response = requests.get("http://127.0.0.1:8080/resumes", verify=False)
+    response = requests.get("http://104.155.153.158:8080/resumes", verify=False)
     resumes=response.json()
     resume_vectors = [embed_text(resume['summary']) for resume in resumes]
     return resumes ,resume_vectors
 
 def get_jobs_from_db():
-    response = requests.get("http://127.0.0.1:8080/jobs", verify=False)
+    response = requests.get("http://104.155.153.158:8080/jobs", verify=False)
     jobs = response.json()
     job_descirption_vectors = [embed_text(job['summary']) for job in jobs]
     return jobs,job_descirption_vectors

@@ -15,7 +15,7 @@ def save_file(file, bucket_name, file_key) -> str:
 
 
 def get_file_url(bucket_name: str, object_name: str) -> str:
-    return f"http://localhost:9001/browser/{bucket_name}/{object_name}"
+    return f"http://minio-service:9001/browser/{bucket_name}/{object_name}"
     # return f"https://{s3_client.meta.endpoint_url}/{bucket_name}/{object_name}"
 
 
