@@ -3,7 +3,7 @@ import os
 load_dotenv()
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = "postgresql://root:1234@db:5432/dbname"
+    SQLALCHEMY_DATABASE_URI = "postgresql://root:1234@pgvector-service:5432/dbname"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
