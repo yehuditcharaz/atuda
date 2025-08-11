@@ -3,7 +3,8 @@ import os
 load_dotenv()
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('DB_SERVICE_NAME')}:{os.getenv('DB_PORT')}/{os.getenv('POSTGRES_DB')}"
+    # SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('DB_SERVICE_NAME')}:{os.getenv('DB_PORT')}/{os.getenv('POSTGRES_DB')}"
+    SQLALCHEMY_DATABASE_URI = f"{os.getenv('DATABASE_URL')}"
     # SQLALCHEMY_DATABASE_URI = "postgresql://root:1234@pgvector-service:5432/dbname"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
