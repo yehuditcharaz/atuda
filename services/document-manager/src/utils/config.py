@@ -11,7 +11,11 @@ class APP:
     ERROR = 404
     HOST = os.getenv("HOST")
     PORT = os.getenv("PORT")
-    ACCESS_URL = os.getenv("ACCESS_URL")
+    ACCESS_ORIGINS = [
+        origin.strip()
+        for origin in os.getenv("ALLOWED_ORIGINS", "").split(",")
+        if origin.strip()
+    ]
 
 
 class Errors:

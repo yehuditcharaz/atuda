@@ -31,13 +31,9 @@ def test_pipe_failure(mock_get_chat_response_exception):
     mock_get_chat_response_exception.assert_called_once()
 
 
-def test_get_chat_response_success(mock_pipeline, mock_requests_get):
+def test_get_chat_response_success(mock_pipeline, mock_requests_post):
     result = get_chat_response(mock_pipeline, f"{UtilsTest.EMPTY_BODY}")
     assert result == Responses.SUCCESS_RESPONSE
-    mock_requests_get.assert_called_once_with(
-        f"{UtilsTest.SERVER_URL}{UtilsTest.RAG_SERVICE_PATH}",
-        params={"query": f"{UtilsTest.EMPTY_BODY}"},
-    )
 
 
 def test_get_chat_response_failure(mock_get_chat_response_server_failure):

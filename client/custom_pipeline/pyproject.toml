@@ -27,3 +27,8 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
+
+[tool.ruff]
+exclude = [
+    "blueprints/function_calling_blueprint.py",
+]

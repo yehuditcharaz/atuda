@@ -1,26 +1,39 @@
 import grpc
-import json
-from flask import Flask, request, jsonify
+import logging
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 
 from services.chain_multimodal.chain import chain_multimodal_rag
 from utils.config import UtilsConfig
 
-app = Flask(__name__)
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
+
+app = FastAPI()
+logging.basicConfig(level=logging.INFO)
+
+executor = ThreadPoolExecutor(max_workers=10)
 
 
-@app.route("/chat")
-def chat():
-    query = request.args.get("query")
+@app.post("/chat")
+async def chat(request: Request):
     try:
-        result = chain_multimodal_rag.with_retry(
-            stop_after_attempt=UtilsConfig.RETRY_AFTER_ATTEMPT,
-            retry_if_exception_type=(grpc.RpcError,),
-        ).invoke(json.loads(query))
-    except Exception:
-        result = {"answer": UtilsConfig.ERROR_MESSAGE}
-    response = {"status_code": 200, **result}
-    return jsonify(response)
+        query = await request.json()
 
+        loop = asyncio.get_running_loop()
 
-if __name__ == "__main__":
-    app.run(host=UtilsConfig.HOST, port=UtilsConfig.PORT)
+        result = await loop.run_in_executor(
+            executor,
+            lambda: chain_multimodal_rag.with_retry(
+                stop_after_attempt=UtilsConfig.RETRY_AFTER_ATTEMPT,
+                retry_if_exception_type=(grpc.RpcError,),
+            ).invoke(query),
+        )
+    except Exception as e:
+        logging.error(f"Error in /chat: {e}", exc_info=True)
+        return JSONResponse(
+            status_code=500,
+            content={"answer": UtilsConfig.ERROR_MESSAGE},
+        )
+
+    return JSONResponse(status_code=200, content={"status_code": 200, **result})

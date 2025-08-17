@@ -8,19 +8,22 @@ USER root
 
 RUN pip install .
 RUN python3 -c "import nltk; nltk.download('all')"
+
 RUN apt-get update && apt-get install -y libgl1 \
-    && apt-get install -y poppler-utils \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y tesseract-ocr \
-    && apt-get install -y curl
+    poppler-utils \
+    tesseract-ocr \
+    curl \
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
 
 ENV PATH="/usr/local/gcloud/google-cloud-sdk/bin:$PATH"
 
 RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz
-RUN mkdir -p /usr/local/gcloud \
-  && tar -C /usr/local/gcloud -xvf /tmp/google-cloud-sdk.tar.gz \
-  && /usr/local/gcloud/google-cloud-sdk/install.sh 
+RUN mkdir -p /usr/local/gcloud && \
+    tar -C /usr/local/gcloud -xvf /tmp/google-cloud-sdk.tar.gz && \
+    /usr/local/gcloud/google-cloud-sdk/install.sh
 
-RUN gcloud config set project $PROJECT_ID 
+RUN gcloud config set project $PROJECT_ID
 
 EXPOSE 8080
 

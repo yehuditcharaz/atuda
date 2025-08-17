@@ -1,6 +1,7 @@
 import pytest
 import sys
 from unittest.mock import MagicMock
+from fastapi.testclient import TestClient  # <-- FastAPI TestClient
 
 from .stub import MockChainResponses
 
@@ -9,8 +10,8 @@ from .stub import MockChainResponses
 def client():
     from routes.chat import app
 
-    with app.test_client() as client:
-        yield client
+    with TestClient(app) as c:  # <-- שימוש ב-TestClient
+        yield c
 
 
 @pytest.fixture(autouse=True)

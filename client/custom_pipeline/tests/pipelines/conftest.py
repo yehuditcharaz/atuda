@@ -36,11 +36,11 @@ def mock_requests_success():
 
 
 @pytest.fixture
-def mock_requests_get(mock_requests_success):
-    with patch(
-        "pipelines.pipeline.requests.get", return_value=mock_requests_success
-    ) as mock:
-        yield mock
+def mock_requests_post():
+    with patch("pipelines.pipeline.requests.post") as mock_post:
+        mock_post.return_value.status_code = 200
+        mock_post.return_value.json.return_value = Responses.SUCCESS_RESPONSE
+        yield mock_post
 
 
 @pytest.fixture

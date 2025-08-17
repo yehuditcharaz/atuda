@@ -17,4 +17,4 @@ RUN apt-get update && apt-get install -y \
 
 EXPOSE 5000
 
-CMD ["python", "src/routes/app.py"]
+CMD ["uvicorn", "src.routes.app:app", "--host", "0.0.0.0", "--port", "5000"]

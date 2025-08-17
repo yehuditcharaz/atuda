@@ -1,4 +1,5 @@
 import json
+import re
 import requests
 
 from pydantic import BaseModel
@@ -15,6 +16,7 @@ class Pipeline:
 
     def pipe(self, user_message, model_id, messages, body):
         try:
+            messages = sanitize_assistant_history(messages)
             history = json.dumps({"messages": messages})
             response = get_chat_response(self, history)
             if response["status_code"] == 200:
@@ -27,9 +29,9 @@ class Pipeline:
 
 def get_chat_response(self, history):
     try:
-        response = requests.get(
+        response = requests.post(
             self.valves.SERVER_URL + Utils.RAG_SERVICE_PATH,
-            params={"query": history},
+            json=json.loads(history),
         )
         json_response = response.json()
         return json_response
@@ -52,3 +54,18 @@ def convert_to_md(response):
         return "\n\n".join(md_output)
     except Exception:
         return SystemMessages.ERROR_MESSAGE
+
+
+def sanitize_assistant_history(messages):
+    for message in messages:
+        if message.get("role") == "assistant":
+            content = message["content"]
+            content = re.sub(r"\*\*Source:\*\*\n(.|\n)*?(?=\n\n\*\*|$)", "", content)
+            content = re.sub(
+                r"\*\*Related Images:\*\*\n(.|\n)*?(?=\n\n|$)", "", content
+            )
+            content = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", content)
+            content = re.sub(r"!\[\]\([^)]+\)", "", content)
+            content = re.sub(r"\n\s*\n", "\n\n", content)
+            message["content"] = content.strip()
+    return messages
