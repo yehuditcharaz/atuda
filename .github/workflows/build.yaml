@@ -53,13 +53,13 @@ jobs:
       uses: docker/build-push-action@v5
       id: docker_build
       with:
-        context: ./services/rag-serivce
+        context: ./services/RAG-service
         # context: ./client/custom_open
         push: true
         provenance: false
         labels: ${{ steps.meta.outputs.labels }}
         tags: ${{ steps.meta.outputs.tags }}
-        file: ./services/rag-service/Dockerfile
+        file: ./services/RAG-service/Dockerfile
         # file: ./client/custom_open/Dockerfile
         build-args: |
           GOOGLE_CREDENTIALS=${{ secrets.ACCOUNT_KEY_NEW_REPO }}
