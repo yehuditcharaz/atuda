@@ -49,6 +49,21 @@ jobs:
           type=semver,pattern=v{{version}}
           type=semver,pattern=v{{major}}.{{minor}}
 
+         - name: Check disk usage
+        run: df -h
+
+    - name: Remove temporary files
+      run: |
+        rm -rf /path/to/temporary/files/*   
+    - name: Clear cache
+      run: |
+        rm -rf ${{ github.workspace }}/.github/cache    
+    - name: Remove large log files
+      run: |
+        find /path/to/logs -type f -name '*.log' -delete    
+    - name: Check disk usage
+      run: df -h
+
     - name: 🐳 Docker Build & Push
       uses: docker/build-push-action@v5
       id: docker_build
