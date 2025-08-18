@@ -57,9 +57,6 @@ jobs:
     - name: Clear cache
       run: |
         rm -rf ${{ github.workspace }}/.github/cache    
-    - name: Remove large log files
-      run: |
-        find /path/to/logs -type f -name '*.log' -delete    
     - name: Check disk usage
       run: df -h
 
