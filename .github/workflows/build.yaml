@@ -49,9 +49,8 @@ jobs:
           type=semver,pattern=v{{version}}
           type=semver,pattern=v{{major}}.{{minor}}
 
-         - name: Check disk usage
+    - name: Check disk usage
         run: df -h
-
     - name: Remove temporary files
       run: |
         rm -rf /path/to/temporary/files/*   
